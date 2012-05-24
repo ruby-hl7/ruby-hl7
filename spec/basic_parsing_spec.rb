@@ -157,6 +157,18 @@ describe HL7::Message do
       lambda { msg << Class.new }.should raise_error(HL7::Exception)
     end
 
+    it 'allows appending of an array of segments' do
+      msg = HL7::Message.new
+      lambda do
+        msg << [HL7::Message::Segment::MSH.new, HL7::Message::Segment::NTE.new]
+      end.should_not raise_error
+
+      obx = HL7::Message::Segment::OBX.new
+      lambda do
+        obx.children << [HL7::Message::Segment::NTE.new, HL7::Message::Segment::NTE.new]
+      end.should_not raise_error
+    end
+
     it 'sorts segments' do
       msg = HL7::Message.new
       pv1 = HL7::Message::Segment::PV1.new

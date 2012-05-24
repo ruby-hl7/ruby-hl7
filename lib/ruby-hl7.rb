@@ -144,9 +144,20 @@ class HL7::Message
     @segments.index( segs.to_a.first )
   end
 
-  # add a segment to the message
+  # add a segment or array of segments to the message
   # * will force auto set_id sequencing for segments containing set_id's
   def <<( value )
+    # do nothing if value is nil
+    return unless value
+    
+    if value.kind_of? Array
+      value.map{|item| append(item)}
+    else
+      append(value)
+    end
+  end
+
+  def append( value )
     unless ( value && value.kind_of?(HL7::Message::Segment) )
       raise HL7::Exception.new( "attempting to append something other than an HL7 Segment" )
     end
@@ -199,7 +210,7 @@ class HL7::Message
   # parse the provided String or Enumerable object into this message
   def parse( inobj )
     unless inobj.kind_of?(String) || inobj.respond_to?(:each)
-      raise HL7::ParseError.new
+      raise HL7::ParseError.new( "object to parse should be string or enumerable" )
     end
 
     if inobj.kind_of?(String)
@@ -210,7 +221,7 @@ class HL7::Message
   end
 
   # yield each segment in the message
-  def each # :yeilds: segment
+  def each # :yields: segment
     return unless @segments
     @segments.each { |s| yield s }
   end
@@ -287,7 +298,7 @@ class HL7::Message
   end
 
   def generate_segments( ary )
-    raise HL7::ParseError.new unless ary.length > 0
+    raise HL7::ParseError.new( "no array to generate segments" ) unless ary.length > 0
 
     @parsing = true
     last_seg = nil
@@ -304,7 +315,7 @@ class HL7::Message
   def generate_segment( elm, last_seg )
       seg_parts = elm.split( @element_delim, -1 )
       unless seg_parts && (seg_parts.length > 0)
-        raise HL7::ParseError.new if HL7.ParserConfig[:empty_segment_is_error] || false
+        raise HL7::ParseError.new( "empty segment is an error per configuration setting" ) if HL7.ParserConfig[:empty_segment_is_error] || false
         return nil
       end
 
@@ -532,7 +543,18 @@ class HL7::Message::Segment
             @parental = p
             alias :old_append :<<
 
-            def <<(value)
+            def <<( value )
+              # do nothing if value is nil
+              return unless value
+              
+              if value.kind_of? Array
+                value.map{|item| append(item)}
+              else
+                append(value)
+              end
+            end
+            
+            def append(value)
               unless (value && value.kind_of?(HL7::Message::Segment))
                 raise HL7::Exception.new( "attempting to append non-segment to a segment list" )
               end
@@ -564,7 +586,7 @@ class HL7::Message::Segment
   #   * :id is the field number to reference (optional, auto-increments from 1
   #      by default)
   #   * :blk is a validation proc (optional, overrides the second argument)
-  # * blk is an optional validation proc which MUST take a parameter
+  # * blk is an optional validation/convertion proc which MUST take a parameter
   #   and always return a value for the field (it will be used on read/write
   #   calls)
   def self.add_field( name, options={}, &blk )
@@ -601,6 +623,14 @@ class HL7::Message::Segment
   def self.fields #:nodoc:
     singleton.module_eval do
       (@fields ||= [])
+    end
+  end
+
+  def self.convert_to_ts(value) #:nodoc:
+    if value.is_a?(Time) or value.is_a?(Date)
+      return value.to_hl7
+    else
+      return value
     end
   end
 
@@ -645,6 +675,58 @@ class HL7::Message::Segment
 
   @elements = []
 
+end
+
+class Date
+  # Get a HL7 timestamp (type TS) for a Date instance.
+  #
+  #  Date.parse('2009-12-02').to_hl7
+  #  => "20091202"
+  def to_hl7
+    strftime('%Y%m%d')
+  end
+end
+
+class Time
+  # Get a HL7 timestamp (type TS) for a Time instance.
+  #
+  # fraction_digits:: specifies a number of digits of fractional seconds. Its default value is 0.
+  #
+  #  Time.parse('01:23').to_hl7
+  #  => "20091202012300"
+  #  Time.now.to_hl7(3)
+  #  => "20091202153652.302"
+  def to_hl7( fraction_digits = 0)
+    strftime('%Y%m%d%H%M%S') +
+      if fraction_digits == 0
+        ''
+      elsif fraction_digits <= 6
+        '.' + sprintf('%06d', usec)[0, fraction_digits]
+      else
+        '.' + sprintf('%06d', usec) + '0' * (fraction_digits - 6)
+      end
+  end
+end
+
+class DateTime
+  # Get a HL7 timestamp (type TS) for a Time instance.
+  #
+  # fraction_digits:: specifies a number of digits of fractional seconds. Its default value is 0.
+  #
+  #  Time.parse('01:23').to_hl7
+  #  => "20091202012300"
+  #  Time.now.to_hl7(3)
+  #  => "20091202153652.302"
+  def to_hl7( fraction_digits = 0)
+    strftime('%Y%m%d%H%M%S') +
+      if fraction_digits == 0
+        ''
+      elsif fraction_digits <= 6
+        '.' + sprintf('%06d', usec)[0, fraction_digits]
+      else
+        '.' + sprintf('%06d', usec) + '0' * (fraction_digits - 6)
+      end
+  end
 end
 
 # parse an hl7 formatted date

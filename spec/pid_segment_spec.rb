@@ -11,7 +11,7 @@ describe HL7::Message::Segment::PID do
     it 'validates the admin_sex element' do
       pid = HL7::Message::Segment::PID.new
       lambda do
-        vals = %w[F M O U A N] + [ nil ]
+        vals = %w[F M O U A N C] + [ nil ]
         vals.each do |x|
           pid.admin_sex = x
         end

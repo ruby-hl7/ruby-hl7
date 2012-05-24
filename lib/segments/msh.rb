@@ -7,7 +7,9 @@ class HL7::Message::Segment::MSH < HL7::Message::Segment
   add_field :sending_facility, :idx=>3
   add_field :recv_app, :idx=>4
   add_field :recv_facility, :idx=>5
-  add_field :time, :idx=>6
+  add_field :time, :idx=>6 do |value|
+    convert_to_ts(value)
+  end
   add_field :security, :idx=>7
   add_field :message_type, :idx=>8
   add_field :message_control_id, :idx=>9
@@ -22,4 +24,13 @@ class HL7::Message::Segment::MSH < HL7::Message::Segment
   add_field :principal_language_of_message
   add_field :alternate_character_set_handling_scheme
   add_field :message_profile_identifier
+  
+  private
+  def self.convert_to_ts(value) #:nodoc:
+    if value.is_a?(Time) or value.is_a?(Date)
+      return value.to_hl7
+    else
+      return value
+    end
+  end
 end

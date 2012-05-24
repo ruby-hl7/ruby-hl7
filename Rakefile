@@ -43,7 +43,7 @@ if RUBY_VERSION < '1.9.1'
       s.add_dependency("rubyforge", ">= #{::RubyForge::VERSION}")
     end
   rescue LoadError
-    puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+    puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install jeweler"
   end
 end
 
