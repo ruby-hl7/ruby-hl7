@@ -1,8 +1,5 @@
 # encoding: UTF-8
-$: << '../lib'
-require 'ruby-hl7'
-require 'test/hl7_messages'
-require 'string'
+require 'spec_helper'
 
 describe HL7::Message do
   context 'batch parsing' do
@@ -41,7 +38,7 @@ describe 'String extension' do
   end
 
   it 'should respond_to :hl7_batch?' do
-    @batch_message.should respond_to(:hl7_batch?)
+    @batch_message.hl7_batch?.should be_true
     @plain_message.should respond_to(:hl7_batch?)
   end
 

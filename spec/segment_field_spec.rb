@@ -1,6 +1,5 @@
 # encoding: UTF-8
-$: << '../lib'
-require 'ruby-hl7'
+require 'spec_helper'
 
 class MockSegment < HL7::Message::Segment
   weight 1
@@ -17,7 +16,7 @@ describe HL7::Message::Segment do
   before :all do
     @base = "Mock|no_block|validated|converted"
   end
-  
+
   context "block on field definitions" do
     it 'is evaluated on access by field name' do
       msg = MockSegment.new(@base)

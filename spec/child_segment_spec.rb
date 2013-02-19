@@ -1,6 +1,5 @@
 # encoding: UTF-8
-$: << '../lib'
-require 'ruby-hl7'
+require 'spec_helper'
 
 describe HL7::Message do
   context 'child segments' do

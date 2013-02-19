@@ -1,7 +1,6 @@
 # encoding: UTF-8
-$: << '../lib'
+require 'spec_helper'
 require 'time'
-require 'ruby-hl7'
 
 describe HL7::Message do
   context 'speed parsing' do

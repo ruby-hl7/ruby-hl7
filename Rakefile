@@ -1,17 +1,23 @@
 # $Id$
 require 'rubygems'
 require 'rake'
-require 'rake/rdoctask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
+require 'rdoc/task'
+require 'rubygems/package_task'
 require 'rake/contrib/sshpublisher'
 require 'rbconfig'
 require 'rubyforge'
-require 'spec/rake/spectask'
-require 'spec/rake/verify_rcov'
+require 'rspec'
+require 'rspec/core/rake_task'
+require 'simplecov'
 
 $: << './lib'
 require 'ruby-hl7'
+require 'message_parser'
+require 'message'
+require 'segment_list_storage'
+require 'segment_generator'
+require 'segment'
+
 full_name = "Ruby-HL7"
 short_name = full_name.downcase
 
@@ -70,30 +76,24 @@ spec = Gem::Specification.new do |s|
 end
 
 desc "Run all examples"
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_files = FileList['spec/**/*.rb']
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = 'spec/**/*.rb'
 end
 
-desc "Run all examples with RCov"
-Spec::Rake::SpecTask.new(:spec_with_rcov) do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.rcov = true
-  t.rcov_opts = ['--exclude', "spec,rcov,test"]
+desc "Run all examples with SimpleCov"
+RSpec::Core::RakeTask.new(:spec_with_simplecov) do |spec|
+  ENV['COVERAGE'] = 'true'
+  spec.pattern = 'spec/**/*.rb'
 end
 
-RCov::VerifyTask.new(:verify_rcov => :spec_with_rcov) do |t|
-  t.threshold = 97.13
-  t.index_html = 'coverage/index.html'
-end
-
-Rake::RDocTask.new do |rd|
+RDoc::Task.new do |rd|
   rd.main = "README.rdoc"
   rd.rdoc_files.include("README.rdoc", "LICENSE", "lib/**/*.rb")
   rd.title = "%s (%s) Documentation" % [ full_name, spec.version ]
   rd.rdoc_dir = 'doc'
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
 

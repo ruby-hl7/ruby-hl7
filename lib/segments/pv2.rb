@@ -35,19 +35,22 @@ class HL7::Message::Segment::PV2 < HL7::Message::Segment
   add_field :recurring_service_code
   add_field :billing_media_code
   add_field :expected_surgery_date
-  add_field :military_partnership_code
-  add_field :military_non_availibility_code
-  add_field :newborn_baby_indicator
-  add_field :baby_detained_indicator
-  add_field :mode_of_arrival_code
-  add_field :recreational_drug_use_code
-  add_field :precaution_code
-  add_field :patient_condition_code
-  add_field :living_will_code
-  add_field :organ_donor_code
-  add_field :advance_directive_code
-  add_field :patient_status_effective_date
-  add_field :expected_loa_return_date
-  add_field :expected_preadmission_testing_date
-  add_field :notify_clergy_code
+
+  # Adding military fields
+  [ :military_partnership_code,
+    :military_non_availibility_code,
+    :newborn_baby_indicator,
+    :baby_detained_indicator,
+    :mode_of_arrival_code,
+    :recreational_drug_use_code,
+    :precaution_code,
+    :patient_condition_code,
+    :living_will_code,
+    :organ_donor_code,
+    :advance_directive_code,
+    :patient_status_effective_date,
+    :expected_loa_return_date,
+    :expected_preadmission_testing_date,
+    :notify_clergy_code
+   ].each { |f| add_field f }
 end

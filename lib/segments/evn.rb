@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'ruby-hl7'
 class HL7::Message::Segment::EVN < HL7::Message::Segment
-  weight 0 # should occur after the MSH segment 
+  weight 0 # should occur after the MSH segment
   add_field :type_code, :idx=>1
   add_field :recorded_date, :idx=>2
   add_field :planned_date, :idx=>3
