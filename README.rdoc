@@ -1,7 +1,7 @@
 = Ruby HL7 Library README
 
-{<img src="https://travis-ci.org/mogox/ruby-hl7.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mogox/ruby-hl7]
-{<img src="https://codeclimate.com/github/mogox/ruby-hl7.png" />}[https://codeclimate.com/github/mogox/ruby-hl7]
+{<img src="https://travis-ci.org/ruby-hl7/ruby-hl7.png?branch=master" alt="Build Status" />}[https://travis-ci.org/ruby-hl7/ruby-hl7]
+{<img src="https://codeclimate.com/github/ruby-hl7/ruby-hl7.png" />}[https://codeclimate.com/github/ruby-hl7/ruby-hl7]
 
 A simple way to parse and create HL7 2.x messages with Ruby.
 
