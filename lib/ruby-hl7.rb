@@ -48,6 +48,18 @@ end
 class HL7::EmptySegmentNotAllowed < HL7::ParseError
 end
 
+class String
+
+  def encode_hl7
+    self.gsub('\\', "\\E\\").gsub('|', "\\F\\").gsub('&', "\\T\\").gsub('~', "\\R\\").gsub('^', "\\S\\").gsub("\r\n", "\n").gsub("\n", "\\.br\\")
+  end
+
+  def decode_hl7
+    self.gsub("\\E\\", '\\').gsub("\\F\\", '|').gsub("\\T\\", '&').gsub("\\R\\", '~').gsub("\\S\\", '^').gsub("\\.br\\", "\r\n")
+  end
+
+end
+
 require 'message_parser'
 require 'message'
 require 'segment_list_storage'
