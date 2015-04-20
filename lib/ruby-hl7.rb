@@ -23,7 +23,7 @@ require 'date'
 module HL7 # :nodoc:
   VERSION = '1.3.2'
   def self.ParserConfig
-    @parser_cfg ||= { :empty_segment_is_error => true }
+    @parser_cfg ||= { :empty_segment_is_error => false }
   end
 end
 
