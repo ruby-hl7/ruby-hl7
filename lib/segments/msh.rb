@@ -4,7 +4,7 @@ class HL7::Message::Segment::MSH < HL7::Message::Segment
   add_field :enc_chars
   add_field :sending_app
   add_field :sending_facility
-  add_field :recv_app_xxxx
+  add_field :recv_app
   add_field :recv_facility
   add_field :time do |value|
     convert_to_ts(value)
