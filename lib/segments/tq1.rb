@@ -1,5 +1,5 @@
 
-class HL7::Message::Segment::SCH < HL7::Message::Segment
+class HL7::Message::Segment::TQ1 < HL7::Message::Segment
   weight 2
   add_field :set_id, idx: 1
   add_field :quantity, idx: 2
