@@ -55,7 +55,7 @@ class String
   end
 
   def decode_hl7
-    self.gsub("\\E\\", '\\').gsub("\\F\\", '|').gsub("\\T\\", '&').gsub("\\R\\", '~').gsub("\\S\\", '^').gsub("\\.br\\", "\r\n")
+    self.gsub("\\E\\", '\\').gsub("\\F\\", '|').gsub("\\T\\", '&').gsub("\\R\\", '~').gsub("\\S\\", '^').gsub("\\.br\\", "\n")
   end
 
 end
