@@ -13,6 +13,6 @@ class HL7::Message::Segment::TQ1 < HL7::Message::Segment
   add_field :condition_text, idx: 10
   add_field :text_instruction, idx: 11
   add_field :conjunction, idx: 12
-  add_field :occurence_duration, idx: 13
+  add_field :occurrence_duration, idx: 13
   add_field :total_occurrences, idx: 14
 end
