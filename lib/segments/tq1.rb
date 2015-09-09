@@ -7,8 +7,8 @@ class HL7::Message::Segment::TQ1 < HL7::Message::Segment
   add_field :explicit_time, idx: 4
   add_field :relative_time_and_units, idx: 5
   add_field :service_duration, idx: 6
-  add_field :start_date_time, idx: 7
-  add_field :end_date_time, idx: 8
+  add_field :start_date, idx: 7
+  add_field :end_date, idx: 8
   add_field :priority, idx: 9
   add_field :condition_text, idx: 10
   add_field :text_instruction, idx: 11
