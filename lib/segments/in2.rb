@@ -16,7 +16,9 @@ class HL7::Message::Segment::IN2 < HL7::Message::Segment
   add_field :champus_service
   add_field :champus_rank_grade
   add_field :champus_status
-  add_field :champus_retire_date {|value| convert_to_ts(value) }
+  add_field :champus_retire_date do |value|
+    convert_to_ts(value)
+  end
   add_field :champus_non_avail_cert_on_file
   add_field :baby_coverage
   add_field :combine_baby_bill
@@ -43,8 +45,12 @@ class HL7::Message::Segment::IN2 < HL7::Message::Segment
   add_field :nationality
   add_field :ethnic_group
   add_field :marital_status
-  add_field :insureds_employment_start_date {|value| convert_to_ts(value) }
-  add_field :insureds_employment_stop_date {|value| convert_to_ts(value) }
+  add_field :insureds_employment_start_date do |value|
+    convert_to_ts(value)
+  end
+  add_field :insureds_employment_stop_date do |value|
+    convert_to_ts(value)
+  end
   add_field :job_title
   add_field :job_code_class
   add_field :job_status
@@ -54,8 +60,12 @@ class HL7::Message::Segment::IN2 < HL7::Message::Segment
   add_field :insureds_contact_person_name
   add_field :insureds_contact_person_phone_num
   add_field :insureds_contact_person_reason
-  add_field :relationship_to_patient_start_dt {|value| convert_to_ts(value) }
-  add_field :relationship_to_patient_stop_dt {|value| convert_to_ts(value) }
+  add_field :relationship_to_patient_start_dt do |value|
+    convert_to_ts(value)
+  end
+  add_field :relationship_to_patient_stop_dt do |value|
+    convert_to_ts(value)
+  end
   add_field :insured_co_contact_reason
   add_field :insured_co_contact_phone
   add_field :policy_scope
