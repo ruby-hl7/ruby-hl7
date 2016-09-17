@@ -10,14 +10,14 @@ module HL7
     add_field :diagnosis_related_group,   :idx => 7
     add_field :drg_approval_indicator,    :idx => 8
     add_field :drg_grouper_review_code,   :idx => 9
-    add_field :outlier_type,              :idx => 9
-    add_field :outlier_days,              :idx => 9
-    add_field :outlier_cost,              :idx => 9
-    add_field :grouper_version_and_type,  :idx => 9
-    add_field :diagnosis_priority,        :idx => 9
-    add_field :diagnosis_clinician,       :idx => 9
-    add_field :diagnosis_classification,  :idx => 9
-    add_field :confidential_indicator,    :idx => 9
-    add_field :attestation_date_time,     :idx => 9
+    add_field :outlier_type,              :idx => 10
+    add_field :outlier_days,              :idx => 11
+    add_field :outlier_cost,              :idx => 12
+    add_field :grouper_version_and_type,  :idx => 13
+    add_field :diagnosis_priority,        :idx => 14
+    add_field :diagnosis_clinician,       :idx => 15
+    add_field :diagnosis_classification,  :idx => 16
+    add_field :confidential_indicator,    :idx => 17
+    add_field :attestation_date_time,     :idx => 18
   end
 end
