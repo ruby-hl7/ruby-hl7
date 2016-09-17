@@ -47,7 +47,7 @@ class HL7::Message
     @segments_by_name = {}
     @item_delim = "^"
     @element_delim = '|'
-    @segment_delim = "\r"
+    @segment_delim = "\n"
     @delimiter = HL7::Message::Delimiter.new( @element_delim,
                                               @item_delim,
                                               @segment_delim)
