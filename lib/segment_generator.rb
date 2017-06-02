@@ -1,4 +1,10 @@
 # Class for grouping the messages delimiter
+require 'message_parser'
+require 'message'
+require 'segment_list_storage'
+require 'segment_generator'
+require 'segment_fields'
+require 'segment'
 class HL7::Message::Delimiter
   attr_accessor :item, :element, :segment
 
