@@ -160,14 +160,6 @@ class HL7::Message::Segment
     self.respond_to?(:children)
   end
 
-  class HL7::Message::Segment::Default < HL7::Message::Segment
-    def initialize(raw_segment="", delims=[])
-      segs = [] if (raw_segment == "")
-      segs ||= raw_segment
-      super( segs, delims )
-    end
-  end
-
   private
   def self.singleton #:nodoc:
     class << self; self end
@@ -201,8 +193,3 @@ class HL7::Message::Segment
   end
 
 end
-
-
-
-# load our segments
-Dir["#{File.dirname(__FILE__)}/segments/*.rb"].each { |ext| load ext }
