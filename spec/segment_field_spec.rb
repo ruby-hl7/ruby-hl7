@@ -66,10 +66,10 @@ describe HL7::Message::Segment do
   describe '#[]' do
     it 'allows index access to the segment' do
       msg = HL7::Message::Segment.new(@base)
-      msg[0].should == 'Mock'
-      msg[1].should == 'no_block'
-      msg[2].should == 'validated'
-      msg[3].should == 'converted'
+      msg[0].should eq 'Mock'
+      msg[1].should eq 'no_block'
+      msg[2].should eq 'validated'
+      msg[3].should eq 'converted'
     end
   end
 

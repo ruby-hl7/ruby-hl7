@@ -18,10 +18,10 @@ describe HL7::Message::Segment::MFE do
     it 'allows access to an MFE segment' do
       lambda do
         sft = HL7::Message::Segment::MFE.new( @base_sft )
-        sft.record_level_event_code.should == 'MAD'
-        sft.mfn_control_id.should == '6772331'
-        sft.primary_key_value.should == 'BUD^Buddhist^HL70006'
-        sft.primary_key_value_type.should == 'CE'
+        sft.record_level_event_code.should eq 'MAD'
+        sft.mfn_control_id.should eq '6772331'
+        sft.primary_key_value.should eq 'BUD^Buddhist^HL70006'
+        sft.primary_key_value_type.should eq 'CE'
       end.should_not raise_error
     end
   end

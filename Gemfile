@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rake', '~> 10.0.3'
+gem 'rake', '~> 11.0'
 gem 'rdoc'
 gem 'rubyforge'
 gem 'technicalpickles-jeweler'
