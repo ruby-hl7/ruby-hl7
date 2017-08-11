@@ -18,7 +18,7 @@ require 'segment'
 
 full_name = "Ruby-HL7"
 short_name = full_name.downcase
-RAKEVERSION = 11.0
+RAKEVERSION = 11.3
 
 # Many of these tasks were garnered from zenspider's Hoe
 # just forced to work my way
@@ -38,9 +38,7 @@ if RUBY_VERSION < '1.9.1'
       s.homepage = "http://github.com/ruby-hl7/ruby-hl7"
       s.description = "A simple library to parse and generate HL7 2.x messages"
       s.require_path = "lib"
-      s.has_rdoc = true
       s.required_ruby_version = '>= 1.8.6'
-      s.extra_rdoc_files = %w[README.rdoc LICENSE]
       s.files = FileList["{bin,lib,test_data}/**/*"].to_a
       s.test_files = FileList["{test}/**/test*.rb"].to_a
       s.add_dependency("rake", ">= #{RAKEVERSION}")
