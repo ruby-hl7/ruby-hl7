@@ -11,15 +11,15 @@ describe HL7::Message::Segment::NK1 do
       lambda do
         nk1 = HL7::Message::Segment::NK1.new( @base_nk1 )
         nk1.should_not be_nil
-        nk1.to_s.should == @base_nk1
+        nk1.to_s.should eq @base_nk1
       end.should_not raise_error
     end
 
     it 'allows access to an NK1 segment' do
       lambda do
         nk1 = HL7::Message::Segment::NK1.new( @base_nk1 )
-        nk1.name.should == 'Mum^Martha^M^^^^L'
-        nk1.phone_number.should == '^PRN^PH^^1^555^5552006'
+        nk1.name.should eq 'Mum^Martha^M^^^^L'
+        nk1.phone_number.should eq '^PRN^PH^^1^555^5552006'
       end.should_not raise_error
     end
   end

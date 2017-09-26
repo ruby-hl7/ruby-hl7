@@ -80,30 +80,30 @@ HL7MESSAGES[:arup_simple_pid] = <<ARUP_SIMPLE_PID
 MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005||||||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Repeatedly Reactive||Negative||||F|||200903210007\r
 ARUP_SIMPLE_PID
 
-HL7MESSAGES[:arup_replace_name] = Proc.new do |patient_name|
-  first_name, last_name = patient_name.split
-<<ARUP
-MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||#{last_name}^#{first_name}^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
-ARUP
-end
-
-HL7MESSAGES[:arup_replace_lab] = Proc.new do |lab_name|
-<<ARUP
-MSH|^~\&|ARUP|#{lab_name}^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
-ARUP
-end
-
-HL7MESSAGES[:arup_replace_collection_date] = Proc.new do |collection_date|
-<<ARUP
-MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||#{collection_date}|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
-ARUP
-end
-
-HL7MESSAGES[:arup_replace_test_type] =  Proc.new do |test_type|
-<<ARUP
-MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^#{test_type}^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
-ARUP
-end
+# HL7MESSAGES[:arup_replace_name] = Proc.new do |patient_name|
+#   first_name, last_name = patient_name.split
+# <<ARUP
+# MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||#{last_name}^#{first_name}^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
+# ARUP
+# end
+#
+# HL7MESSAGES[:arup_replace_lab] = Proc.new do |lab_name|
+# <<ARUP
+# MSH|^~\&|ARUP|#{lab_name}^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
+# ARUP
+# end
+#
+# HL7MESSAGES[:arup_replace_collection_date] = Proc.new do |collection_date|
+# <<ARUP
+# MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||#{collection_date}|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^Hepatitis Be Antigen^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
+# ARUP
+# end
+#
+# HL7MESSAGES[:arup_replace_test_type] =  Proc.new do |test_type|
+# <<ARUP
+# MSH|^~\&|ARUP|ARUP LABORATORIES^46D0523979^CLIA|UTDOH|UT|200903261645||ORU^R01|200903261645128667|P|2.3.1|1\rPID|1||17744418^^^^MR||ZHANG^GEORGE^^^^^L||19830922|M||U^Unknown^HL70005|42 HAPPY LN^^SALT LAKE CITY^UT^84444^^M||^^PH^^^801^5552346|||||||||U^Unknown^HL70189\rORC||||||||||||^FARNSWORTH^MABEL^W|||||||||University Hospital UT|50 North Medical Drive^^Salt Lake City^UT^84132^USA^B||^^^^^USA^B\rOBR|1||09078102377|13954-3^Hepatitis Be Antigen^LN|||200903191011|||||||200903191011|BLOOD|^FARNSWORTH^MABEL^W||||||200903191011|||F||||||9^Unknown\rOBX|1|ST|13954-3^#{test_type}^LN|1|Positive|Metric Ton|Negative||||F|||200903210007\r
+# ARUP
+# end
 
 # The following messages are taken from the HL7 2.5.1 ELR to Public
 # Health US Realm document.
@@ -292,3 +292,9 @@ REALM_CJ_INPATIENT
 HL7MESSAGES[:realm_cj_en] = <<REALM_CAMPYLOBACTER_EN
 MSH|^~\&|Lab1^1234^CLIA|^1234^CLIA|ELR^2.16.840.1.113883.19.3.2^ISO|SPH^2.16.840.1.113883.19.3.2^ISO|20080818183002.1-0700||ORU^R01^ORU_R01|1234567890|P^T|2.5.1|||NE|NE|USA||||USELR1.0^^2.16.840.1.114222.4.10.3^ISO\rSFT|1|Level Seven Healthcare Software, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234|1.2|An Lab System|56734||20080817\rPID|1||36363636^^^MPI&2.16.840.1.113883.19.3.2.1&ISO^MR^A&2.16.840.1.113883.19.3.2.1&ISO~444333333^^^&2.16.840.1.113883.4.1^ISO^SS||Everyman^Adam^A^^^^L^^^^^^^BS|Mum^Martha^M^^^^M|19800602|M||2106-3^White^CDCREC^^^^04/24/2007|2222 Home Street^^Ann Arbor^MI^99999^USA^H||^PRN^PH^^1^555^5552004|^WPN^PH^^1^955^5551009|en^English^ISO6391^^^^3/29/2007|M^Married^HL70002^^^^2.5.1||||||N^Not Hispanic or Latino^HL70189^^^^2.5.1||||||||N|||200808151000-0700|Reliable^2.16.840.1.113883.19.3.1^ISO\rPV1|1|O|4E^234^A^Good Health Hospital&2.16.840.1.113883.19.3.2.3&ISO^N^N^Building 1^4^Nursing unit 4 East^1234&&2.16.840.1.113883.19.3.2.3&ISO^&2.16.840.1.113883.19.3.2.3&ISO|R||||||||||||||||||||||||||||||||||||||||200808151000-0700|200808151200-0700\rPV2|||1^Sick^99AdmitReason|||||||||||||N||||||||Level Seven Healthcare, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234|||20010603|||19990603\rORC|RE|23456^EHR^2.16.840.1.113883.19.3.2.3^ISO|9700123^Lab^2.16.840.1.113883.19.3.1.6^ISO|||||||||1234^Admit^Alan^A^III^Dr^^^&2.16.840.1.113883.19.4.6^ISO^L^^^EI^&2.16.840.1.113883.19.4.6^ISO^^^^^^^^MD||^WPN^PH^^1^555^5551005|||||||Level Seven Healthcare, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234|1005 Healthcare Drive^^Ann Arbor^MI^99999^USA^B|^WPN^PH^^1^555^5553001|4444 Healthcare Drive^Suite 123^Ann Arbor^MI^99999^USA^B\rOBR|1|23456^EHR^2.16.840.1.113883.19.3.2.3^ISO|9700123^Lab^2.16.840.1.113883.19.3.1.6^ISO|625-4^Bacteria identified^LN^3456543^ CULTURE, STOOL^99USI^2.26|||200808151030-0700||||||diarrhea|||1234^Admit^Alan^A^III^Dr^^^&2.16.840.1.113883.19.4.6^ISO^L^^^EI^&2.16.840.1.113883.19.4.6^ISO^^^^^^^^MD|^WPN^PH^^1^555^5551005|||||2008081830-0700|||F||||||787.91^DIARRHEA^I9CDX^^^^07/09/2008|1235&Slide&Stan&S&&Dr&MD&&DOC&2.16.840.1.113883.19.4.6&ISO\rOBX|1|CWE|625-4^Bacteria identified:Prid:Pt:Stool:Nom:Culture^LN^^^^2.26|1|66543000^Campylobacter jejuni^SCT^^^^January 2007||||||P|||200906041458|||0086^Bacterial identification^OBSMETHOD^^^^501-20080815||200906051700||||GHH Lab^L^^^^CLIA&2.16.840.1.113883.19.4.6&ISO^XX^^^1236|3434 Industrial Loop^^Ann Arbor^MI^99999^USA^B|9876543^Slide^Stan^S^^^^^NPPES&2.16.840.1.113883.19.4.6&ISO^L^^^NPI\rSPM|1|23456&EHR&2.16.840.1.113883.19.3.2.3&ISO^9700122&Lab&2.16.840.1.113883.19.3.1.6&ISO||119339001^Stool specimen^SCT^^^^20080131|||||||P^Patient^HL60369^^^^2.5.1|10^g&gram&UCUM&&&&1.6|||||200808151030-0700|200808151100-0700
 REALM_CAMPYLOBACTER_EN
+
+#Sample messages for MFN messages
+HL7MESSAGES[:mfn_m13] = <<MFN_M13
+MSH|^~\&|HL7REG|UH|HL7LAB|CH|200106290544||MFN^M13^MFN_M01|MSGID004|P|2.5||AL|AL\rMFI|HL70006^RELIGION^HL70175||UPD|||AL\rMFE|MAD|6772333|200106290500|BUD^Buddhist^HL70006|CE\rMFE|MAD|6772334|200106290500|BOT^Buddhist: Other^HL70006|CE
+MFN_M13
+

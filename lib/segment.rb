@@ -21,10 +21,10 @@ class HL7::Message::Segment
   extend HL7::Message::SegmentListStorage
   include HL7::Message::SegmentFields
 
-  attr :segment_parent, true
-  attr :element_delim
-  attr :item_delim
-  attr :segment_weight
+  attr_accessor :segment_parent
+  attr_reader :element_delim
+  attr_reader :item_delim
+  attr_reader :segment_weight
 
   METHOD_MISSING_FOR_INITIALIZER = <<-END
     def method_missing( sym, *args, &blk )
@@ -142,6 +142,12 @@ class HL7::Message::Segment
   # indicate whether or not the segment has a parent
   def is_child_segment=(val)
     @is_child_segment = val
+  end
+
+  # yield each element in the segment
+  def each # :yields: element
+    return unless @elements
+    @elements.each { |e| yield e }
   end
 
   # get the length of the segment (number of fields it contains)

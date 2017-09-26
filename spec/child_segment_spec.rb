@@ -11,15 +11,15 @@ describe HL7::Message do
       msg = HL7::Message.new @base
       msg.should_not be_nil
       msg[:OBR].should_not be_nil
-      msg[:OBR].length.should == 3
+      msg[:OBR].length.should eq 3
       msg[:OBR][0].children.should_not be_nil
-      msg[:OBR][0].children.length.should == 6
+      msg[:OBR][0].children.length.should eq 6
       msg[:OBR][1].children.should_not be_nil
-      msg[:OBR][1].children.length.should == 3
+      msg[:OBR][1].children.length.should eq 3
       msg[:OBR][2].children.should_not be_nil
-      msg[:OBR][2].children.length.should == 1
+      msg[:OBR][2].children.length.should eq 1
       msg[:OBX][0].children.should_not be_nil
-      msg[:OBX][0].children.length.should == 1
+      msg[:OBX][0].children.length.should eq 1
 
       msg[:OBR][0].children.each do |x|
         x.should_not be_nil
@@ -42,7 +42,7 @@ describe HL7::Message do
       msg << ob
       ob.children.should_not be_nil
       ob.segment_parent.should_not be_nil
-      ob.segment_parent.should == msg
+      ob.segment_parent.should eq msg
       orig_cnt = msg.length
 
       (1..4).each do |x|
@@ -51,13 +51,13 @@ describe HL7::Message do
         m.should_not be_nil
         /taco/.match(m.to_s).should_not be_nil
         ob.children << m
-        ob.children.length.should == x
+        ob.children.length.should eq x
         m.segment_parent.should_not be_nil
-        m.segment_parent.should == ob
+        m.segment_parent.should eq ob
       end
 
-      @base.should_not == msg.to_hl7
-      msg.length.should_not == orig_cnt
+      @base.should_not eq msg.to_hl7
+      msg.length.should_not eq orig_cnt
       text_ver = msg.to_hl7
       /taco/.match(text_ver).should_not be_nil
     end

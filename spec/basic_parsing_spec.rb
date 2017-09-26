@@ -14,42 +14,42 @@ describe HL7::Message do
     it 'parses simple text' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
-      msg.to_hl7.should == @simple_msh_txt
+      msg.to_hl7.should eq @simple_msh_txt
     end
 
     it 'parses delimiters properly' do
       msg = HL7::Message.new( @base_msh )
-      msg.element_delim.should == "|"
-      msg.item_delim.should == "^"
+      msg.element_delim.should eq "|"
+      msg.item_delim.should eq "^"
 
       msg = HL7::Message.new( @base_msh_alt_delims )
-      msg.element_delim.should == "$"
-      msg.item_delim.should == "@"
+      msg.element_delim.should eq "$"
+      msg.item_delim.should eq "@"
     end
 
     it 'parses via the constructor' do
       msg = HL7::Message.new( @simple_msh_txt )
-      msg.to_hl7.should == @simple_msh_txt
+      msg.to_hl7.should eq @simple_msh_txt
     end
 
     it 'parses via the class method' do
       msg = HL7::Message.parse( @simple_msh_txt )
-      msg.to_hl7.should == @simple_msh_txt
+      msg.to_hl7.should eq @simple_msh_txt
     end
 
     it 'only parses String and Enumerable data' do
-      lambda { msg = HL7::Message.parse :MSHthis_shouldnt_parse_at_all }.should raise_error(HL7::ParseError)
+      lambda { HL7::Message.parse :MSHthis_shouldnt_parse_at_all }.should raise_error(HL7::ParseError)
     end
 
     it 'parses empty strings' do
-      lambda { msg = HL7::Message.new @empty_txt }.should_not raise_error
+      lambda { HL7::Message.new @empty_txt }.should_not raise_error
     end
 
     it 'converts to strings' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
       orig = @simple_msh_txt.gsub( /\r/, "\n" )
-      msg.to_s.should == orig
+      msg.to_s.should eq orig
     end
 
     it 'converts to a string and to HL7' do
@@ -60,19 +60,19 @@ describe HL7::Message do
     it 'allows access to segments by index' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
-      msg[0].to_s.should == @base_msh
+      msg[0].to_s.should eq @base_msh
     end
 
     it 'allows access to segments by name' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
-      msg["MSH"].to_s.should == @base_msh
+      msg["MSH"].to_s.should eq @base_msh
     end
 
     it 'allows access to segments by symbol' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
-      msg[:MSH].to_s.should == @base_msh
+      msg[:MSH].to_s.should eq @base_msh
     end
 
     it 'inserts segments by index' do
@@ -80,7 +80,7 @@ describe HL7::Message do
       msg.parse @simple_msh_txt
       inp = HL7::Message::Segment::Default.new
       msg[1] = inp
-      msg[1].should == inp
+      msg[1].should eq inp
 
       lambda { msg[2] = Class.new }.should raise_error(HL7::Exception)
     end
@@ -96,7 +96,7 @@ describe HL7::Message do
       msg.parse @simple_msh_txt
       inp = HL7::Message::Segment::NTE.new
       msg["NTE"] = inp
-      msg["NTE"].should == inp
+      msg["NTE"].should eq inp
       lambda { msg["NTE"] = Class.new }.should raise_error(HL7::Exception)
     end
 
@@ -105,21 +105,21 @@ describe HL7::Message do
       msg.parse @simple_msh_txt
       inp = HL7::Message::Segment::NTE.new
       msg[:NTE] = inp
-      msg[:NTE].should == inp
+      msg[:NTE].should eq inp
       lambda { msg[:NTE] = Class.new }.should raise_error(HL7::Exception)
     end
 
     it 'allows access to segment elements' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
-      msg[:MSH].sending_app.should == "LAB1"
+      msg[:MSH].sending_app.should eq "LAB1"
     end
 
     it 'allows modification of segment elements' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
       msg[:MSH].sending_app = "TEST"
-      msg[:MSH].sending_app.should == "TEST"
+      msg[:MSH].sending_app.should eq "TEST"
     end
 
     it 'raises NoMethodError when accessing a missing element' do
@@ -136,14 +136,14 @@ describe HL7::Message do
 
     it 'permits elements to be accessed via numeric names' do
       msg = HL7::Message.new( @simple_msh_txt )
-      msg[:MSH].e2.should == "LAB1"
+      msg[:MSH].e2.should eq "LAB1"
       msg[:MSH].e3.should be_empty
     end
 
     it 'permits elements to be modified via numeric names' do
       msg = HL7::Message.parse( @simple_msh_txt )
       msg[:MSH].e2 = "TESTING1234"
-      msg[:MSH].e2.should == "TESTING1234"
+      msg[:MSH].e2.should eq "TESTING1234"
     end
 
     it 'allows appending of segments' do
@@ -177,7 +177,7 @@ describe HL7::Message do
       nte = HL7::Message::Segment::NTE.new
       msg << nte
       nte2 = HL7::Message::Segment::NTE.new
-      msg << nte
+      msg << nte2
       msh.sending_app = "TEST"
 
       initial = msg.to_s
@@ -199,9 +199,9 @@ describe HL7::Message do
       ntec = HL7::Message::Segment::NTE.new
       ntec.comment = "third"
       msg << ntec
-      ntea.set_id.should == "1"
-      nteb.set_id.should == "2"
-      ntec.set_id.should == "3"
+      ntea.set_id.should eq "1"
+      nteb.set_id.should eq "2"
+      ntec.set_id.should eq "3"
     end
 
     it 'parses Enumerable data' do
@@ -209,7 +209,7 @@ describe HL7::Message do
       test_file.should_not be_nil
 
       msg = HL7::Message.new( test_file )
-      msg.to_hl7.should == @simple_msh_txt
+      msg.to_hl7.should eq @simple_msh_txt
     end
 
     it 'has a to_info method' do
@@ -220,21 +220,21 @@ describe HL7::Message do
     it 'parses a raw array' do
       inp = "NTE|1|ME TOO"
       nte = HL7::Message::Segment::NTE.new( inp.split( '|' ) )
-      nte.to_s.should == inp
+      nte.to_s.should eq inp
     end
 
     it 'produces MLLP output' do
       msg = HL7::Message.new( @simple_msh_txt )
       expect = "\x0b%s\x1c\r" % msg.to_hl7
-      msg.to_mllp.should == expect
+      msg.to_mllp.should eq expect
     end
 
     it 'parses MLLP input' do
       raw = "\x0b%s\x1c\r" % @simple_msh_txt
       msg = HL7::Message.parse( raw )
       msg.should_not be_nil
-      msg.to_hl7.should == @simple_msh_txt
-      msg.to_mllp.should == raw
+      msg.to_hl7.should eq @simple_msh_txt
+      msg.to_mllp.should eq raw
     end
 
     it 'can parse its own MLLP output' do
@@ -243,7 +243,7 @@ describe HL7::Message do
       lambda do
         post_mllp = HL7::Message.parse( msg.to_mllp )
         post_mllp.should_not be_nil
-        msg.to_hl7.should == post_mllp.to_hl7
+        msg.to_hl7.should eq post_mllp.to_hl7
       end.should_not raise_error
     end
 
@@ -261,7 +261,7 @@ describe HL7::Message do
         obr.children.length.should be_zero
         (1..5).each do |x|
           obr.children << HL7::Message::Segment::OBX.new
-          obr.children.length.should == x
+          obr.children.length.should eq x
         end
       end.should_not raise_error
     end
@@ -275,7 +275,6 @@ describe HL7::Message do
       #multible obr's with multiple obx's
       msg = HL7::Message.parse( @simple_msh_txt )
       orig_output = msg.to_hl7
-      orig_obx_cnt = msg[:OBX].length
       (1..10).each do |obr_id|
         obr = HL7::Message::Segment::OBR.new
         msg << obr
@@ -286,11 +285,11 @@ describe HL7::Message do
       end
 
       msg[:OBR].should_not be_nil
-      msg[:OBR].length.should == 11
+      msg[:OBR].length.should eq 11
       msg[:OBX].should_not be_nil
-      msg[:OBX].length.should == 102
-      msg[:OBR][4].children[1].set_id.should == "2"
-      msg[:OBR][5].children[1].set_id.should == "2"
+      msg[:OBX].length.should eq 102
+      msg[:OBR][4].children[1].set_id.should eq "2"
+      msg[:OBR][5].children[1].set_id.should eq "2"
 
       final_output = msg.to_hl7
       orig_output.should_not == final_output
@@ -298,10 +297,10 @@ describe HL7::Message do
 
     it "returns each segment's index" do
       msg = HL7::Message.parse( @simple_msh_txt )
-      msg.index("PID").should == 1
-      msg.index(:PID).should == 1
-      msg.index("PV1").should == 2
-      msg.index(:PV1).should == 2
+      msg.index("PID").should eq 1
+      msg.index(:PID).should eq 1
+      msg.index("PV1").should eq 2
+      msg.index(:PV1).should eq 2
       msg.index("TACOBELL").should be_nil
       msg.index(nil).should be_nil
       msg.index(1).should be_nil
@@ -314,7 +313,7 @@ describe HL7::Message do
     end
 
     it 'can parse an empty segment' do
-      lambda { msg = HL7::Message.new @empty_segments_txt }.should_not raise_error
+      lambda { HL7::Message.new @empty_segments_txt }.should_not raise_error
     end
   end
 end

@@ -9,6 +9,17 @@ describe HL7::Message::Segment do
     end
   end
 
+  describe 'enumerable' do
+    it 'enumerates over elements' do
+      seg = HL7::Message::Segment::Default.new
+      segment_count = 0
+      seg.each do |s|
+        segment_count = segment_count + 1
+      end
+      segment_count.should == seg.length
+    end
+  end
+
   describe 'is_child_segment?' do
     let(:segment){ HL7::Message::Segment.new "MSA|AR|ZZ9380 ERR" }
     it "return false when is not set" do

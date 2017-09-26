@@ -19,11 +19,12 @@ Lists
 
 Copyright (C) 2006-2014 Mark Guzman
 
-Maintained by the Collaborative Software Initiative
+Maintained by:
 
 * http://csinitiative.com
 * http://trisano.org
 * http://github.com/csinitiative/trisano
+* http://onemedical.com
 
 == Download and Installation
 
