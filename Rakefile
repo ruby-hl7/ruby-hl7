@@ -20,6 +20,7 @@ require 'segment'
 
 full_name = "Ruby-HL7"
 short_name = full_name.downcase
+RAKEVERSION = 11.0
 
 # Many of these tasks were garnered from zenspider's Hoe
 # just forced to work my way
@@ -46,7 +47,6 @@ if RUBY_VERSION < '1.9.1'
       s.files = FileList["{bin,lib,test_data}/**/*"].to_a
       s.test_files = FileList["{test}/**/test*.rb"].to_a
       s.add_dependency("rake", ">= #{RAKEVERSION}")
-      s.add_dependency("rubyforge", ">= #{::RubyForge::VERSION}")
     end
   rescue LoadError
     puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install jeweler"
@@ -78,6 +78,7 @@ end
 desc "Run all examples"
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = 'spec/**/*.rb'
+  spec.ruby_opts = '-w'
 end
 
 desc "Run all examples with SimpleCov"

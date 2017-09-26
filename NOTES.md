@@ -1,5 +1,21 @@
 ## Overview
 
+**Version 1.2.0**
+Included in this release:
+https://github.com/ruby-hl7/ruby-hl7/pull/52
+https://github.com/ruby-hl7/ruby-hl7/pull/56
+https://github.com/ruby-hl7/ruby-hl7/pull/58
+https://github.com/ruby-hl7/ruby-hl7/pull/59
+
+Thanks to:
+@adamstegman, @clausti, @evanmthw, @mitch-lindsay
+
+**Version 1.1.1**
+Included in this release:
+
+- https://github.com/ruby-hl7/ruby-hl7/pull/48
+- https://github.com/ruby-hl7/ruby-hl7/pull/44
+
 **Version 1.1.0**
 Included in this release:
 - https://github.com/ruby-hl7/ruby-hl7/pull/7

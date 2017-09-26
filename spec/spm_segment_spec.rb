@@ -11,15 +11,15 @@ describe HL7::Message::Segment::SPM do
       lambda do
         spm = HL7::Message::Segment::SPM.new( @base_spm )
         spm.should_not be_nil
-        spm.to_s.should == @base_spm
+        spm.to_s.should eq @base_spm
       end.should_not raise_error
     end
 
     it 'allows access to an SPM segment' do
       lambda do
         spm = HL7::Message::Segment::SPM.new( @base_spm )
-        spm.specimen_type.should == '122554006^Capillary blood specimen^SCT^BLDC^Blood capillary^HL70070^20080131^2.5.1'
-        spm.set_id.should == '1'
+        spm.specimen_type.should eq '122554006^Capillary blood specimen^SCT^BLDC^Blood capillary^HL70070^20080131^2.5.1'
+        spm.set_id.should eq '1'
       end.should_not raise_error
     end
   end

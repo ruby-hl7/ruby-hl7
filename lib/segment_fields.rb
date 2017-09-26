@@ -78,14 +78,22 @@ module HL7::Message::SegmentFields
 
   def field_info( name ) #:nodoc:
     field_blk = nil
-    idx = name # assume we've gotten a fixnum
-    unless name.kind_of?( Fixnum )
+    idx = name # assume we've gotten a integer
+    unless name.kind_of?(Integer)
       fld_info = self.class.fields[ name ]
       idx = fld_info[:idx].to_i
       field_blk = fld_info[:blk]
     end
 
     [ idx, field_blk ]
+  end
+
+  def []( index )
+    @elements[index]
+  end
+
+  def []=( index, value )
+    @elements[index] = value.to_s
   end
 
   def read_field( name ) #:nodoc:

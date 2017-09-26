@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ruby-hl7'
 class HL7::Message::Segment::RF1 < HL7::Message::Segment
   weight 0 # should occur after the MSH segment
   add_field :referral_status

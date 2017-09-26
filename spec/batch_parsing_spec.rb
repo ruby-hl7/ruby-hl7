@@ -26,7 +26,7 @@ describe HL7::Message do
       HL7::Message.parse_batch(HL7MESSAGES[:realm_batch]) do |m|
         count += 1
       end
-      count.should == 2
+      count.should eq 2
     end
   end
 end

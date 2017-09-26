@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ruby-hl7'
 class HL7::Message::Segment::NTE < HL7::Message::Segment
   weight 4
   add_field :set_id, :idx=>1

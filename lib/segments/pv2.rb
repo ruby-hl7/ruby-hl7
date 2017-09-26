@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ruby-hl7'
 class HL7::Message::Segment::PV2 < HL7::Message::Segment
   weight 3
   add_field :prior_pending_location
