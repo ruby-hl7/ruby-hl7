@@ -1,11 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rake', '~> 11.0'
-gem 'rdoc'
-gem 'rubyforge'
-gem 'technicalpickles-jeweler'
+gem 'rake', '~> 11.3.0'
 
 group :test, :development do
   gem 'simplecov'
-  gem 'rspec', '~> 2.99.0'
+  gem 'rspec', '~> 3.4'
 end
