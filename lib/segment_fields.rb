@@ -36,6 +36,11 @@ module HL7::Message::SegmentFields
       end
 
       self.class_eval <<-END
+        if :#{name} != :name
+          remove_method(:#{name}) if method_defined?(:#{name})
+          remove_method(:"#{name}=") if method_defined?(:"#{name}=")
+        end
+
         def #{name}(val=nil)
           unless val
             read_field( :#{namesym} )

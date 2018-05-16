@@ -25,6 +25,11 @@ module HL7 # :nodoc:
   def self.ParserConfig
     @parser_cfg ||= { :empty_segment_is_error => true }
   end
+
+  def self.configure
+    @configuration ||= Configuration.new
+    yield(@configuration)
+  end
 end
 
 # Encapsulate HL7 specific exceptions
@@ -48,6 +53,7 @@ end
 class HL7::EmptySegmentNotAllowed < HL7::ParseError
 end
 
+require 'configuration'
 require 'message_parser'
 require 'message'
 require 'segment_list_storage'
