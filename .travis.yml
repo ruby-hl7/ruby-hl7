@@ -14,8 +14,7 @@ addons:
     packages:
       - haveged
 rvm:
+  - 2.4
   - 2.3
   - 2.2
-  - 2.1
-  - 2.0
   - jruby-9.1.5.0

@@ -8,21 +8,21 @@ describe HL7::Message::Segment::MFE do
     end
 
     it 'creates an MFE segment' do
-      lambda do
+      expect do
         sft = HL7::Message::Segment::MFE.new( @base_sft )
-        sft.should_not be_nil
-        sft.to_s.should == @base_sft
-      end.should_not raise_error
+        expect(sft).not_to be_nil
+        expect(sft.to_s).to eq(@base_sft)
+      end.not_to raise_error
     end
 
     it 'allows access to an MFE segment' do
-      lambda do
+      expect do
         sft = HL7::Message::Segment::MFE.new( @base_sft )
-        sft.record_level_event_code.should eq 'MAD'
-        sft.mfn_control_id.should eq '6772331'
-        sft.primary_key_value.should eq 'BUD^Buddhist^HL70006'
-        sft.primary_key_value_type.should eq 'CE'
-      end.should_not raise_error
+        expect(sft.record_level_event_code).to eq 'MAD'
+        expect(sft.mfn_control_id).to eq '6772331'
+        expect(sft.primary_key_value).to eq 'BUD^Buddhist^HL70006'
+        expect(sft.primary_key_value_type).to eq 'CE'
+      end.not_to raise_error
     end
   end
 end

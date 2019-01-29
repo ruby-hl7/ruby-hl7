@@ -7,23 +7,23 @@ describe HL7::Message::Segment::PRD do
     let (:prd) { HL7::Message::Segment::PRD.new base }
 
     it 'should set the provider_role' do
-      prd.provider_role.should eql 'RP'
+      expect(prd.provider_role).to eql 'RP'
     end
 
     it 'should set the name' do
-      prd.provider_name.should eql 'LastName^FirstName^MiddleInitial^SR^NickName'
+      expect(prd.provider_name).to eql 'LastName^FirstName^MiddleInitial^SR^NickName'
     end
 
     it 'should set the provider_address' do
-      prd.provider_address.should eql '444 Home Street^Apt B^Ann Arbor^MI^99999^USA'
+      expect(prd.provider_address).to eql '444 Home Street^Apt B^Ann Arbor^MI^99999^USA'
     end
 
     it 'should set the provider_location' do
-      prd.provider_location.should eql '^^^A Wonderful Clinic'
+      expect(prd.provider_location).to eql '^^^A Wonderful Clinic'
     end
 
     it 'should set provider_communication_information' do
-      prd.provider_communication_information.should eql '^WPN^PH^^^07^5555555'
+      expect(prd.provider_communication_information).to eql '^WPN^PH^^^07^5555555'
     end
   end
 end

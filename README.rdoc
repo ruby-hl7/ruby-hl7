@@ -38,5 +38,10 @@ In your Gemfile:
 
   gem 'ruby-hl7'
 
+=== Migrating from 1.2.3 to 1.3.0
+
+The ZCF segment has been removed, as it is not standard.
+To continue using it, please use the {ruby-hl7-zcf gem}[https://github.com/doctolib/ruby-hl7-zcf].
+
 == License
 See the LICENSE file.

@@ -21,7 +21,7 @@ require 'stringio'
 require 'date'
 
 module HL7 # :nodoc:
-  VERSION = '1.2.0'
+  VERSION = '1.2.3'
   def self.ParserConfig
     @parser_cfg ||= { :empty_segment_is_error => true }
   end

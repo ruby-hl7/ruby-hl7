@@ -8,19 +8,19 @@ describe HL7::Message::Segment::SFT do
     end
 
     it 'creates an SFT segment' do
-      lambda do
+      expect do
         sft = HL7::Message::Segment::SFT.new( @base_sft )
-        sft.should_not be_nil
-        sft.to_s.should eq @base_sft
-      end.should_not raise_error
+        expect(sft).not_to be_nil
+        expect(sft.to_s).to eq @base_sft
+      end.not_to raise_error
     end
 
     it 'allows access to an SFT segment' do
-      lambda do
+      expect do
         sft = HL7::Message::Segment::SFT.new( @base_sft )
-        sft.software_product_name.should eq 'An Lab System'
-        sft.software_install_date.should eq '20080817'
-      end.should_not raise_error
+        expect(sft.software_product_name).to eq 'An Lab System'
+        expect(sft.software_install_date).to eq '20080817'
+      end.not_to raise_error
     end
   end
 end

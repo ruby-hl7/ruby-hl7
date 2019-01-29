@@ -9,37 +9,37 @@ describe HL7::Message::Segment::OBR do
     end
 
     it 'allows access to an OBR segment' do
-      @obr.to_s.should eq @base
-      @obr.e1.should eq "2"
-      @obr.set_id.should eq "2"
-      @obr.placer_order_number.should eq "^USSSA"
-      @obr.filler_order_number.should eq "0000000567^USSSA"
-      @obr.universal_service_id.should eq "37956^CT ABDOMEN^LN"
+      expect(@obr.to_s).to eq @base
+      expect(@obr.e1).to eq "2"
+      expect(@obr.set_id).to eq "2"
+      expect(@obr.placer_order_number).to eq "^USSSA"
+      expect(@obr.filler_order_number).to eq "0000000567^USSSA"
+      expect(@obr.universal_service_id).to eq "37956^CT ABDOMEN^LN"
     end
 
     it 'allows modification of an OBR segment' do
       @obr.set_id = 1
-      @obr.set_id.should eq "1"
+      expect(@obr.set_id).to eq "1"
       @obr.placer_order_number = "^DMCRES"
-      @obr.placer_order_number.should eq "^DMCRES"
+      expect(@obr.placer_order_number).to eq "^DMCRES"
     end
 
     it 'supports the diagnostic_serv_sect_id method' do
-      @obr.should respond_to(:diagnostic_serv_sect_id)
-      @obr.diagnostic_serv_sect_id.should eq "NMR"
+      expect(@obr).to respond_to(:diagnostic_serv_sect_id)
+      expect(@obr.diagnostic_serv_sect_id).to eq "NMR"
     end
 
     it 'supports the result_status method' do
-      @obr.should respond_to(:result_status)
-      @obr.result_status.should eq "P"
+      expect(@obr).to respond_to(:result_status)
+      expect(@obr.result_status).to eq "P"
     end
 
     it 'supports the reason_for_study method' do
-      @obr.reason_for_study.should eq "R/O TUMOR"
+      expect(@obr.reason_for_study).to eq "R/O TUMOR"
     end
 
     it 'supports the parent_universal_service_identifier method' do
-      @obr.parent_universal_service_identifier.should eq "123"
+      expect(@obr.parent_universal_service_identifier).to eq "123"
     end
   end
 end

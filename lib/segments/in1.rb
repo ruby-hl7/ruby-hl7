@@ -50,4 +50,8 @@ class HL7::Message::Segment::IN1 < HL7::Message::Segment
   add_field :coverage_type
   add_field :handicap
   add_field :insureds_id_number
+  add_field :signature_code
+  add_field :signature_code_date
+  add_field :insureds_birth_place
+  add_field :vip_indicator
 end

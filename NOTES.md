@@ -1,5 +1,49 @@
 ## Overview
 
+**Version 1.2.3**
+New Segments:
+AIG
+AIS
+MRG
+RGS
+TQ1
+IN1
+
+https://github.com/ruby-hl7/ruby-hl7/pull/86
+https://github.com/ruby-hl7/ruby-hl7/pull/87
+
+
+Thanks to:
+@finnhowell, @rclavel
+
+**Version 1.2.2**
+New segments:
+AIL
+AIP
+SCH
+
+Feature Updates
+https://github.com/ruby-hl7/ruby-hl7/pull/69
+https://github.com/ruby-hl7/ruby-hl7/pull/79
+https://github.com/ruby-hl7/ruby-hl7/pull/81
+https://github.com/ruby-hl7/ruby-hl7/pull/82
+https://github.com/ruby-hl7/ruby-hl7/pull/83
+
+Thanks to @finnhowell, @myokoym, and @mogox for contributions.
+
+**Version 1.2.1**
+New segments:
+DG1
+
+https://github.com/ruby-hl7/ruby-hl7/pull/61
+https://github.com/ruby-hl7/ruby-hl7/pull/66
+https://github.com/ruby-hl7/ruby-hl7/pull/68
+https://github.com/ruby-hl7/ruby-hl7/pull/72
+https://github.com/ruby-hl7/ruby-hl7/pull/74
+
+Thanks to:
+@caseyprovost, @adamjubert, @vadeolu
+
 **Version 1.2.0**
 Included in this release:
 https://github.com/ruby-hl7/ruby-hl7/pull/52

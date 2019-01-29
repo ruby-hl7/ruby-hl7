@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "HL7 Messages" do
   it 'processes multiple known messages without failing' do
-    lambda do
+    expect do
       HL7MESSAGES.each_pair do |key, hl7|
         HL7::Message.new(hl7)
       end
-    end.should_not raise_exception
+    end.not_to raise_exception
   end
 
   describe 'MFN M13 Messages' do
