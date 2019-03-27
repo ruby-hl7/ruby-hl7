@@ -1,8 +1,9 @@
 # $Id$
 require 'rubygems'
 require 'rake'
-require 'rdoc/task'
-require 'rubygems/package_task'
+require 'rake/testtask'
+require "rdoc/task"
+require "rubygems/package_task"
 require 'rake/contrib/sshpublisher'
 require 'rbconfig'
 require 'rspec'

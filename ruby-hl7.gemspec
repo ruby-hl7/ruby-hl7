@@ -18,8 +18,32 @@ Gem::Specification.new do |s|
   ]
 
   s.files         = `git ls-files`.split "\n"
-  s.test_files    = `git ls-files -- {spec}/*`.split "\n"
   s.homepage = %q{http://github.com/ruby-hl7/ruby-hl7}
+  s.files = [
+    "lib/ruby-hl7.rb",
+     "lib/segments/evn.rb",
+     "lib/segments/gt1.rb",
+     "lib/segments/msa.rb",
+     "lib/segments/msh.rb",
+     "lib/segments/nte.rb",
+     "lib/segments/obr.rb",
+     "lib/segments/obx.rb",
+     "lib/segments/oru.rb",
+     "lib/segments/pid.rb",
+     "lib/segments/pv1.rb",
+     "lib/segments/pv2.rb",
+     "lib/segments/qrd.rb",
+     "lib/segments/qrf.rb",
+     "test_data/adt_a01.hl7",
+     "test_data/empty.hl7",
+     "test_data/empty_segments.hl7",
+     "test_data/lotsunknowns.hl7",
+     "test_data/obxobr.hl7",
+     "test_data/rqi_r04.hl7",
+     "test_data/test.hl7",
+     "test_data/test2.hl7"
+  ]
+
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.6")
@@ -27,6 +51,18 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.4.2}
   s.summary = %q{Ruby HL7 Library}
   s.license = "MIT"
+  s.test_files = [
+    "test/test_basic_parsing.rb",
+     "test/test_child_segment.rb",
+     "test/test_default_segment.rb",
+     "test/test_dynamic_segment_def.rb",
+     "test/test_gt1_segment.rb",
+     "test/test_msa_segment.rb",
+     "test/test_obr_segment.rb",
+     "test/test_obx_segment.rb",
+     "test/test_pid_segment.rb",
+     "test/test_speed_parsing.rb"
+  ]
 
   s.add_dependency 'rake', '~> 11.0'
   s.add_dependency 'rdoc', '~> 3.12'
@@ -35,4 +71,17 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.15'
   s.add_development_dependency 'rspec', '~> 2.99'
   s.add_development_dependency 'pry'
+
+  if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rake>, [">= 10.0.3"])
+      s.add_runtime_dependency(%q<rubyforge>, [">= 2.0.0"])
+    else
+      s.add_dependency(%q<rake>, [">= 10.0.3"])
+      s.add_dependency(%q<rubyforge>, [">= 2.0.0"])
+    end
+  else
+    s.add_dependency(%q<rake>, [">= 10.0.3"])
+    s.add_dependency(%q<rubyforge>, [">= 2.0.0"])
+  end
+
 end
