@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler', '~> 1.17'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 11.0'
-  s.add_development_dependency 'rdoc', '~> 3.12'
+  s.add_development_dependency 'rdoc', '~> 6.1'
   s.add_development_dependency 'rspec', '~> 2.99'
   s.add_development_dependency 'simplecov', '~> 0.15'
 end
