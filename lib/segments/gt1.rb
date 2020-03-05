@@ -55,7 +55,5 @@ module HL7
     add_field :guarantor_race
     add_field :guarantor_birth_place
     add_field :vip_indicator
-
-
   end
 end   
