@@ -8,12 +8,22 @@ module HL7
     add_field :guarantor_home_phone
     add_field :guarantor_business_phone
     add_field :guarantor_date_of_birth
-    add_field :guarantor_sex
+    add_field :guarantor_sex do |sex|
+      unless /^[FMOUANC]$/.match(sex) || sex == nil || sex == ""
+        raise HL7::InvalidDataError.new( "bad administrative sex value (not F|M|O|U|A|N|C)" )
+      end
+      sex = "" unless sex
+      sex
+    end
     add_field :guarantor_type
     add_field :guarantor_relationship
     add_field :guarantor_ssn
-    add_field :guarantor_begin_date
-    add_field :guarantor_end_date
+    add_field :guarantor_begin_date do |value|
+      convert_to_ts(value)
+    end
+    add_field :guarantor_end_date do |value|
+      convert_to_ts(value)
+    end
     add_field :guarantor_priority
     add_field :guarantor_employer_name
     add_field :guarantor_employer_address
@@ -21,15 +31,21 @@ module HL7
     add_field :guarantor_employee_id
     add_field :guarantor_employment_status
     add_field :guarantor_billing_hold_flag
-    add_field :guarantor_date_of_death
+    add_field :guarantor_date_of_death do |value|
+      convert_to_ts(value)
+    end
     add_field :guarantor_death_flag
     add_field :guarantor_charge_adjustment_code
     add_field :guarantor_household_annual_income
     add_field :guarantor_household_size
     add_field :guarantor_employer_id_number
     add_field :guarantor_marital_status_code
-    add_field :guarantor_hire_effective_date
-    add_field :employment_stop_date
+    add_field :guarantor_hire_effective_date do |value|
+      convert_to_ts(value)
+    end
+    add_field :employment_stop_date do |value|
+      convert_to_ts(value)
+    end
     add_field :living_dependency
     add_field :ambulatory_status
     add_field :citizenship
