@@ -3,7 +3,6 @@ require 'rubygems'
 require 'rake'
 require 'rdoc/task'
 require 'rubygems/package_task'
-require 'rake/contrib/sshpublisher'
 require 'rbconfig'
 require 'rspec'
 require 'rspec/core/rake_task'
@@ -18,7 +17,7 @@ require 'segment_generator'
 require 'segment'
 
 full_name = "Ruby-HL7"
-RAKEVERSION = 11.0
+RAKEVERSION = "12.3.3"
 
 # Many of these tasks were garnered from zenspider's Hoe
 # just forced to work my way
