@@ -59,6 +59,7 @@ DEPENDENCIES
   rspec (>= 3.9.0)
   ruby-hl7!
   simplecov (>= 0.16.1)
+  simplecov-html (>= 0.10.0)
 
 BUNDLED WITH
    1.17.2
