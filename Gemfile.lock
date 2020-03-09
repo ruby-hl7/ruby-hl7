@@ -58,7 +58,7 @@ DEPENDENCIES
   rdoc (~> 3.12)
   rspec (>= 3.9.0)
   ruby-hl7!
-  simplecov (~> 0.15)
+  simplecov (>= 0.16.1)
 
 BUNDLED WITH
    1.17.2
