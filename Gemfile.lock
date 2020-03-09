@@ -21,6 +21,8 @@ GEM
       method_source (~> 0.9.0)
       spoon (~> 0.0)
     rake (13.0.1)
+    rake-contrib (1.0.0)
+      rake
     rdoc (3.12.2)
       json (~> 1.4)
     rspec (3.9.0)
@@ -52,6 +54,7 @@ DEPENDENCIES
   bundler (~> 1.17)
   pry
   rake (>= 12.3.3)
+  rake-contrib
   rdoc (~> 3.12)
   rspec (>= 3.9.0)
   ruby-hl7!

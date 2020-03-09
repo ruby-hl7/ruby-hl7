@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rdoc', '~> 3.12'
   s.add_development_dependency 'rspec', '>= 3.9.0'
   s.add_development_dependency 'simplecov', '~> 0.15'
+  s.add_development_dependency 'rake-contrib'
 end
