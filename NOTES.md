@@ -1,5 +1,15 @@
 ## Overview
 
+**Version 1.3.2**
+Added GT1 segment
+Updated dependencies
+
+https://github.com/ruby-hl7/ruby-hl7/pull/111
+https://github.com/ruby-hl7/ruby-hl7/pull/108
+
+Thanks to:
+@gusIreland
+
 **Version 1.3.1**
 Added FT1 segment
 Updated gemspec dependencies
