@@ -42,6 +42,7 @@ class HL7::Message::Segment::PV2 < HL7::Message::Segment
     :baby_detained_indicator,
     :mode_of_arrival_code,
     :recreational_drug_use_code,
+    :admission_level_of_care_code,
     :precaution_code,
     :patient_condition_code,
     :living_will_code,
