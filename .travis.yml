@@ -2,11 +2,16 @@ branches:
   only:
     - master
 language: ruby
+before_install:
+  - gem install bundler --version 1.17.2
 matrix:
   allow_failures:
     - rvm:
       - ruby-head
+      - 2.1
+      - 2.0
       - 1.9.3
+      - 1.8.6
 sudo: required
 dist: trusty
 addons:
@@ -14,6 +19,9 @@ addons:
     packages:
       - haveged
 rvm:
+  - 2.7
+  - 2.6
+  - 2.5
   - 2.4
   - 2.3
   - 2.2
