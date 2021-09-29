@@ -24,15 +24,5 @@ module HL7
     add_field :attestation_date_time do |value|
       convert_to_ts(value)
     end
-
-    private
-
-    def self.convert_to_ts(value) #:nodoc:
-      if value.is_a?(Time) || value.is_a?(Date)
-        value.to_hl7
-      else
-        value
-      end
-    end
   end
 end
