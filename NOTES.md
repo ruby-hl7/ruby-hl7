@@ -1,5 +1,15 @@
 ## Overview
 
+**Version 1.3.3**
+Update RDoc
+Added TXA segment
+
+https://github.com/ruby-hl7/ruby-hl7/pull/118
+https://github.com/ruby-hl7/ruby-hl7/pull/117
+
+Thanks to:
+@Stratus3D and @rodrigofhm
+
 **Version 1.3.2**
 Added GT1 segment
 Updated dependencies
