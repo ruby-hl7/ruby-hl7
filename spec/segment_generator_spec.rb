@@ -4,7 +4,7 @@ describe HL7::Message::SegmentGenerator do
   describe 'valid_segments_parts?' do
 
     let(:element){ "MSH|1|2|3" }
-    let(:delimiter){ HL7::Message::Delimiter.new('|', '^', '\r') }
+    let(:delimiter){ HL7::Message::Delimiter.new('|', '^', '\r', '~') }
     let(:segment_generator) do
       HL7::Message::SegmentGenerator.new(element, nil, delimiter)
     end

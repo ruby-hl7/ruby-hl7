@@ -19,7 +19,7 @@ describe HL7::Message::Segment::OBR do
 
     it 'allows modification of an OBR segment' do
       @obr.set_id = 1
-      expect(@obr.set_id).to eq "1"
+      expect(@obr.set_id).to eq 1
       @obr.placer_order_number = "^DMCRES"
       expect(@obr.placer_order_number).to eq "^DMCRES"
     end

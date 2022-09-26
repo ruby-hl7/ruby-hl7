@@ -24,7 +24,7 @@ describe HL7::Message::Segment::FT1 do
         expect(ft1.transaction_description).to eq 'Description'
         expect(ft1.transaction_quantity).to eq '1'
         expect(ft1.assigned_patient_location).to eq '123456^The Location'
-        expect(ft1.diagnosis_code).to eq 'R45.82^Worries~H18.892^Other specified disorders of cornea'
+        expect(ft1.diagnosis_code).to eq(['R45.82^Worries', 'H18.892^Other specified disorders of cornea'])
         expect(ft1.performed_by_provider).to eq '1043312457^Provider^Testing^^^^'
         expect(ft1.ordering_provider).to eq '1043312457^Provider^Testing^^^^'
         expect(ft1.procedure_code).to eq '99392^HEART FAILURE COMPOSITE'

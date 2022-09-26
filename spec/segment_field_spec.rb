@@ -33,7 +33,7 @@ describe HL7::Message::Segment do
       msg.validating = "good"
       expect(msg.validating).to eq "good"
       msg.validating = "bad"
-      expect(msg.validating).to eq ""
+      expect(msg.validating).to be_nil
 
       msg.converting = "empty"
       expect(msg.converting).to eq "XXempty"

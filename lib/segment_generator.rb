@@ -1,11 +1,12 @@
 # Class for grouping the messages delimiter
 class HL7::Message::Delimiter
-  attr_accessor :item, :element, :segment
+  attr_accessor :item, :element, :segment, :repetition
 
-  def initialize(element_delim, item_delim, segment_delim)
+  def initialize(element_delim, item_delim, segment_delim, repetition_delim)
     @element = element_delim
     @item = item_delim
     @segment = segment_delim
+    @repetition = repetition_delim
   end
 end
 
@@ -38,7 +39,7 @@ class HL7::Message::SegmentGenerator
 
   def build
     klass = get_segment_class
-    new_seg = klass.new( @element, [@delimiter.element, @delimiter.item] )
+    new_seg = klass.new( @element, [@delimiter.element, @delimiter.item, @delimiter.repetition] )
     new_seg
   end
 

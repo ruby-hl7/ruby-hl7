@@ -72,4 +72,9 @@ class HL7::MessageParser
   def parse_item_delim(str)
     (str && str.kind_of?(String)) ? str.slice(4,1) : "^"
   end
+
+  # Get the repetition delimiter from an MSH segment
+  def parse_repetition_delim(str)
+    (str && str.kind_of?(String)) ? str.slice(5,1) : "~"
+  end
 end

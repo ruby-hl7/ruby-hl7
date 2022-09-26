@@ -93,7 +93,7 @@ module HL7::Message::SegmentFields
   end
 
   def []=( index, value )
-    @elements[index] = value.to_s
+    @elements[index] = value
   end
 
   def read_field( name ) #:nodoc:
@@ -102,7 +102,6 @@ module HL7::Message::SegmentFields
     return nil if (idx >= @elements.length)
 
     ret = @elements[ idx ]
-    ret = ret.first if (ret.kind_of?(Array) && ret.length == 1)
     ret = field_blk.call( ret ) if field_blk
     ret
   end
@@ -118,8 +117,7 @@ module HL7::Message::SegmentFields
       @elements += missing
     end
 
-    value = value.first if (value && value.kind_of?(Array) && value.length == 1)
     value = field_blk.call( value ) if field_blk
-    @elements[ idx ] = value.to_s
+    @elements[ idx ] = value
   end
 end

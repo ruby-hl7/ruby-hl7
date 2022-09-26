@@ -75,6 +75,12 @@ describe HL7::Message do
       expect(msg[:MSH].to_s).to eq @base_msh
     end
 
+    it 'returns an Array for segments with repetitions' do
+      test_file = open( './test_data/test.hl7' )
+      msg = HL7::Message.new( test_file )
+      expect(msg[:PID].patient_id_list).to eq(['3131313', '4141414'])
+    end
+
     it 'inserts segments by index' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
@@ -199,9 +205,9 @@ describe HL7::Message do
       ntec = HL7::Message::Segment::NTE.new
       ntec.comment = "third"
       msg << ntec
-      expect(ntea.set_id).to eq "1"
-      expect(nteb.set_id).to eq "2"
-      expect(ntec.set_id).to eq "3"
+      expect(ntea.set_id).to eq 1
+      expect(nteb.set_id).to eq 2
+      expect(ntec.set_id).to eq 3
     end
 
     it 'parses Enumerable data' do
@@ -288,8 +294,8 @@ describe HL7::Message do
       expect(msg[:OBR].length).to eq 11
       expect(msg[:OBX]).not_to be_nil
       expect(msg[:OBX].length).to eq 102
-      expect(msg[:OBR][4].children[1].set_id).to eq "2"
-      expect(msg[:OBR][5].children[1].set_id).to eq "2"
+      expect(msg[:OBR][4].children[1].set_id).to eq 2
+      expect(msg[:OBR][5].children[1].set_id).to eq 2
 
       final_output = msg.to_hl7
       expect(orig_output).not_to eq(final_output)

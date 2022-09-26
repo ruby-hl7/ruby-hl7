@@ -48,9 +48,12 @@ class HL7::Message
     @item_delim = "^"
     @element_delim = '|'
     @segment_delim = "\r"
+    @repetition_delim = '~'
     @delimiter = HL7::Message::Delimiter.new( @element_delim,
                                               @item_delim,
-                                              @segment_delim)
+                                              @segment_delim,
+                                              @repetition_delim
+                                            )
 
     @message_parser = HL7::MessageParser.new(@delimiter)
 
