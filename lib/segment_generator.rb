@@ -29,7 +29,7 @@ class HL7::Message::SegmentGenerator
   def valid_segments_parts?
     return true if @seg_parts && @seg_parts.length > 0
 
-    if HL7.ParserConfig[:empty_segment_is_error]
+    if HL7.configuration.empty_segment_is_error
       raise HL7::EmptySegmentNotAllowed
     else
       return false
