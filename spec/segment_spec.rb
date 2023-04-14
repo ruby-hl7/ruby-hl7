@@ -43,14 +43,21 @@ describe HL7::Message::Segment do
       expect(segment.to_s).to eq("MSA|AR|ZZ9380 ERR")
     end
 
-    context 'when an element is an array' do
+    context 'when `enable_repetitions` is enabled' do
       before do
-        segment[2] = ['value_1', 'value_2']
-        segment[2] << 'value_3'
+        HL7.configuration.preserve_data_types = true
+        HL7.configuration.enable_repetitions = true
       end
 
-      it 'concatenates the repetition' do
-        expect(segment.to_s).to eq("MSA|AR|value_1~value_2~value_3")
+      context 'when an element is an array' do
+        before do
+          segment[2] = ['value_1', 'value_2']
+          segment[2] << 'value_3'
+        end
+
+        it 'concatenates the repetition' do
+          expect(segment.to_s).to eq("MSA|AR|value_1~value_2~value_3")
+        end
       end
     end
   end

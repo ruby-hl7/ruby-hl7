@@ -77,10 +77,12 @@ class HL7::Message::Segment
         elements << ""
       end
     end
-    elements[1..]&.each_with_index do |element, index|
-      is_msh_encoding_characters_field = elements[0] == 'MSH' && index == 0
-      if element.include?(repetition_delim) && !is_msh_encoding_characters_field
-        elements[index + 1] = HL7::MessageParser.split_by_delimiter(element, repetition_delim)
+    if HL7.configuration.enable_repetitions
+      elements[1..]&.each_with_index do |element, index|
+        is_msh_encoding_characters_field = elements[0] == 'MSH' && index == 0
+        if element.include?(repetition_delim) && !is_msh_encoding_characters_field
+          elements[index + 1] = HL7::MessageParser.split_by_delimiter(element, repetition_delim)
+        end
       end
     end
     elements
@@ -96,7 +98,11 @@ class HL7::Message::Segment
       .collect do |element|
         case element
         when Array
-          element.join(repetition_delim)
+          if HL7.configuration.enable_repetitions
+            element.join(repetition_delim)
+          else
+            element
+          end
         else
           element
         end

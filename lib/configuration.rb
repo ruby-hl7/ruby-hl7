@@ -19,10 +19,19 @@ module HL7
   #   end
   #
   class Configuration
-    attr_accessor :empty_segment_is_error
+    attr_accessor :empty_segment_is_error, :enable_repetitions, :preserve_data_types
 
     def initialize #:nodoc:
-      @empty_segment_is_error            = true
+      @empty_segment_is_error = true
+      @enable_repetitions = false
+      @preserve_data_types = false
+    end
+
+    def enable_repetitions=(enabled)
+      if enabled && !preserve_data_types
+        raise ArgumentError, "`enable_repetitions` requires `preserve_data_types` to be set to `true`"
+      end
+      @enable_repetitions = enabled
     end
   end
 end
