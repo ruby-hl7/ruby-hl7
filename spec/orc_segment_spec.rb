@@ -1,5 +1,4 @@
-# encoding: UTF-8
-$: << '../lib'
+$LOAD_PATH << '../lib'
 require 'ruby-hl7'
 
 describe HL7::Message::Segment::ORC do
@@ -10,14 +9,14 @@ describe HL7::Message::Segment::ORC do
 
     it 'creates an ORC segment' do
       expect do
-        orc = HL7::Message::Segment::ORC.new( @base_orc )
+        orc = described_class.new(@base_orc)
         expect(orc).not_to be_nil
         expect(orc.to_s).to eq @base_orc
       end.not_to raise_error
     end
 
     it 'allows access to an ORC segment' do
-      orc = HL7::Message::Segment::ORC.new( @base_orc )
+      orc = described_class.new(@base_orc)
       expect(orc.ordering_provider).to eq '1234^Admit^Alan^A^III^Dr^^^&2.16.840.1.113883.19.4.6^ISO^L^^^EI^&2.16.840.1.113883.19.4.6^ISO^^^^^^^^MD'
       expect(orc.call_back_phone_number).to eq '^WPN^PH^^1^555^5551005'
       expect(orc.ordering_facility_name).to eq 'Level Seven Healthcare, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234'

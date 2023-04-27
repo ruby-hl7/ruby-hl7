@@ -6,11 +6,17 @@
 #  seg.e1 = "SOMETHING ELSE"
 #  seg.e2 = "KIN HERE"
 #
-class HL7::Message::Segment::Default < HL7::Message::Segment
-  def initialize(raw_segment="", delims=[])
-    segs = [] if (raw_segment == "")
-    segs ||= raw_segment
-    super( segs, delims )
+module HL7
+  class Message
+    class Segment
+      class Default < HL7::Message::Segment
+        def initialize(raw_segment = '', delims = [])
+          segs = [] if raw_segment == ''
+          segs ||= raw_segment
+          super(segs, delims)
+        end
+      end
+    end
   end
 end
 

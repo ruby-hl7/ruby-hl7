@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::MFE do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::MFE do
 
     it 'creates an MFE segment' do
       expect do
-        sft = HL7::Message::Segment::MFE.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft).not_to be_nil
         expect(sft.to_s).to eq(@base_sft)
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::MFE do
 
     it 'allows access to an MFE segment' do
       expect do
-        sft = HL7::Message::Segment::MFE.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft.record_level_event_code).to eq 'MAD'
         expect(sft.mfn_control_id).to eq '6772331'
         expect(sft.primary_key_value).to eq 'BUD^Buddhist^HL70006'

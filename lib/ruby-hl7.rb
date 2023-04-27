@@ -1,4 +1,3 @@
-# encoding: UTF-8
 #= ruby-hl7.rb
 # Ruby HL7 is designed to provide a simple, easy to use library for
 # parsing and generating HL7 (2.x) messages.
@@ -22,7 +21,7 @@ require 'date'
 require 'configuration'
 
 module HL7 # :nodoc:
-  VERSION = '1.3.3'
+  VERSION = '1.3.3'.freeze
   # Gives access to the current Configuration.
   def self.configuration
     @configuration ||= Configuration.new
@@ -37,24 +36,34 @@ module HL7 # :nodoc:
 end
 
 # Encapsulate HL7 specific exceptions
-class HL7::Exception < StandardError
+module HL7
+  class Exception < StandardError
+  end
 end
 
 # Parsing failed
-class HL7::ParseError < HL7::Exception
+module HL7
+  class ParseError < HL7::Exception
+  end
 end
 
 # Attempting to use an invalid indice
-class HL7::RangeError < HL7::Exception
+module HL7
+  class RangeError < HL7::Exception
+  end
 end
 
 # Attempting to assign invalid data to a field
-class HL7::InvalidDataError < HL7::Exception
+module HL7
+  class InvalidDataError < HL7::Exception
+  end
 end
 
 # Attempting to add an empty segment
 # This error per configuration setting
-class HL7::EmptySegmentNotAllowed < HL7::ParseError
+module HL7
+  class EmptySegmentNotAllowed < HL7::ParseError
+  end
 end
 
 require 'message_parser'

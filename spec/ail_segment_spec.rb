@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::AIL do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::AIL do
 
     it 'creates an AIL segment' do
       expect do
-        ail = HL7::Message::Segment::AIL.new( @base_ail )
+        ail = described_class.new(@base_ail)
         expect(ail).not_to be_nil
         expect(ail.to_s).to eq @base_ail
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::AIL do
 
     it 'allows access to an AIL segment' do
       expect do
-        ail = HL7::Message::Segment::AIL.new( @base_ail )
+        ail = described_class.new(@base_ail)
         expect(ail.set_id).to eq '1'
         expect(ail.segment_action_code).to eq 'A'
         expect(ail.location_resource_id).to eq 'OFFICE^^^OFFICE'

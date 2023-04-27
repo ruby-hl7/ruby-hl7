@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::MFI do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::MFI do
 
     it 'creates an MFI segment' do
       expect do
-        sft = described_class.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft).not_to be_nil
         expect(sft.to_s).to eq(@base_sft)
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::MFI do
 
     it 'allows access to an MFI segment' do
       expect do
-        sft = described_class.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft.master_file_identifier).to eq 'HL70006^RELIGION^HL70175'
         expect(sft.master_file_application_identifier).to eq 'TEST'
         expect(sft.file_level_event_code).to eq 'UPD'

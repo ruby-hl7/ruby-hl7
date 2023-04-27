@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::ERR do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::ERR do
 
     it 'creates an ERR segment' do
       expect do
-        err = HL7::Message::Segment::ERR.new( @base_err )
+        err = described_class.new(@base_err)
         expect(err).not_to be_nil
         expect(err.to_s).to eq @base_err
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::ERR do
 
     it 'allows access to an ERR segment' do
       expect do
-        err = HL7::Message::Segment::ERR.new( @base_err )
+        err = described_class.new(@base_err)
         expect(err.severity).to eq 'E'
         expect(err.error_location).to eq 'OBR^1'
       end.not_to raise_error

@@ -1,13 +1,12 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::TXA do
   let(:segment) do
-    "TXA|1|AR|AP|20220611113300|1^Name|20220611|2022061110||1^Creator|" \
-    "1^Author|1^Typer|A^V02^UID^TC|A^V01^UID^TC|01|02|file.txt|C|P|AV|ST||" \
-    "2022061110|DC|AR|FileName|202206111011"
+    'TXA|1|AR|AP|20220611113300|1^Name|20220611|2022061110||1^Creator|' \
+      '1^Author|1^Typer|A^V02^UID^TC|A^V01^UID^TC|01|02|file.txt|C|P|AV|ST||' \
+      '2022061110|DC|AR|FileName|202206111011'
   end
-  let(:filled_txa) { HL7::Message::Segment::TXA.new segment }
+  let(:filled_txa) { described_class.new segment }
 
   it 'allows access to an TXA segment' do
     expect(filled_txa.set_id).to eq('1')
@@ -39,7 +38,7 @@ describe HL7::Message::Segment::TXA do
   end
 
   it 'allows creation of an TXA segment' do
-    txa = HL7::Message::Segment::TXA.new
+    txa = described_class.new
     txa.set_id = '1'
     txa.document_type = 'AR'
     txa.document_content_presentation = 'AP'

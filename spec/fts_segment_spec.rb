@@ -4,11 +4,11 @@ describe HL7::Message::Segment::FTS do
   context 'general' do
     before :all do
       base_string = 'FTS||End of File'
-      @fts = HL7::Message::Segment::FTS.new(base_string)
+      @fts = described_class.new(base_string)
     end
 
     it 'creates an FTS segment' do
-      expect(@fts).to_not be_nil
+      expect(@fts).not_to be_nil
     end
 
     it 'allows access to an FTS segment' do

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::SCH do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::SCH do
 
     it 'creates an SCH segment' do
       expect do
-        sch = HL7::Message::Segment::SCH.new( @base_sch )
+        sch = described_class.new(@base_sch)
         expect(sch).not_to be_nil
         expect(sch.to_s).to eq @base_sch
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::SCH do
 
     it 'allows access to an SCH segment' do
       expect do
-        sch = HL7::Message::Segment::SCH.new( @base_sch )
+        sch = described_class.new(@base_sch)
         expect(sch.schedule_id).to eq '681'
         expect(sch.event_reason).to eq 'S^SCHEDULED'
         expect(sch.appointment_reason).to eq '^BONE DENSITY PB,cf/RH '

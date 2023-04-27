@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::GT1 do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::GT1 do
 
     it 'creates an GT1 segment' do
       expect do
-        gt1 = HL7::Message::Segment::GT1.new( @base_gt1 )
+        gt1 = described_class.new(@base_gt1)
         expect(gt1).not_to be_nil
         expect(gt1.to_s).to eq @base_gt1
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::GT1 do
 
     it 'allows access to an GT1 segment' do
       expect do
-        gt1 = HL7::Message::Segment::GT1.new( @base_gt1 )
+        gt1 = described_class.new(@base_gt1)
         expect(gt1.guarantor_number).to eq '440'
         expect(gt1.guarantor_name).to eq 'Crusher^Beverly'
         expect(gt1.guarantor_address).to eq '1003 Elm Street^^Enterprise^MD^29433'
