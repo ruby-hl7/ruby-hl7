@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::SPM do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::SPM do
 
     it 'creates an SPM segment' do
       expect do
-        spm = HL7::Message::Segment::SPM.new( @base_spm )
+        spm = described_class.new(@base_spm)
         expect(spm).not_to be_nil
         expect(spm.to_s).to eq @base_spm
       end.not_to raise_error
@@ -17,8 +16,9 @@ describe HL7::Message::Segment::SPM do
 
     it 'allows access to an SPM segment' do
       expect do
-        spm = HL7::Message::Segment::SPM.new( @base_spm )
-        expect(spm.specimen_type).to eq '122554006^Capillary blood specimen^SCT^BLDC^Blood capillary^HL70070^20080131^2.5.1'
+        spm = described_class.new(@base_spm)
+        expect(spm.specimen_type).to eq '122554006^Capillary blood specimen^SCT^BLDC^' \
+                                        'Blood capillary^HL70070^20080131^2.5.1'
         expect(spm.set_id).to eq '1'
       end.not_to raise_error
     end

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::SFT do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::SFT do
 
     it 'creates an SFT segment' do
       expect do
-        sft = HL7::Message::Segment::SFT.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft).not_to be_nil
         expect(sft.to_s).to eq @base_sft
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::SFT do
 
     it 'allows access to an SFT segment' do
       expect do
-        sft = HL7::Message::Segment::SFT.new( @base_sft )
+        sft = described_class.new(@base_sft)
         expect(sft.software_product_name).to eq 'An Lab System'
         expect(sft.software_install_date).to eq '20080817'
       end.not_to raise_error

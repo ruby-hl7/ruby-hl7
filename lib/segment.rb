@@ -17,179 +17,180 @@
 #    # this block will be executed when seg.block_example= is called
 #    # and when seg.block_example is called
 #
-class HL7::Message::Segment
-  extend HL7::Message::SegmentListStorage
-  include HL7::Message::SegmentFields
+module HL7
+  class Message
+    class Segment
+      extend HL7::Message::SegmentListStorage
+      include HL7::Message::SegmentFields
 
-  attr_accessor :segment_parent
-  attr_reader :element_delim
-  attr_reader :item_delim
-  attr_reader :segment_weight
+      attr_accessor :segment_parent
+      attr_reader :element_delim, :item_delim, :segment_weight
 
-  METHOD_MISSING_FOR_INITIALIZER = <<-END
+      METHOD_MISSING_FOR_INITIALIZER = <<-END.freeze
     def method_missing( sym, *args, &blk )
       __seg__.send( sym, args, blk )
     end
-  END
+      END
 
-  # setup a new HL7::Message::Segment
-  # raw_segment:: is an optional String or Array which will be used as the
-  #               segment's field data
-  # delims:: an optional array of delimiters, where
-  #               delims[0] = element delimiter
-  #               delims[1] = item delimiter
-  def initialize(raw_segment="", delims=[], &blk)
-    @segments_by_name = {}
-    @field_total = 0
-    @is_child = false
+      # setup a new HL7::Message::Segment
+      # raw_segment:: is an optional String or Array which will be used as the
+      #               segment's field data
+      # delims:: an optional array of delimiters, where
+      #               delims[0] = element delimiter
+      #               delims[1] = item delimiter
+      def initialize(raw_segment = '', delims = [], &blk)
+        @segments_by_name = {}
+        @field_total = 0
+        @is_child = false
 
-    setup_delimiters delims
+        setup_delimiters delims
 
-    @elements = elements_from_segment(raw_segment)
+        @elements = elements_from_segment(raw_segment)
 
-    if block_given?
-      callctx = eval( "self", blk.binding )
-      def callctx.__seg__(val=nil)
-        @__seg_val__ ||= val
+        return unless blk
+
+        callctx = eval('self', blk.binding, __FILE__, __LINE__)
+        def callctx.__seg__(val = nil)
+          @__seg_val__ ||= val
+        end
+        callctx.__seg__(self)
+        # TODO: find out if this pollutes the calling namespace permanently...
+
+        eval(METHOD_MISSING_FOR_INITIALIZER, blk.binding)
+        yield self
+        eval('class << self; remove_method :method_missing;end', blk.binding, __FILE__, __LINE__)
       end
-      callctx.__seg__(self)
-      # TODO: find out if this pollutes the calling namespace permanently...
 
-      eval( METHOD_MISSING_FOR_INITIALIZER, blk.binding )
-      yield self
-      eval( "class << self; remove_method :method_missing;end", blk.binding )
-    end
-  end
+      # Breaks the raw segment into elements
+      # raw_segment:: is an optional String or Array which will be used as the
+      #               segment's field data
+      def elements_from_segment(raw_segment)
+        if raw_segment.is_a? Array
+          elements = raw_segment
+        else
+          elements = HL7::MessageParser.split_by_delimiter(raw_segment,
+                                                           @element_delim)
+          if raw_segment == ''
+            elements[0] = self.class.to_s.split('::').last
+            elements << ''
+          end
+        end
+        elements
+      end
 
-  # Breaks the raw segment into elements
-  # raw_segment:: is an optional String or Array which will be used as the
-  #               segment's field data
-  def elements_from_segment(raw_segment)
-    if (raw_segment.kind_of? Array)
-      elements = raw_segment
-    else
-      elements = HL7::MessageParser.split_by_delimiter( raw_segment,
-                                                        @element_delim )
-      if raw_segment == ""
-        elements[0] = self.class.to_s.split( "::" ).last
-        elements << ""
+      def to_info
+        format('%s: empty segment >> %s', self.class.to_s, @elements.inspect)
+      end
+
+      # output the HL7 spec version of the segment
+      def to_s
+        @elements.join(@element_delim)
+      end
+
+      # at the segment level there is no difference between to_s and to_hl7
+      alias to_hl7 to_s
+
+      # handle the e<number> field accessor
+      # and any aliases that didn't get added to the system automatically
+      def method_missing(sym, *args, &blk)
+        base_str = sym.to_s.delete('=')
+        base_sym = base_str.to_sym
+
+        if self.class.fields.include?(base_sym)
+          # base_sym is ok, let's move on
+        elsif /e([0-9]+)/ =~ base_str
+          # base_sym should actually be $1, since we're going by
+          # element id number
+          base_sym = ::Regexp.last_match(1).to_i
+        else
+          super
+        end
+
+        if sym.to_s.include?('=')
+          write_field(base_sym, args)
+        elsif args.length.positive?
+          write_field(base_sym, args.flatten.select { |arg| arg })
+        else
+          read_field(base_sym)
+        end
+      end
+
+      # sort-compare two Segments, 0 indicates equality
+      def <=>(other)
+        return nil unless other.is_a?(HL7::Message::Segment)
+
+        # per Comparable docs: http://www.ruby-doc.org/core/classes/Comparable.html
+        diff = weight - other.weight
+        return -1 if diff.positive?
+        return 1 if diff.negative?
+
+        0
+      end
+
+      # get the defined sort-weight of this segment class
+      # an alias for self.weight
+      def weight
+        self.class.weight
+      end
+
+      # return true if the segment has a parent
+      def is_child_segment?
+        (@is_child_segment ||= false)
+      end
+
+      # indicate whether or not the segment has a parent
+      attr_writer :is_child_segment
+
+      # yield each element in the segment
+      def each(&block) # :yields: element
+        return unless @elements
+
+        @elements.each(&block)
+      end
+
+      # get the length of the segment (number of fields it contains)
+      def length
+        0 unless @elements
+        @elements.length
+      end
+
+      def has_children?
+        respond_to?(:children)
+      end
+
+      private
+
+      def self.singleton # :nodoc:
+        class << self; self end
+      end
+
+      def setup_delimiters(delims)
+        delims = [delims].flatten
+
+        @element_delim = delims.length.positive? ? delims[0] : '|'
+        @item_delim = delims.length > 1 ? delims[1] : '^'
+      end
+
+      # DSL element to define a segment's sort weight
+      # returns the segment's current weight by default
+      # segments are sorted ascending
+      def self.weight(new_weight = nil)
+        if new_weight
+          singleton.module_eval do
+            @my_weight = new_weight
+          end
+        end
+
+        singleton.module_eval do
+          return 999 unless @my_weight
+
+          @my_weight
+        end
+      end
+
+      def self.convert_to_ts(value) # :nodoc:
+        value.respond_to?(:to_hl7) ? value.to_hl7 : value
       end
     end
-    elements
   end
-
-  def to_info
-    "%s: empty segment >> %s" % [ self.class.to_s, @elements.inspect ]
-  end
-
-  # output the HL7 spec version of the segment
-  def to_s
-    @elements.join( @element_delim )
-  end
-
-  # at the segment level there is no difference between to_s and to_hl7
-  alias :to_hl7 :to_s
-
-  # handle the e<number> field accessor
-  # and any aliases that didn't get added to the system automatically
-  def method_missing( sym, *args, &blk )
-    base_str = sym.to_s.gsub( "=", "" )
-    base_sym = base_str.to_sym
-
-    if self.class.fields.include?( base_sym )
-      # base_sym is ok, let's move on
-    elsif /e([0-9]+)/.match( base_str )
-      # base_sym should actually be $1, since we're going by
-      # element id number
-      base_sym = $1.to_i
-    else
-      super
-    end
-
-    if sym.to_s.include?( "=" )
-      write_field( base_sym, args )
-    else
-      if args.length > 0
-        write_field( base_sym, args.flatten.select { |arg| arg } )
-      else
-        read_field( base_sym )
-      end
-    end
-  end
-
-  # sort-compare two Segments, 0 indicates equality
-  def <=>( other )
-    return nil unless other.kind_of?(HL7::Message::Segment)
-
-    # per Comparable docs: http://www.ruby-doc.org/core/classes/Comparable.html
-    diff = self.weight - other.weight
-    return -1 if diff > 0
-    return 1 if diff < 0
-    return 0
-  end
-
-  # get the defined sort-weight of this segment class
-  # an alias for self.weight
-  def weight
-    self.class.weight
-  end
-
-  # return true if the segment has a parent
-  def is_child_segment?
-    (@is_child_segment ||= false)
-  end
-
-  # indicate whether or not the segment has a parent
-  def is_child_segment=(val)
-    @is_child_segment = val
-  end
-
-  # yield each element in the segment
-  def each # :yields: element
-    return unless @elements
-    @elements.each { |e| yield e }
-  end
-
-  # get the length of the segment (number of fields it contains)
-  def length
-    0 unless @elements
-    @elements.length
-  end
-
-  def has_children?
-    self.respond_to?(:children)
-  end
-
-  private
-  def self.singleton #:nodoc:
-    class << self; self end
-  end
-
-  def setup_delimiters(delims)
-    delims = [ delims ].flatten
-
-    @element_delim = ( delims.length>0 ) ? delims[0] : "|"
-    @item_delim = ( delims.length>1 ) ? delims[1] : "^"
-  end
-
-  # DSL element to define a segment's sort weight
-  # returns the segment's current weight by default
-  # segments are sorted ascending
-  def self.weight(new_weight=nil)
-    if new_weight
-      singleton.module_eval do
-        @my_weight = new_weight
-      end
-    end
-
-    singleton.module_eval do
-      return 999 unless @my_weight
-      @my_weight
-    end
-  end
-
-  def self.convert_to_ts(value) #:nodoc:
-    value.respond_to?(:to_hl7) ? value.to_hl7 : value
-  end
-
 end

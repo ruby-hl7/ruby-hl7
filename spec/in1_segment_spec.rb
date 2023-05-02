@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message::Segment::IN1 do
@@ -9,7 +8,7 @@ describe HL7::Message::Segment::IN1 do
 
     it 'creates an IN1 segment' do
       expect do
-        in1 = HL7::Message::Segment::IN1.new( @base_in1 )
+        in1 = described_class.new(@base_in1)
         expect(in1).not_to be_nil
         expect(in1.to_s).to eq @base_in1
       end.not_to raise_error
@@ -17,7 +16,7 @@ describe HL7::Message::Segment::IN1 do
 
     it 'allows access to an IN1 segment' do
       expect do
-        in1 = HL7::Message::Segment::IN1.new( @base_in1 )
+        in1 = described_class.new(@base_in1)
         expect(in1.set_id).to eq '1'
         expect(in1.insurance_company_id).to eq '752'
         expect(in1.insurance_company_name).to eq 'ACORDIA NATIONAL'

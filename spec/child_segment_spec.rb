@@ -1,14 +1,13 @@
-# encoding: UTF-8
 require 'spec_helper'
 
 describe HL7::Message do
   context 'child segments' do
     before :all do
-      @base = open( './test_data/obxobr.hl7' ).readlines
+      @base = open('./test_data/obxobr.hl7').readlines
     end
 
     it 'allows access to child segments' do
-      msg = HL7::Message.new @base
+      msg = described_class.new @base
       expect(msg).not_to be_nil
       expect(msg[:OBR]).not_to be_nil
       expect(msg[:OBR].length).to eq 3
@@ -33,7 +32,7 @@ describe HL7::Message do
     end
 
     it 'allows adding child segments' do
-      msg = HL7::Message.new @base
+      msg = described_class.new @base
       expect(msg).not_to be_nil
       expect(msg[:OBR]).not_to be_nil
       ob = HL7::Message::Segment::OBR.new
@@ -47,9 +46,9 @@ describe HL7::Message do
 
       (1..4).each do |x|
         m = HL7::Message::Segment::OBX.new
-        m.observation_value = "taco"
+        m.observation_value = 'taco'
         expect(m).not_to be_nil
-        expect(/taco/.match(m.to_s)).not_to be_nil
+        expect(m.to_s.include?('taco')).not_to be_nil
         ob.children << m
         expect(ob.children.length).to eq x
         expect(m.segment_parent).not_to be_nil
@@ -59,8 +58,7 @@ describe HL7::Message do
       expect(@base).not_to eq msg.to_hl7
       expect(msg.length).not_to eq orig_cnt
       text_ver = msg.to_hl7
-      expect(/taco/.match(text_ver)).not_to be_nil
+      expect(text_ver.include?('taco')).not_to be_nil
     end
   end
 end
-
