@@ -9,19 +9,19 @@ describe HL7::Message::Segment::ORC do
     end
 
     it 'creates an ORC segment' do
-      lambda do
+      expect do
         orc = HL7::Message::Segment::ORC.new( @base_orc )
-        orc.should_not be_nil
-        orc.to_s.should == @base_orc
-      end.should_not raise_error
+        expect(orc).not_to be_nil
+        expect(orc.to_s).to eq @base_orc
+      end.not_to raise_error
     end
 
     it 'allows access to an ORC segment' do
       orc = HL7::Message::Segment::ORC.new( @base_orc )
-      orc.ordering_provider.should == '1234^Admit^Alan^A^III^Dr^^^&2.16.840.1.113883.19.4.6^ISO^L^^^EI^&2.16.840.1.113883.19.4.6^ISO^^^^^^^^MD'
-      orc.call_back_phone_number.should == '^WPN^PH^^1^555^5551005'
-      orc.ordering_facility_name.should == 'Level Seven Healthcare, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234'
-      orc.parent_universal_service_identifier.should == '7844'
+      expect(orc.ordering_provider).to eq '1234^Admit^Alan^A^III^Dr^^^&2.16.840.1.113883.19.4.6^ISO^L^^^EI^&2.16.840.1.113883.19.4.6^ISO^^^^^^^^MD'
+      expect(orc.call_back_phone_number).to eq '^WPN^PH^^1^555^5551005'
+      expect(orc.ordering_facility_name).to eq 'Level Seven Healthcare, Inc.^L^^^^&2.16.840.1.113883.19.4.6^ISO^XX^^^1234'
+      expect(orc.parent_universal_service_identifier).to eq '7844'
     end
   end
 end

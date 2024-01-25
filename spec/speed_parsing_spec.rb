@@ -11,9 +11,9 @@ describe HL7::Message do
     it 'parses large, unknown segments rapidly' do
       start = Time.now
       doc = HL7::Message.new @msg
-      doc.should_not be_nil
+      expect(doc).not_to be_nil
       ends = Time.now
-      (ends-start).should be < 1
+      expect(ends-start).to be < 1
     end
   end
 end

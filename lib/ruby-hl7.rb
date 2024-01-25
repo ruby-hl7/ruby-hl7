@@ -19,11 +19,20 @@
 require 'rubygems'
 require 'stringio'
 require 'date'
+require 'configuration'
 
 module HL7 # :nodoc:
-  VERSION = '1.1.0'
-  def self.ParserConfig
-    @parser_cfg ||= { :empty_segment_is_error => true }
+  VERSION = '1.3.3'
+  # Gives access to the current Configuration.
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  # Allows easy setting of multiple configuration options. See Configuration
+  # for all available options.
+  def self.configure
+    config = configuration
+    yield(config)
   end
 end
 

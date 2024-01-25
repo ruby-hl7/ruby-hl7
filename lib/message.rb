@@ -34,10 +34,10 @@ class HL7::Message
   extend HL7::MessageBatchParser
 
   attr_reader :message_parser
-  attr :element_delim
-  attr :item_delim
-  attr :segment_delim
-  attr :delimiter
+  attr_reader :element_delim
+  attr_reader :item_delim
+  attr_reader :segment_delim
+  attr_reader :delimiter
 
   # setup a new hl7 message
   # raw_msg:: is an optional object containing an hl7 message
@@ -78,12 +78,12 @@ class HL7::Message
   end
 
   # access a segment of the message
-  # index:: can be a Range, Fixnum or anything that
+  # index:: can be a Range, Integer or anything that
   #         responds to to_sym
   def []( index )
     ret = nil
 
-    if index.kind_of?(Range) || index.kind_of?(Fixnum)
+    if index.kind_of?(Range) || index.kind_of?(Integer)
       ret = @segments[ index ]
     elsif (index.respond_to? :to_sym)
       ret = @segments_by_name[ index.to_sym ]
@@ -94,7 +94,7 @@ class HL7::Message
   end
 
   # modify a segment of the message
-  # index:: can be a Range, Fixnum or anything that
+  # index:: can be a Range, Integer or anything that
   #         responds to to_sym
   # value:: an HL7::Message::Segment object
   def []=( index, value )
@@ -102,12 +102,12 @@ class HL7::Message
       raise HL7::Exception.new( "attempting to assign something other than an HL7 Segment" )
     end
 
-    if index.kind_of?(Range) || index.kind_of?(Fixnum)
+    if index.kind_of?(Range) || index.kind_of?(Integer)
       @segments[ index ] = value
     elsif index.respond_to?(:to_sym)
       (@segments_by_name[ index.to_sym ] ||= []) << value
     else
-      raise HL7::Exception.new( "attempting to use an indice that is not a Range, Fixnum or to_sym providing object" )
+      raise HL7::Exception.new( "attempting to use an indice that is not a Range, Integer or to_sym providing object" )
     end
 
     value.segment_parent = self
@@ -146,7 +146,7 @@ class HL7::Message
     (@segments ||= []) << value
     name = value.class.to_s.gsub("HL7::Message::Segment::", "").to_sym
     (@segments_by_name[ name ] ||= []) << value
-    sequence_segments unless @parsing # let's auto-set the set-id as we go
+    sequence_segments unless defined?(@parsing) && @parsing # let's auto-set the set-id as we go
   end
 
   # yield each segment in the message
@@ -270,7 +270,7 @@ class HL7::Message
     end
   end
 
-   def get_symbol_from_name(seg_name)
+  def get_symbol_from_name(seg_name)
     seg_name.to_s.strip.length > 0 ? seg_name.to_sym : nil
   end
 

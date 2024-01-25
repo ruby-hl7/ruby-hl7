@@ -22,44 +22,62 @@ describe HL7::Message::Segment do
     it 'is evaluated on access by field name' do
       msg = MockSegment.new(@base)
 
-      msg.to_s.should       == @base
-      msg.no_block.should   == "no_block"
-      msg.validating.should == "validated"
-      msg.converting.should == "Xconverted"
+      expect(msg.to_s).to       eq @base
+      expect(msg.no_block).to   eq "no_block"
+      expect(msg.validating).to eq "validated"
+      expect(msg.converting).to eq "Xconverted"
 
       msg.no_block = "NO_BLOCK"
-      msg.no_block.should == "NO_BLOCK"
+      expect(msg.no_block).to eq "NO_BLOCK"
 
       msg.validating = "good"
-      msg.validating.should == "good"
+      expect(msg.validating).to eq "good"
       msg.validating = "bad"
-      msg.validating.should == ""
+      expect(msg.validating).to eq ""
 
       msg.converting = "empty"
-      msg.converting.should == "XXempty"
+      expect(msg.converting).to eq "XXempty"
     end
 
     it 'is not evaluated on read access by eXXX alias' do
       msg = MockSegment.new(@base)
 
-      msg.e1.should == "no_block"
-      msg.e2.should == "validated"
-      msg.e3.should == "converted"
+      expect(msg.e1).to eq "no_block"
+      expect(msg.e2).to eq "validated"
+      expect(msg.e3).to eq "converted"
     end
 
     it 'is not evaluated on write access by eXXX alias' do
       msg = MockSegment.new(@base)
 
       msg.e1 = "NO_BLOCK"
-      msg.e1.should == "NO_BLOCK"
+      expect(msg.e1).to eq "NO_BLOCK"
 
       msg.e2 = "good"
-      msg.e2.should == "good"
+      expect(msg.e2).to eq "good"
       msg.e2 = "bad"
-      msg.e2.should == "bad"
+      expect(msg.e2).to eq "bad"
 
       msg.e3 = "empty"
-      msg.e3.should == "empty"
+      expect(msg.e3).to eq "empty"
+    end
+  end
+
+  describe '#[]' do
+    it 'allows index access to the segment' do
+      msg = HL7::Message::Segment.new(@base)
+      expect(msg[0]).to eq 'Mock'
+      expect(msg[1]).to eq 'no_block'
+      expect(msg[2]).to eq 'validated'
+      expect(msg[3]).to eq 'converted'
+    end
+  end
+
+  describe '#[]=' do
+    it 'allows index assignment to the segment' do
+      msg = HL7::Message::Segment.new(@base)
+      msg[0] = 'Kcom'
+      expect(msg[0]).to eq 'Kcom'
     end
   end
 
@@ -67,8 +85,8 @@ describe HL7::Message::Segment do
     context 'with a valid field' do
       it 'uses alias field names' do
         msg = MockSegment.new(@base)
-        msg.no_block.should == "no_block"
-        msg.no_block_alias.should == "no_block"
+        expect(msg.no_block).to eq "no_block"
+        expect(msg.no_block_alias).to eq "no_block"
       end
     end
 
@@ -85,7 +103,7 @@ describe HL7::Message::Segment do
 
       it 'throws an error when the field is invalid' do
         msg = MockInvalidSegment.new(@base)
-        lambda{  msg.no_block_alias }.should raise_error
+        expect{  msg.no_block_alias }.to raise_error(HL7::InvalidDataError)
       end
     end
   end

@@ -10,13 +10,13 @@ describe HL7::Message::Segment::Default do
 
     it 'stores an existing segment' do
       seg = HL7::Message::Segment::Default.new( @base_msa )
-      seg.to_s.should == @base_msa
+      expect(seg.to_s).to eq @base_msa
     end
 
     it 'converts to a string' do
       seg = HL7::Message::Segment::Default.new( @base_msa )
-      seg.to_s.should == @base_msa
-      seg.to_hl7.should == seg.to_s
+      expect(seg.to_s).to eq @base_msa
+      expect(seg.to_hl7).to eq seg.to_s
     end
 
     it 'creates a raw segment' do
@@ -25,7 +25,7 @@ describe HL7::Message::Segment::Default do
       seg.e1 = "INFO"
       seg.e2 = "MORE INFO"
       seg.e5 = "LAST INFO"
-      seg.to_s.should == "NK1|INFO|MORE INFO|||LAST INFO"
+      expect(seg.to_s).to eq "NK1|INFO|MORE INFO|||LAST INFO"
     end
   end
 end

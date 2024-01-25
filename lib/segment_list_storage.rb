@@ -5,7 +5,7 @@ module HL7::Message::SegmentListStorage
   attr_reader :child_types
 
   def add_child_type(child_type)
-    if @child_types
+    if defined?(@child_types)
       @child_types << child_type.to_sym
     else
       has_children [ child_type.to_sym ]
@@ -41,7 +41,7 @@ module HL7::Message::SegmentListStorage
   def define_method_children
     self.class_eval do
       define_method(:children) do
-        unless @my_children
+        unless defined?(@my_children)
           p = self
           @my_children ||= []
           @my_children.instance_eval do

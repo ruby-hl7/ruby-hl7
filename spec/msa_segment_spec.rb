@@ -9,19 +9,19 @@ describe HL7::Message::Segment::MSA do
     end
 
     it 'creates an MSA segment' do
-      lambda do
+      expect do
         msa = HL7::Message::Segment::MSA.new( @base_msa )
-        msa.should_not be_nil
-        msa.to_s.should == @base_msa
-      end.should_not raise_error
+        expect(msa).not_to be_nil
+        expect(msa.to_s).to eq @base_msa
+      end.not_to raise_error
     end
 
     it 'allows access to an MSA segment' do
-      lambda do
+      expect do
         msa = HL7::Message::Segment::MSA.new( @base_msa )
-        msa.ack_code.should == "AR"
-        msa.control_id.should == "ZZ9380 ERR"
-      end.should_not raise_error
+        expect(msa.ack_code).to eq "AR"
+        expect(msa.control_id).to eq "ZZ9380 ERR"
+      end.not_to raise_error
     end
   end
 end

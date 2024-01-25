@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ruby-hl7'
 class HL7::Message::Segment::MSH < HL7::Message::Segment
   weight( -1 ) # the msh should always start a message
   add_field :enc_chars

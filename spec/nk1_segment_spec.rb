@@ -8,19 +8,19 @@ describe HL7::Message::Segment::NK1 do
     end
 
     it 'creates an NK1 segment' do
-      lambda do
+      expect do
         nk1 = HL7::Message::Segment::NK1.new( @base_nk1 )
-        nk1.should_not be_nil
-        nk1.to_s.should == @base_nk1
-      end.should_not raise_error
+        expect(nk1).not_to be_nil
+        expect(nk1.to_s).to eq @base_nk1
+      end.not_to raise_error
     end
 
     it 'allows access to an NK1 segment' do
-      lambda do
+      expect do
         nk1 = HL7::Message::Segment::NK1.new( @base_nk1 )
-        nk1.name.should == 'Mum^Martha^M^^^^L'
-        nk1.phone_number.should == '^PRN^PH^^1^555^5552006'
-      end.should_not raise_error
+        expect(nk1.name).to eq 'Mum^Martha^M^^^^L'
+        expect(nk1.phone_number).to eq '^PRN^PH^^1^555^5552006'
+      end.not_to raise_error
     end
   end
 end

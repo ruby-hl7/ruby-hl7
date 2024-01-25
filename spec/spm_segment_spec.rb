@@ -8,19 +8,19 @@ describe HL7::Message::Segment::SPM do
     end
 
     it 'creates an SPM segment' do
-      lambda do
+      expect do
         spm = HL7::Message::Segment::SPM.new( @base_spm )
-        spm.should_not be_nil
-        spm.to_s.should == @base_spm
-      end.should_not raise_error
+        expect(spm).not_to be_nil
+        expect(spm.to_s).to eq @base_spm
+      end.not_to raise_error
     end
 
     it 'allows access to an SPM segment' do
-      lambda do
+      expect do
         spm = HL7::Message::Segment::SPM.new( @base_spm )
-        spm.specimen_type.should == '122554006^Capillary blood specimen^SCT^BLDC^Blood capillary^HL70070^20080131^2.5.1'
-        spm.set_id.should == '1'
-      end.should_not raise_error
+        expect(spm.specimen_type).to eq '122554006^Capillary blood specimen^SCT^BLDC^Blood capillary^HL70070^20080131^2.5.1'
+        expect(spm.set_id).to eq '1'
+      end.not_to raise_error
     end
   end
 end

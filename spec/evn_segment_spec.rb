@@ -9,15 +9,15 @@ describe HL7::Message::Segment::EVN do
 
     it 'allows access to an EVN segment' do
       evn = HL7::Message::Segment::EVN.new @base
-      evn.type_code.should == "A04"
+      expect(evn.type_code).to eq "A04"
     end
 
     it 'allows creation of an EVN segment' do
       evn = HL7::Message::Segment::EVN.new
       evn.event_facility="A Facility"
-      evn.event_facility.should == 'A Facility'
+      expect(evn.event_facility).to eq 'A Facility'
       evn.recorded_date = Date.new 2001,2,3
-      evn.recorded_date.should == "20010203"
+      expect(evn.recorded_date).to eq "20010203"
     end
   end
 end

@@ -8,19 +8,19 @@ describe HL7::Message::Segment::ERR do
     end
 
     it 'creates an ERR segment' do
-      lambda do
+      expect do
         err = HL7::Message::Segment::ERR.new( @base_err )
-        err.should_not be_nil
-        err.to_s.should == @base_err
-      end.should_not raise_error
+        expect(err).not_to be_nil
+        expect(err.to_s).to eq @base_err
+      end.not_to raise_error
     end
 
     it 'allows access to an ERR segment' do
-      lambda do
+      expect do
         err = HL7::Message::Segment::ERR.new( @base_err )
-        err.severity.should == 'E'
-        err.error_location.should == 'OBR^1'
-      end.should_not raise_error
+        expect(err.severity).to eq 'E'
+        expect(err.error_location).to eq 'OBR^1'
+      end.not_to raise_error
     end
   end
 end

@@ -5,7 +5,7 @@ describe Date do
   subject{ Date.parse('2013-12-02').to_hl7 }
 
   it "should respond to the HL7 timestamp" do
-    subject.should eq "20131202"
+    expect(subject).to eq "20131202"
   end
 end
 
@@ -17,13 +17,13 @@ describe "to_hl7 for time related classes" do
 
   shared_examples "a time to_hl7" do
     context "without fraction" do
-      it { time_now.to_time.to_hl7.should eq formated_time }
+      it { expect(time_now.to_time.to_hl7).to eq formated_time }
     end
 
     context "with_fraction" do
-      it { time_now.to_time.to_hl7(3).should eq formated_time + fraction_3 }
+      it { expect(time_now.to_time.to_hl7(3)).to eq formated_time + fraction_3 }
 
-      it { time_now.to_time.to_hl7(9).should eq formated_time + fraction_9 }
+      it { expect(time_now.to_time.to_hl7(9)).to eq formated_time + fraction_9 }
     end
   end
 

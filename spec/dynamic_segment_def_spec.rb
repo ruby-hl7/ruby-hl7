@@ -10,7 +10,7 @@ describe 'dynamic segment definition' do
         s.e2 = "5678"
       end
 
-      seg.to_s.should == "MSK|1234|5678"
+      expect(seg.to_s).to eq "MSK|1234|5678"
     end
 
     it 'accepts a block without a parameter' do
@@ -20,7 +20,7 @@ describe 'dynamic segment definition' do
         e2 "5678"
       end
 
-      seg.to_s.should == "MSK|1234|5678"
+      expect(seg.to_s).to eq "MSK|1234|5678"
     end
 
     it "doesn't pollute the caller namespace" do
@@ -30,8 +30,8 @@ describe 'dynamic segment definition' do
         s.e2 = "5678"
       end
 
-      lambda { e3 "TEST" }.should raise_error(NoMethodError)
-      seg.to_s.should == "MSK|1234|5678"
+      expect { e3 "TEST" }.to raise_error(NoMethodError)
+      expect(seg.to_s).to eq "MSK|1234|5678"
     end
   end
 end

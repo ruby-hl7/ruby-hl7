@@ -9,39 +9,39 @@ describe HL7::Message::Segment::OBX do
 
     it 'allows access to an OBX segment' do
       obx = HL7::Message::Segment::OBX.new @base
-      obx.set_id.should == "1"
-      obx.value_type.should == "NM"
-      obx.observation_id.should == "30341-2^Erythrocyte sedimentation rate^LN^815117^ESR^99USI^^^Erythrocyte sedimentation rate"
-      obx.observation_sub_id.should == ""
-      obx.observation_value.should == "10"
-      obx.units.should == "mm/h^millimeter per hour^UCUM"
-      obx.references_range.should == "0 to 17"
-      obx.abnormal_flags.should == "N"
-      obx.probability.should == "0.1"
-      obx.nature_of_abnormal_test.should == ""
-      obx.observation_result_status.should == "F"
-      obx.effective_date_of_reference_range.should == ""
-      obx.user_defined_access_checks.should == ""
-      obx.observation_date.should == "20110331140551-0800"
-      obx.producer_id.should == ""
-      obx.responsible_observer.should == "Observer"
-      obx.observation_site.should == '^A Site'
-      obx.observation_method.should == ""
-      obx.equipment_instance_id.should == ""
-      obx.analysis_date.should == "20110331150551-0800"
-      obx.performing_organization_name.should == "Century Hospital^^^^^NIST-AA-1&2.16.840.1.113883.3.72.5.30.1&ISO^XX^^^987"
-      obx.performing_organization_address.should == "2070 Test Park^^Los Angeles^CA^90067^USA^B^^06037"
-      obx.performing_organization_medical_director.should == "2343242^Knowsalot^Phil^J.^III^Dr.^^^NIST-AA-1&2.16.840.1.113883.3.72.5.30.1&ISO^L^^^DN"
+      expect(obx.set_id).to eq "1"
+      expect(obx.value_type).to eq "NM"
+      expect(obx.observation_id).to eq "30341-2^Erythrocyte sedimentation rate^LN^815117^ESR^99USI^^^Erythrocyte sedimentation rate"
+      expect(obx.observation_sub_id).to eq ""
+      expect(obx.observation_value).to eq "10"
+      expect(obx.units).to eq "mm/h^millimeter per hour^UCUM"
+      expect(obx.references_range).to eq "0 to 17"
+      expect(obx.abnormal_flags).to eq "N"
+      expect(obx.probability).to eq "0.1"
+      expect(obx.nature_of_abnormal_test).to eq ""
+      expect(obx.observation_result_status).to eq "F"
+      expect(obx.effective_date_of_reference_range).to eq ""
+      expect(obx.user_defined_access_checks).to eq ""
+      expect(obx.observation_date).to eq "20110331140551-0800"
+      expect(obx.producer_id).to eq ""
+      expect(obx.responsible_observer).to eq "Observer"
+      expect(obx.observation_site).to eq '^A Site'
+      expect(obx.observation_method).to eq ""
+      expect(obx.equipment_instance_id).to eq ""
+      expect(obx.analysis_date).to eq "20110331150551-0800"
+      expect(obx.performing_organization_name).to eq "Century Hospital^^^^^NIST-AA-1&2.16.840.1.113883.3.72.5.30.1&ISO^XX^^^987"
+      expect(obx.performing_organization_address).to eq "2070 Test Park^^Los Angeles^CA^90067^USA^B^^06037"
+      expect(obx.performing_organization_medical_director).to eq "2343242^Knowsalot^Phil^J.^III^Dr.^^^NIST-AA-1&2.16.840.1.113883.3.72.5.30.1&ISO^L^^^DN"
     end
 
     it 'allows creation of an OBX segment' do
-      lambda do
+      expect do
         obx = HL7::Message::Segment::OBX.new
         obx.value_type = "TESTIES"
         obx.observation_id = "HR"
         obx.observation_sub_id = "2"
         obx.observation_value = "SOMETHING HAPPENned"
-      end.should_not raise_error
+      end.not_to raise_error
     end
 
     describe "#correction?" do

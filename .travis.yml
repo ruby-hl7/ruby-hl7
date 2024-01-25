@@ -4,12 +4,17 @@ branches:
 language: ruby
 matrix:
   allow_failures:
-    - rvm: ruby-head
+    - rvm:
+      - ruby-head
+      - 1.9.3
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+      - haveged
 rvm:
-  - 2.2.0
-  - 2.1.0
-  - 2.0.0
-  - 1.9.3
-  - ruby-head
-  - jruby-9.0.4.0
-  - rbx-3.9
+  - 2.4
+  - 2.3
+  - 2.2
+  - jruby-9.1.5.0

@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'ruby-hl7'
 class HL7::Message::Segment::PID < HL7::Message::Segment
   weight 1
   has_children [:NK1,:NTE,:PV1,:PV2]
@@ -22,7 +21,7 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
   add_field :patient_alias
   add_field :race
   add_field :address
-  add_field :country_code
+  add_field :county_code
   add_field :phone_home
   add_field :phone_business
   add_field :primary_language
@@ -54,4 +53,16 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
   add_field :strain
   add_field :production_class_code
   add_field :tribal_citizenship
+
+  def country_code
+    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; "+
+         "the 'country_code' alias is retained for backwards compatibility only."
+    county_code
+  end
+
+  def country_code=(country_code)
+    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; "+
+         "the 'country_code' alias is retained for backwards compatibility only."
+    self.county_code = country_code
+  end
 end

@@ -1,5 +1,103 @@
 ## Overview
 
+**Version 1.3.3**
+Update RDoc
+Added TXA segment
+
+https://github.com/ruby-hl7/ruby-hl7/pull/118
+https://github.com/ruby-hl7/ruby-hl7/pull/117
+
+Thanks to:
+@Stratus3D and @rodrigofhm
+
+**Version 1.3.2**
+Added GT1 segment
+Updated dependencies
+
+https://github.com/ruby-hl7/ruby-hl7/pull/111
+https://github.com/ruby-hl7/ruby-hl7/pull/108
+
+Thanks to:
+@gusIreland
+
+**Version 1.3.1**
+Added FT1 segment
+Updated gemspec dependencies
+
+https://github.com/ruby-hl7/ruby-hl7/pull/102
+https://github.com/ruby-hl7/ruby-hl7/pull/94
+
+Thanks to:
+@raulperezalejo @anujbiyani
+
+**Version 1.3.0**
+Removed ZCF segment
+Renamed PID-12 from country_code to county_code (deprecation warnings)
+Bumped gem dependency versions
+
+https://github.com/ruby-hl7/ruby-hl7/pull/90
+https://github.com/ruby-hl7/ruby-hl7/pull/91
+https://github.com/ruby-hl7/ruby-hl7/pull/93
+https://github.com/ruby-hl7/ruby-hl7/pull/95
+https://github.com/ruby-hl7/ruby-hl7/pull/97
+
+Thanks to:
+@mogox @rclavel @mullican
+
+**Version 1.2.3**
+New Segments:
+AIG
+AIS
+MRG
+RGS
+TQ1
+IN1
+
+https://github.com/ruby-hl7/ruby-hl7/pull/86
+https://github.com/ruby-hl7/ruby-hl7/pull/87
+
+
+Thanks to:
+@finnhowell, @rclavel
+
+**Version 1.2.2**
+New segments:
+AIL
+AIP
+SCH
+
+Feature Updates
+https://github.com/ruby-hl7/ruby-hl7/pull/69
+https://github.com/ruby-hl7/ruby-hl7/pull/79
+https://github.com/ruby-hl7/ruby-hl7/pull/81
+https://github.com/ruby-hl7/ruby-hl7/pull/82
+https://github.com/ruby-hl7/ruby-hl7/pull/83
+
+Thanks to @finnhowell, @myokoym, and @mogox for contributions.
+
+**Version 1.2.1**
+New segments:
+DG1
+
+https://github.com/ruby-hl7/ruby-hl7/pull/61
+https://github.com/ruby-hl7/ruby-hl7/pull/66
+https://github.com/ruby-hl7/ruby-hl7/pull/68
+https://github.com/ruby-hl7/ruby-hl7/pull/72
+https://github.com/ruby-hl7/ruby-hl7/pull/74
+
+Thanks to:
+@caseyprovost, @adamjubert, @vadeolu
+
+**Version 1.2.0**
+Included in this release:
+https://github.com/ruby-hl7/ruby-hl7/pull/52
+https://github.com/ruby-hl7/ruby-hl7/pull/56
+https://github.com/ruby-hl7/ruby-hl7/pull/58
+https://github.com/ruby-hl7/ruby-hl7/pull/59
+
+Thanks to:
+@adamstegman, @clausti, @evanmthw, @mitch-lindsay
+
 **Version 1.1.1**
 Included in this release:
 

@@ -12,8 +12,8 @@ describe HL7::Message::SegmentListStorage do
     it "should allow to add a new segment type as child" do
       SegmentWithChildren.add_child_type :OBR
       segment = SegmentWithChildren.new
-      segment.accepts?(:OBR).should be true
-      segment.child_types.should include :OBR
+      expect(segment.accepts?(:OBR)).to be true
+      expect(segment.child_types).to include :OBR
     end
   end
 
@@ -21,7 +21,7 @@ describe HL7::Message::SegmentListStorage do
     subject do
       segment_instance = segment_class.new
       [:accepts?, :child_types, :children].each do |method|
-        segment_instance.respond_to?(method).should be true
+        expect(segment_instance.respond_to?(method)).to be true
       end
     end
 
@@ -30,7 +30,7 @@ describe HL7::Message::SegmentListStorage do
 
       it "by adding add_child_type should respond to the children methods" do
         segment_instance = segment_class.new
-        segment_instance.respond_to?(:children).should be false
+        expect(segment_instance.respond_to?(:children)).to be false
         segment_class.add_child_type(:OBR)
         subject
       end
