@@ -43,7 +43,7 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
   end
   add_field :death_indicator
   add_field :id_unknown_indicator
-  add_field :id_readability_code
+  add_field :id_reliability_code
   add_field :last_update_date do |value|
     convert_to_ts(value)
   end
@@ -64,5 +64,17 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
     warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; "+
          "the 'country_code' alias is retained for backwards compatibility only."
     self.county_code = country_code
+  end
+
+  def id_readability_code
+    warn "DEPRECATION WARNING: PID-32 is defined as 'id_reliability_code'; "+
+         "the 'id_readability_code' alias is retained for backwards compatibility only."
+    id_reliability_code
+  end
+
+  def id_readability_code=(code)
+    warn "DEPRECATION WARNING: PID-32 is defined as 'id_reliability_code'; "+
+           "the 'id_readability_code' alias is retained for backwards compatibility only."
+    self.id_reliability_code = code
   end
 end
