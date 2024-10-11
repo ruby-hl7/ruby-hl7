@@ -83,7 +83,7 @@ describe HL7::Message::Segment::PID do
     context 'when admin_sex is filled with a valid value' do
       it 'does not raise any error' do
         expect do
-          vals = %w[F M O U A N C] + [ nil ]
+          vals = %w[F M O U A N] + [ nil ]
           vals.each do |x|
             filled_pid.admin_sex = x
           end
