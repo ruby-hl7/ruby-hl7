@@ -75,6 +75,32 @@ describe HL7::Message do
       expect(msg[:MSH].to_s).to eq @base_msh
     end
 
+    describe 'repetitions' do
+      let(:test_file) { open( './test_data/test.hl7' ) }
+      let(:msg) { HL7::Message.new( test_file ) }
+
+      before do
+        HL7.configuration.preserve_data_types = true
+        HL7.configuration.enable_repetitions = repetitions_enabled
+      end
+
+      context 'when `enable_repetitions` is enabled' do
+        let(:repetitions_enabled) { true }
+
+        it 'returns an Array for segments with repetitions' do
+          expect(msg[:PID].patient_id_list).to eq(['3131313', '4141414'])
+        end
+      end
+
+      context 'when `enable_repetitions` is disabled' do
+        let(:repetitions_enabled) { false }
+
+        it 'returns a String for segments with repetitions' do
+          expect(msg[:PID].patient_id_list).to eq('3131313~4141414')
+        end
+      end
+    end
+
     it 'inserts segments by index' do
       msg = HL7::Message.new
       msg.parse @simple_msh_txt
@@ -186,22 +212,37 @@ describe HL7::Message do
       expect(initial).not_to eq(final)
     end
 
-    it 'automatically assigns a set_id to a new segment' do
-      msg = HL7::Message.new
-      msh = HL7::Message::Segment::MSH.new
-      msg << msh
-      ntea = HL7::Message::Segment::NTE.new
-      ntea.comment = "first"
-      msg << ntea
-      nteb = HL7::Message::Segment::NTE.new
-      nteb.comment = "second"
-      msg << nteb
-      ntec = HL7::Message::Segment::NTE.new
-      ntec.comment = "third"
-      msg << ntec
-      expect(ntea.set_id).to eq "1"
-      expect(nteb.set_id).to eq "2"
-      expect(ntec.set_id).to eq "3"
+    describe '`set_id`' do
+      let(:msg)  { HL7::Message.new }
+      let(:ntea) { HL7::Message::Segment::NTE.new.tap { |ntea| ntea.comment = "first" } }
+      let(:nteb) { HL7::Message::Segment::NTE.new.tap { |ntea| ntea.comment = "second" } }
+      let(:ntec) { HL7::Message::Segment::NTE.new.tap { |ntea| ntea.comment = "third" } }
+      let(:preserve_data_types) { false }
+
+      before do
+        HL7.configuration.preserve_data_types = preserve_data_types
+        msh = HL7::Message::Segment::MSH.new
+        msg << msh
+        msg << ntea
+        msg << nteb
+        msg << ntec
+      end
+
+      it 'automatically assigns a String set_id to a new segment' do
+        expect(ntea.set_id).to eq "1"
+        expect(nteb.set_id).to eq "2"
+        expect(ntec.set_id).to eq "3"
+      end
+
+      context 'when `preserve_data_types` is enabled`' do
+        let(:preserve_data_types) { true }
+
+        it 'automatically assigns a numeric set_id to a new segment' do
+          expect(ntea.set_id).to eq 1
+          expect(nteb.set_id).to eq 2
+          expect(ntec.set_id).to eq 3
+        end
+      end
     end
 
     it 'parses Enumerable data' do

@@ -24,6 +24,7 @@ class HL7::Message::Segment
   attr_accessor :segment_parent
   attr_reader :element_delim
   attr_reader :item_delim
+  attr_reader :repetition_delim
   attr_reader :segment_weight
 
   METHOD_MISSING_FOR_INITIALIZER = <<-END
@@ -38,6 +39,7 @@ class HL7::Message::Segment
   # delims:: an optional array of delimiters, where
   #               delims[0] = element delimiter
   #               delims[1] = item delimiter
+  #               delims[2] = repetition delimiter
   def initialize(raw_segment="", delims=[], &blk)
     @segments_by_name = {}
     @field_total = 0
@@ -75,6 +77,14 @@ class HL7::Message::Segment
         elements << ""
       end
     end
+    if HL7.configuration.enable_repetitions
+      elements[1..]&.each_with_index do |element, index|
+        is_msh_encoding_characters_field = elements[0] == 'MSH' && index == 0
+        if element.include?(repetition_delim) && !is_msh_encoding_characters_field
+          elements[index + 1] = HL7::MessageParser.split_by_delimiter(element, repetition_delim)
+        end
+      end
+    end
     elements
   end
 
@@ -84,7 +94,20 @@ class HL7::Message::Segment
 
   # output the HL7 spec version of the segment
   def to_s
-    @elements.join( @element_delim )
+    @elements
+      .collect do |element|
+        case element
+        when Array
+          if HL7.configuration.enable_repetitions
+            element.join(repetition_delim)
+          else
+            element
+          end
+        else
+          element
+        end
+      end
+      .join(element_delim)
   end
 
   # at the segment level there is no difference between to_s and to_hl7
@@ -107,10 +130,10 @@ class HL7::Message::Segment
     end
 
     if sym.to_s.include?( "=" )
-      write_field( base_sym, args )
+      write_field( base_sym, *args )
     else
       if args.length > 0
-        write_field( base_sym, args.flatten.select { |arg| arg } )
+        write_field( base_sym, *args.flatten.select { |arg| arg } )
       else
         read_field( base_sym )
       end
@@ -168,8 +191,9 @@ class HL7::Message::Segment
   def setup_delimiters(delims)
     delims = [ delims ].flatten
 
-    @element_delim = ( delims.length>0 ) ? delims[0] : "|"
-    @item_delim = ( delims.length>1 ) ? delims[1] : "^"
+    @element_delim = ( delims.length > 0 ) ? delims[0] : "|"
+    @item_delim = ( delims.length > 1 ) ? delims[1] : "^"
+    @repetition_delim = ( delims.length > 2 ) ? delims[2] : "~"
   end
 
   # DSL element to define a segment's sort weight
