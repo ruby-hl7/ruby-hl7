@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class HL7::Message::Segment::QRD < HL7::Message::Segment
   weight 84
   add_field :query_date

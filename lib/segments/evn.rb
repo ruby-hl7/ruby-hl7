@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class HL7::Message::Segment::EVN < HL7::Message::Segment
   weight 0 # should occur after the MSH segment
   add_field :type_code

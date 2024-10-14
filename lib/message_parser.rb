@@ -1,29 +1,29 @@
 module HL7::MessageBatchParser
   def parse_batch(batch) # :yields: message
-    raise HL7::ParseError, 'badly_formed_batch_message' unless
+    raise HL7::ParseError, "badly_formed_batch_message" unless
       batch.hl7_batch?
 
     batch = clean_batch_for_jruby batch
 
-    raise HL7::ParseError, 'empty_batch_message' unless
+    raise HL7::ParseError, "empty_batch_message" unless
       match = /\rMSH/.match(batch)
 
-    match.post_match.split(/\rMSH/).each do |_msg|
+    match.post_match.split("\rMSH").each do |_msg|
       if md = /\rBTS/.match(_msg)
         # TODO: Validate the message count in the BTS segment
         # should == index + 1
         _msg = md.pre_match
       end
 
-      yield 'MSH' + _msg
+      yield "MSH" + _msg
     end
   end
 
   # parse a String or Enumerable object into an HL7::Message if possible
   # * returns a new HL7::Message if successful
-  def parse( inobj )
+  def parse(inobj)
     HL7::Message.new do |msg|
-      msg.parse( inobj )
+      msg.parse(inobj)
     end
   end
 
@@ -35,10 +35,10 @@ module HL7::MessageBatchParser
   # characters, only in sample messages from here documents.  The
   # expensive copy is only incurred when the batch message has a
   # newline character in it.
-  private
+private
 
   def clean_batch_for_jruby(batch)
-    batch.gsub("\n", "\r") if batch.include?("\n")
+    batch.tr("\n", "\r") if batch.include?("\n")
   end
 end
 
@@ -47,7 +47,7 @@ class HL7::MessageParser
   attr_reader :delimiter
 
   def self.split_by_delimiter(element, delimiter)
-    element.split( delimiter, -1 )
+    element.split(delimiter, -1)
   end
 
   def initialize(delimiter)
@@ -55,21 +55,21 @@ class HL7::MessageParser
   end
 
   # parse the provided String or Enumerable object into this message
-  def parse_string( instr )
+  def parse_string(instr)
     post_mllp = instr
-    if /\x0b((:?.|\r|\n)+)\x1c\r/.match( instr )
-      post_mllp = $1 #strip the mllp bytes
+    if /\x0b((:?.|\r|\n)+)\x1c\r/ =~ instr
+      post_mllp = $1 # strip the mllp bytes
     end
     HL7::MessageParser.split_by_delimiter(post_mllp, @delimiter.segment)
   end
 
   # Get the element delimiter from an MSH segment
   def parse_element_delim(str)
-    (str && str.kind_of?(String)) ? str.slice(3,1) : "|"
+    str && str.is_a?(String) ? str.slice(3, 1) : "|"
   end
 
   # Get the item delimiter from an MSH segment
   def parse_item_delim(str)
-    (str && str.kind_of?(String)) ? str.slice(4,1) : "^"
+    str && str.is_a?(String) ? str.slice(4, 1) : "^"
   end
 end

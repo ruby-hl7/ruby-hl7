@@ -1,14 +1,13 @@
-# encoding: UTF-8
-require 'spec_helper'
+require "spec_helper"
 
 describe HL7::Message::Segment::PID do
-  let(:segment) {
+  let(:segment) do
     "PID|1||333||LastName^FirstName^MiddleInitial^SR^NickName||19760228|F||2106-3^White^HL70005^CAUC^Caucasian^L||AA||||||555.55|012345678||||||||||201011110924-0700|Y||UA|||||||"
-  }
+  end
   let(:filled_pid) { HL7::Message::Segment::PID.new(segment) }
 
-  context '.initialize' do
-    it 'sets values correctly' do
+  describe ".initialize" do
+    it "sets values correctly" do
       expect(filled_pid.set_id).to eq "1"
       expect(filled_pid.patient_id).to eq ""
       expect(filled_pid.patient_id_list).to eq "333"
@@ -51,7 +50,7 @@ describe HL7::Message::Segment::PID do
     end
   end
 
-  describe '#country_code' do
+  describe "#country_code" do
     it "aliases the county_code field as country_code for backward compatibility" do
       expect(filled_pid.country_code).to eq "AA"
 
@@ -60,7 +59,7 @@ describe HL7::Message::Segment::PID do
     end
   end
 
-  describe '#id_readability_code='  do
+  describe "#id_readability_code=" do
     it "aliases the id_reliability_code field as id_readability_code for backward compatibility" do
       expect(filled_pid.id_readability_code).to eq "UA"
 
@@ -69,9 +68,9 @@ describe HL7::Message::Segment::PID do
     end
   end
 
-  describe '#admin_sex=' do
-    context 'when admin_sex is filled with an invalid value' do
-      it 'raises an InvalidDataError' do
+  describe "#admin_sex=" do
+    context "when admin_sex is filled with an invalid value" do
+      it "raises an InvalidDataError" do
         expect do
           ["TEST", "A", 1, 2].each do |x|
             filled_pid.admin_sex = x
@@ -80,10 +79,10 @@ describe HL7::Message::Segment::PID do
       end
     end
 
-    context 'when admin_sex is filled with a valid value' do
-      it 'does not raise any error' do
+    context "when admin_sex is filled with a valid value" do
+      it "does not raise any error" do
         expect do
-          vals = %w[F M O U A N] + [ nil ]
+          vals = %w[F M O U A N] + [nil]
           vals.each do |x|
             filled_pid.admin_sex = x
           end

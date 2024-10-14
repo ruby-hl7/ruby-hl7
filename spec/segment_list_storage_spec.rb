@@ -1,15 +1,15 @@
-require 'spec_helper'
+require "spec_helper"
 
-class SegmentNoChildren< HL7::Message::Segment
+class SegmentNoChildren < HL7::Message::Segment
 end
 
 class SegmentWithChildren < HL7::Message::Segment
-  has_children [:NTE,:ORC,:SPM]
+  has_children %i[NTE ORC SPM]
 end
 
 describe HL7::Message::SegmentListStorage do
   describe "self#add_child_type" do
-    it "should allow to add a new segment type as child" do
+    it "allows to add a new segment type as child" do
       SegmentWithChildren.add_child_type :OBR
       segment = SegmentWithChildren.new
       expect(segment.accepts?(:OBR)).to be true
@@ -20,13 +20,13 @@ describe HL7::Message::SegmentListStorage do
   describe "Adding children has_children and add_child_type" do
     subject do
       segment_instance = segment_class.new
-      [:accepts?, :child_types, :children].each do |method|
+      %i[accepts? child_types children].each do |method|
         expect(segment_instance.respond_to?(method)).to be true
       end
     end
 
     context "when child_types is not present" do
-      let(:segment_class){ SegmentNoChildren }
+      let(:segment_class) { SegmentNoChildren }
 
       it "by adding add_child_type should respond to the children methods" do
         segment_instance = segment_class.new
@@ -37,9 +37,9 @@ describe HL7::Message::SegmentListStorage do
     end
 
     context "when child_types is present" do
-      let(:segment_class){ SegmentWithChildren }
+      let(:segment_class) { SegmentWithChildren }
 
-      it "should respond to the children methods" do
+      it "responds to the children methods" do
         subject
       end
     end

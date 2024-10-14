@@ -1,6 +1,5 @@
-# encoding: UTF-8
 class HL7::Message::Segment::MSH < HL7::Message::Segment
-  weight( -1 ) # the msh should always start a message
+  weight(-1) # the msh should always start a message
   add_field :enc_chars
   add_field :sending_app
   add_field :sending_facility

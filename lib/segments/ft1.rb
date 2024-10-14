@@ -12,7 +12,7 @@ module HL7
     end
     add_field :transaction_type
     add_field :transaction_code
-    add_field :transaction_description    
+    add_field :transaction_description
     add_field :transaction_description_alt
     add_field :transaction_quantity
     add_field :transaction_amount_extended
@@ -35,29 +35,27 @@ module HL7
     add_field :unit_cost
     add_field :filler_order_number
     add_field :entered_by
-    
+
     # https://en.wikipedia.org/wiki/Current_Procedural_Terminology (CPT)
     add_field :procedure_code
 
     add_field :procedure_code_modifier
-    add_field :advanced_beneficiary_notice_code      
-    add_field :medically_necessary_duplicate_procedure_reason  
+    add_field :advanced_beneficiary_notice_code
+    add_field :medically_necessary_duplicate_procedure_reason
     add_field :ndc_code
     add_field :payment_reference_id
     add_field :transaction_reference_key
     add_field :performing_facility
-    add_field :ordering_facility      
+    add_field :ordering_facility
     add_field :item_number
-    add_field :model_number 
-    add_field :special_processing_code   
+    add_field :model_number
+    add_field :special_processing_code
     add_field :clinic_code
-    add_field :referral_number 
+    add_field :referral_number
     add_field :authorization_number
-    add_field :service_provider_taxonomy_code 
+    add_field :service_provider_taxonomy_code
     add_field :revenue_code
-    add_field :prescription_number  
+    add_field :prescription_number
     add_field :ndc_qty_and_uom
-
-
   end
-end  
+end

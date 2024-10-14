@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class HL7::Message::Segment::PV2 < HL7::Message::Segment
   weight 3
   add_field :prior_pending_location
@@ -36,20 +35,19 @@ class HL7::Message::Segment::PV2 < HL7::Message::Segment
   add_field :expected_surgery_date
 
   # Adding military fields
-  [ :military_partnership_code,
-    :military_non_availibility_code,
-    :newborn_baby_indicator,
-    :baby_detained_indicator,
-    :mode_of_arrival_code,
-    :recreational_drug_use_code,
-    :precaution_code,
-    :patient_condition_code,
-    :living_will_code,
-    :organ_donor_code,
-    :advance_directive_code,
-    :patient_status_effective_date,
-    :expected_loa_return_date,
-    :expected_preadmission_testing_date,
-    :notify_clergy_code
-   ].each { |f| add_field f }
+  %i[military_partnership_code
+     military_non_availibility_code
+     newborn_baby_indicator
+     baby_detained_indicator
+     mode_of_arrival_code
+     recreational_drug_use_code
+     precaution_code
+     patient_condition_code
+     living_will_code
+     organ_donor_code
+     advance_directive_code
+     patient_status_effective_date
+     expected_loa_return_date
+     expected_preadmission_testing_date
+     notify_clergy_code].each {|f| add_field f }
 end

@@ -1,4 +1,4 @@
-require 'simplecov'
+require "simplecov"
 
 if ENV["COVERAGE"]
   SimpleCov.start do
@@ -8,6 +8,6 @@ if ENV["COVERAGE"]
 end
 
 # ruby-hl7 loads the rest of the files in lib
-require File.expand_path('../../lib/ruby-hl7', __FILE__)
-require File.expand_path('../../lib/test/hl7_messages', __FILE__)
-require 'pry'
+require File.expand_path("../lib/ruby-hl7", __dir__)
+require File.expand_path("../lib/test/hl7_messages", __dir__)
+require "pry"

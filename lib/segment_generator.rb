@@ -11,9 +11,7 @@ end
 
 # Methods for creating segments in Message
 class HL7::Message::SegmentGenerator
-
-  attr_reader :element, :last_seg
-  attr_reader :delimiter
+  attr_reader :element, :last_seg, :delimiter
 
   attr_accessor :seg_parts, :seg_name
 
@@ -22,24 +20,21 @@ class HL7::Message::SegmentGenerator
     @last_seg = last_seg
     @delimiter = delimiter
 
-    @seg_parts = HL7::MessageParser.split_by_delimiter( element,
-                                                        delimiter.element )
+    @seg_parts = HL7::MessageParser.split_by_delimiter(element,
+      delimiter.element)
   end
 
   def valid_segments_parts?
     return true if @seg_parts && @seg_parts.length > 0
 
-    if HL7.configuration.empty_segment_is_error
-      raise HL7::EmptySegmentNotAllowed
-    else
-      return false
-    end
+    raise HL7::EmptySegmentNotAllowed if HL7.configuration.empty_segment_is_error
+
+    false
   end
 
   def build
     klass = get_segment_class
-    new_seg = klass.new( @element, [@delimiter.element, @delimiter.item] )
-    new_seg
+    klass.new(@element, [@delimiter.element, @delimiter.item])
   end
 
   def get_segment_class
@@ -47,7 +42,7 @@ class HL7::Message::SegmentGenerator
     segment_to_search = @seg_name if RUBY_VERSION < "1.9"
 
     if HL7::Message::Segment.constants.index(segment_to_search)
-      eval("HL7::Message::Segment::%s" % @seg_name)
+      eval(format("HL7::Message::Segment::%s", @seg_name))
     else
       HL7::Message::Segment::Default
     end

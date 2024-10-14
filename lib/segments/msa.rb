@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class HL7::Message::Segment::MSA < HL7::Message::Segment
   weight 1 # should occur after the msh segment
   add_field :ack_code
@@ -8,4 +7,3 @@ class HL7::Message::Segment::MSA < HL7::Message::Segment
   add_field :delayed_ack_type
   add_field :error_cond
 end
-

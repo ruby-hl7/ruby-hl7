@@ -21,8 +21,8 @@ module HL7
   class Configuration
     attr_accessor :empty_segment_is_error
 
-    def initialize #:nodoc:
-      @empty_segment_is_error            = true
+    def initialize # :nodoc:
+      @empty_segment_is_error = true
     end
   end
 end

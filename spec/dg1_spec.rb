@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require "spec_helper"
 
 describe HL7::Message::Segment::DG1 do
@@ -6,7 +5,7 @@ describe HL7::Message::Segment::DG1 do
     let(:base_string) do
       "DG1|1|I9|71596^OSTEOARTHROS NOS-L/LEG ^I9|OSTEOARTHROS NOS-L/LEG |20170615140551-0800||A|"
     end
-    let(:segment){ HL7::Message::Segment::DG1.new(base_string) }
+    let(:segment) { HL7::Message::Segment::DG1.new(base_string) }
 
     it "allows access to an DG1 segment" do
       expect(segment.set_id).to eq("1")
@@ -32,7 +31,7 @@ describe HL7::Message::Segment::DG1 do
   end
 
   context "creating" do
-    let(:segment){ HL7::Message::Segment::DG1.new }
+    let(:segment) { HL7::Message::Segment::DG1.new }
 
     it "allows creation of an DGH segment" do
       segment.set_id = "2"
