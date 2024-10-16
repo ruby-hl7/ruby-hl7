@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Ruby Object representation of an hl7 2.x message segment
 # The segments can be setup to provide aliases to specific fields with
 # optional validation code that is run when the field is modified
@@ -106,7 +108,7 @@ class HL7::Message::Segment
 
     if sym.to_s.include?("=")
       write_field(base_sym, args)
-    elsif args.length > 0
+    elsif args.length.positive?
       write_field(base_sym, args.flatten.select {|arg| arg })
     else
       read_field(base_sym)
@@ -119,8 +121,8 @@ class HL7::Message::Segment
 
     # per Comparable docs: http://www.ruby-doc.org/core/classes/Comparable.html
     diff = weight - other.weight
-    return -1 if diff > 0
-    return 1 if diff < 0
+    return -1 if diff.positive?
+    return 1 if diff.negative?
 
     0
   end
@@ -144,9 +146,9 @@ class HL7::Message::Segment
   # yield each element in the segment
   def each # :yields: element
     return unless @elements
+
     @elements.each { |e| yield e }
   end
-
 
   # get the length of the segment (number of fields it contains)
   def length
@@ -167,7 +169,7 @@ private
   def setup_delimiters(delims)
     delims = [delims].flatten
 
-    @element_delim = delims.length > 0 ? delims[0] : "|"
+    @element_delim = delims.length.positive? ? delims[0] : "|"
     @item_delim = delims.length > 1 ? delims[1] : "^"
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for grouping the messages delimiter
 class HL7::Message::Delimiter
   attr_accessor :item, :element, :segment
@@ -25,7 +27,7 @@ class HL7::Message::SegmentGenerator
   end
 
   def valid_segments_parts?
-    return true if @seg_parts && @seg_parts.length > 0
+    return true if @seg_parts&.length&.positive?
 
     raise HL7::EmptySegmentNotAllowed if HL7.configuration.empty_segment_is_error
 

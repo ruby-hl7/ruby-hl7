@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7
   class Message::Segment::DG1 < HL7::Message::Segment
     weight 92

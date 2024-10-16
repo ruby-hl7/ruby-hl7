@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 class MockSegment < HL7::Message::Segment
@@ -8,7 +10,7 @@ class MockSegment < HL7::Message::Segment
     value == "bad" ? nil : value
   end
   add_field :converting do |value|
-    "X" + value
+    "X#{value}"
   end
 end
 

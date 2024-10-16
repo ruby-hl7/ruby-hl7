@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::NTE < HL7::Message::Segment
   weight 4
   add_field :set_id, :idx => 1

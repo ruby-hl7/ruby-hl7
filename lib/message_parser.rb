@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7::MessageBatchParser
   def parse_batch(batch) # :yields: message
     raise HL7::ParseError, "badly_formed_batch_message" unless
@@ -15,7 +17,7 @@ module HL7::MessageBatchParser
         _msg = md.pre_match
       end
 
-      yield "MSH" + _msg
+      yield "MSH#{_msg}"
     end
   end
 
@@ -65,11 +67,11 @@ class HL7::MessageParser
 
   # Get the element delimiter from an MSH segment
   def parse_element_delim(str)
-    str && str.is_a?(String) ? str.slice(3, 1) : "|"
+    str.is_a?(String) ? str.slice(3, 1) : "|"
   end
 
   # Get the item delimiter from an MSH segment
   def parse_item_delim(str)
-    str && str.is_a?(String) ? str.slice(4, 1) : "^"
+    str.is_a?(String) ? str.slice(4, 1) : "^"
   end
 end

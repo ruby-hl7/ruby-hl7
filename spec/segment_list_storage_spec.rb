@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 class SegmentNoChildren < HL7::Message::Segment

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7
   # This class enables detailed configuration of the HL7 parser services.
   #

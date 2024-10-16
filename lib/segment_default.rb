@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Provide a catch-all information preserving segment
 # * nb: aliases are not provided BUT you can use the numeric element accessor
 #

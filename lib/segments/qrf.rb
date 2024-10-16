@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::QRF < HL7::Message::Segment
   weight 85
   add_field :where_subject_filter

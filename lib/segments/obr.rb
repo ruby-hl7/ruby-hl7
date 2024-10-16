@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::OBR < HL7::Message::Segment
   weight 89 # obx.weight-1
   has_children %i[NTE OBX SPM]

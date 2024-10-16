@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::PV1 < HL7::Message::Segment
   weight 2
   add_field :set_id

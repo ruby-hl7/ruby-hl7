@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Date do
@@ -10,8 +12,8 @@ end
 
 describe "to_hl7 for time related classes" do
   let(:formated_time) { time_now.strftime("%Y%m%d%H%M%S") }
-  let(:fraction_3) { "." + format("%06d", time_now.to_time.usec)[0, 3] }
-  let(:fraction_9) { "." + format("%06d", time_now.to_time.usec) + ("0" * 3) }
+  let(:fraction_3) { ".#{format("%06d", time_now.to_time.usec)[0, 3]}" }
+  let(:fraction_9) { ".#{format("%06d", time_now.to_time.usec)}#{"0" * 3}" }
 
   shared_examples "a time to_hl7" do
     context "without fraction" do

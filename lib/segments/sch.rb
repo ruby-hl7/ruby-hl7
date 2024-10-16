@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::SCH < HL7::Message::Segment
   weight 0
   add_field :placer_appointment_id

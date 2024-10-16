@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # $Id$
 require "rubygems"
 require "rake"

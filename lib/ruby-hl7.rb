@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #= ruby-hl7.rb
 # Ruby HL7 is designed to provide a simple, easy to use library for
 # parsing and generating HL7 (2.x) messages.

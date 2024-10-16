@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $: << "../lib"
 require "ruby-hl7"
 

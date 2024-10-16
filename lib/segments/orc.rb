@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::ORC < HL7::Message::Segment
   weight 88 # obr.weight-1
   has_children [:OBR]
@@ -38,7 +40,7 @@ class HL7::Message::Segment::ORC < HL7::Message::Segment
   add_field :parent_universal_service_identifier
 
   def self.convert_to_ts(value) # :nodoc:
-    return value.to_hl7 if value.is_a?(Time) or value.is_a?(Date)
+    return value.to_hl7 if value.is_a?(Time) || value.is_a?(Date)
 
     value
   end

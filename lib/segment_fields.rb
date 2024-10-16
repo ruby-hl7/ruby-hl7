@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  SegmentFields
 #  class HL7::Message::Segment::NK1 < HL7::Message::Segment
 #    weight 100 # segments are sorted ascendingly
@@ -118,7 +120,7 @@ module HL7::Message::SegmentFields
       @elements += missing
     end
 
-    value = value.first if value && value.is_a?(Array) && value.length == 1
+    value = value.first if value.is_a?(Array) && value.length == 1
     value = field_blk.call(value) if field_blk
     @elements[idx] = value.to_s
   end

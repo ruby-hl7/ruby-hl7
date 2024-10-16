@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # $Id$
 # Ruby-HL7 Proxy Server Example
 require "rubygems"
 require "ruby-hl7"
-require "thread"
 require "socket"
 
 PORT = 2402
@@ -12,7 +13,7 @@ target_port = 5900
 srv = TCPServer.new(PORT)
 puts format("proxy_server listening on port: %i", PORT)
 puts format("proxying for: %s:%i", target_ip, target_port)
-while true
+loop do
   sok = srv.accept
   Thread.new(sok) do |my_socket|
     my_socket.readlines

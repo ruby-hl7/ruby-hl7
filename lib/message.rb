@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Ruby Object representation of an hl7 2.x message
 # the message object is actually a "smart" collection of hl7 segments
 # == Examples
@@ -63,7 +65,7 @@ class HL7::Message
     elsif inobj.respond_to?(:each)
       generate_segments_enumerable(inobj)
     else
-      raise HL7::ParseError.new("object to parse should be string or enumerable")
+      raise HL7::ParseError, "object to parse should be string or enumerable"
     end
   end
 
@@ -94,8 +96,8 @@ class HL7::Message
   #         responds to to_sym
   # value:: an HL7::Message::Segment object
   def []=(index, value)
-    unless value && value.is_a?(HL7::Message::Segment)
-      raise HL7::Exception.new("attempting to assign something other than an HL7 Segment")
+    unless value.is_a?(HL7::Message::Segment)
+      raise HL7::Exception, "attempting to assign something other than an HL7 Segment"
     end
 
     if index.is_a?(Range) || index.is_a?(Integer)
@@ -103,7 +105,7 @@ class HL7::Message
     elsif index.respond_to?(:to_sym)
       (@segments_by_name[index.to_sym] ||= []) << value
     else
-      raise HL7::Exception.new("attempting to use an indice that is not a Range, Integer or to_sym providing object")
+      raise HL7::Exception, "attempting to use an indice that is not a Range, Integer or to_sym providing object"
     end
 
     value.segment_parent = self
@@ -112,7 +114,7 @@ class HL7::Message
   # return the index of the value if it exists, nil otherwise
   # value:: is expected to be a string
   def index(value)
-    return nil unless value && value.respond_to?(:to_sym)
+    return nil unless value.respond_to?(:to_sym)
 
     segs = @segments_by_name[value.to_sym]
     return nil unless segs
@@ -134,8 +136,8 @@ class HL7::Message
   end
 
   def append(value)
-    unless value && value.is_a?(HL7::Message::Segment)
-      raise HL7::Exception.new("attempting to append something other than an HL7 Segment")
+    unless value.is_a?(HL7::Message::Segment)
+      raise HL7::Exception, "attempting to append something other than an HL7 Segment"
     end
 
     value.segment_parent = self unless value.segment_parent
@@ -160,18 +162,18 @@ class HL7::Message
 
   # provide a screen-readable version of the message
   def to_s
-    @segments.collect {|s| s if s.to_s.length > 0 }.join("\n")
+    @segments.collect {|s| s if s.to_s.length.positive? }.join("\n")
   end
 
   # provide a HL7 spec version of the message
   def to_hl7
-    @segments.collect {|s| s if s.to_s.length > 0 }.join(@delimiter.segment)
+    @segments.collect {|s| s if s.to_s.length.positive? }.join(@delimiter.segment)
   end
 
   # provide the HL7 spec version of the message wrapped in MLLP
   def to_mllp
     pre_mllp = to_hl7
-    "\x0b" + pre_mllp + "\x1c\r"
+    "\v#{pre_mllp}\u001C\r"
   end
 
   # auto-set the set_id fields of any message segments that
@@ -183,7 +185,7 @@ class HL7::Message
 
     segs.each do |s|
       if s.is_a?(last.class) && s.respond_to?(:set_id)
-        last.set_id = 1 unless last.set_id && last.set_id.to_i > 0
+        last.set_id = 1 unless last.set_id&.to_i&.positive?
         s.set_id = last.set_id.to_i + 1
       end
 
@@ -201,7 +203,7 @@ class HL7::Message
 private
 
   def generate_segments(ary)
-    raise HL7::ParseError.new("no array to generate segments") unless ary.length > 0
+    raise HL7::ParseError, "no array to generate segments" unless ary.length.positive?
 
     @parsing = true
     segment_stack = []
@@ -236,8 +238,8 @@ private
 
   def choose_segment_from(segment_stack, new_seg, seg_name)
     # Segments have been previously seen
-    while segment_stack.length > 0
-      if segment_stack.last && segment_stack.last.has_children? && segment_stack.last.accepts?(seg_name)
+    while segment_stack.length.positive?
+      if segment_stack.last&.has_children? && segment_stack.last&.accepts?(seg_name)
         # If a previous segment can accept the current segment as a child,
         # add it to the previous segments children
         segment_stack.last.children << new_seg
@@ -250,7 +252,7 @@ private
     end
 
     # Root of segment 'tree'
-    return unless segment_stack.length == 0
+    return unless segment_stack.empty?
 
     @segments << new_seg
     segment_stack << new_seg
@@ -267,6 +269,6 @@ private
   end
 
   def get_symbol_from_name(seg_name)
-    seg_name.to_s.strip.length > 0 ? seg_name.to_sym : nil
+    seg_name.to_s.strip.length.positive? ? seg_name.to_sym : nil
   end
 end

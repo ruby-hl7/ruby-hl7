@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::PV2 < HL7::Message::Segment
   weight 3
   add_field :prior_pending_location

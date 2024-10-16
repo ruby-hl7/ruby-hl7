@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (C) 2007, 2008, 2009, 2010 The Collaborative Software Foundation
 #
 # This file is part of TriSano.

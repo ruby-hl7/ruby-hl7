@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::ERR < HL7::Message::Segment
   weight 2
   add_field :error_code_and_location

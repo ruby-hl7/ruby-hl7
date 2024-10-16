@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe HL7::Message::Segment::DG1 do
@@ -16,17 +18,17 @@ describe HL7::Message::Segment::DG1 do
       expect(segment.diagnosis_type).to eq("")
       expect(segment.major_diagnostic_category).to eq("A")
       expect(segment.diagnosis_related_group).to eq("")
-      expect(segment.drg_approval_indicator).to eq(nil)
-      expect(segment.drg_grouper_review_code).to eq(nil)
-      expect(segment.outlier_type).to eq(nil)
-      expect(segment.outlier_days).to eq(nil)
-      expect(segment.outlier_cost).to eq(nil)
-      expect(segment.grouper_version_and_type).to eq(nil)
-      expect(segment.diagnosis_priority).to eq(nil)
-      expect(segment.diagnosis_clinician).to eq(nil)
-      expect(segment.diagnosis_classification).to eq(nil)
-      expect(segment.confidential_indicator).to eq(nil)
-      expect(segment.attestation_date_time).to eq(nil)
+      expect(segment.drg_approval_indicator).to be_nil
+      expect(segment.drg_grouper_review_code).to be_nil
+      expect(segment.outlier_type).to be_nil
+      expect(segment.outlier_days).to be_nil
+      expect(segment.outlier_cost).to be_nil
+      expect(segment.grouper_version_and_type).to be_nil
+      expect(segment.diagnosis_priority).to be_nil
+      expect(segment.diagnosis_clinician).to be_nil
+      expect(segment.diagnosis_classification).to be_nil
+      expect(segment.confidential_indicator).to be_nil
+      expect(segment.attestation_date_time).to be_nil
     end
   end
 

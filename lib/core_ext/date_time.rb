@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7Time
   # Get a HL7 timestamp (type TS) for a Time instance.
   #
@@ -14,7 +16,7 @@ module HL7Time
 private
 
   def hl7_fractions(fraction_digits = 0)
-    return "" unless fraction_digits > 0
+    return "" unless fraction_digits.positive?
 
     time_fraction =  hl7_time_fraction
     answer = ".#{format("%06d", time_fraction)}"

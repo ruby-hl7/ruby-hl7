@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This module includes methods for storing segments inside segments.
 # has_children(child_types) defines three methods dynamically.
 
@@ -59,14 +61,14 @@ private
             end
 
             def append(value)
-              unless value && value.is_a?(HL7::Message::Segment)
-                raise HL7::Exception.new("attempting to append non-segment to a segment list")
+              unless value.is_a?(HL7::Message::Segment)
+                raise HL7::Exception, "attempting to append non-segment to a segment list"
               end
 
               value.segment_parent = @parental
               k = @parental
-              k = k.segment_parent while k && k.segment_parent && !k.segment_parent.is_a?(HL7::Message)
-              k.segment_parent << value if k && k.segment_parent
+              k = k.segment_parent while k&.segment_parent && !k.segment_parent.is_a?(HL7::Message)
+              k.segment_parent << value if k&.segment_parent
               old_append(value)
             end
           end

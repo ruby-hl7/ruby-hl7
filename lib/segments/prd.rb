@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::PRD < HL7::Message::Segment
   weight 2
   add_field :provider_role
