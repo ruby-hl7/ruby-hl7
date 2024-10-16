@@ -90,7 +90,7 @@ class HL7::Message::Segment
 
   # handle the e<number> field accessor
   # and any aliases that didn't get added to the system automatically
-  def method_missing(sym, *args, &)
+  def method_missing(sym, *args, &blk)
     base_str = sym.to_s.delete("=")
     base_sym = base_str.to_sym
 
@@ -142,11 +142,11 @@ class HL7::Message::Segment
   end
 
   # yield each element in the segment
-  def each(&) # :yields: element
+  def each # :yields: element
     return unless @elements
-
-    @elements.each(&)
+    @elements.each { |e| yield e }
   end
+
 
   # get the length of the segment (number of fields it contains)
   def length

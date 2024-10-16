@@ -38,7 +38,7 @@ class HL7::Message
   # setup a new hl7 message
   # raw_msg:: is an optional object containing an hl7 message
   #           it can either be a string or an Enumerable object
-  def initialize(raw_msg = nil, &)
+  def initialize(raw_msg = nil, &blk)
     @segments = []
     @segments_by_name = {}
     @item_delim = "^"
@@ -146,10 +146,10 @@ class HL7::Message
   end
 
   # yield each segment in the message
-  def each(&) # :yields: segment
+  def each # :yields: segment
     return unless @segments
 
-    @segments.each(&)
+    @segments.each { |s| yield s }
   end
 
   # return the segment count
@@ -207,7 +207,7 @@ private
     segment_stack = []
     ary.each do |elm|
       update_delimiters(elm) if elm.slice(0, 3) == "MSH"
-      generate_segment(elm, segment_stack) || last_seg
+      generate_segment(elm, segment_stack)
     end
     @parsing = nil
   end
