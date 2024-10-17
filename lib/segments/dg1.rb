@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7
   class Message::Segment::DG1 < HL7::Message::Segment
     weight 92
@@ -25,9 +27,7 @@ module HL7
       convert_to_ts(value)
     end
 
-    private
-
-    def self.convert_to_ts(value) #:nodoc:
+    def self.convert_to_ts(value) # :nodoc:
       if value.is_a?(Time) || value.is_a?(Date)
         value.to_hl7
       else

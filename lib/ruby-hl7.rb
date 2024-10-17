@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 #= ruby-hl7.rb
 # Ruby HL7 is designed to provide a simple, easy to use library for
 # parsing and generating HL7 (2.x) messages.
@@ -16,13 +17,13 @@
 # see the LICENSE file
 #
 
-require 'rubygems'
-require 'stringio'
-require 'date'
-require 'configuration'
+require "rubygems"
+require "stringio"
+require "date"
+require "configuration"
 
 module HL7 # :nodoc:
-  VERSION = '1.3.3'
+  VERSION = "1.3.3"
   # Gives access to the current Configuration.
   def self.configuration
     @configuration ||= Configuration.new
@@ -57,13 +58,13 @@ end
 class HL7::EmptySegmentNotAllowed < HL7::ParseError
 end
 
-require 'message_parser'
-require 'message'
-require 'segment_list_storage'
-require 'segment_generator'
-require 'segment_fields'
-require 'segment'
-require 'segment_default'
+require "message_parser"
+require "message"
+require "segment_list_storage"
+require "segment_generator"
+require "segment_fields"
+require "segment"
+require "segment_default"
 
-require 'core_ext/date_time'
-require 'core_ext/string'
+require "core_ext/date_time"
+require "core_ext/string"

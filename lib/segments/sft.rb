@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::SFT < HL7::Message::Segment
   weight 0
   add_field :software_vendor_organization

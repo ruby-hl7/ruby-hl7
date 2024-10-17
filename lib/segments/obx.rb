@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 class HL7::Message::Segment::OBX < HL7::Message::Segment
   weight 90
   has_children [:NTE]
