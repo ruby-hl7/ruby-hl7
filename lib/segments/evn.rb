@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 class HL7::Message::Segment::EVN < HL7::Message::Segment
   weight 0 # should occur after the MSH segment
   add_field :type_code

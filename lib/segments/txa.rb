@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::TXA < HL7::Message::Segment
   add_field :set_id
   add_field :document_type

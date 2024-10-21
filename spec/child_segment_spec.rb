@@ -1,13 +1,14 @@
-# encoding: UTF-8
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe HL7::Message do
-  context 'child segments' do
+  context "child segments" do
     before :all do
-      @base = open( './test_data/obxobr.hl7' ).readlines
+      @base = open("./test_data/obxobr.hl7").readlines
     end
 
-    it 'allows access to child segments' do
+    it "allows access to child segments" do
       msg = HL7::Message.new @base
       expect(msg).not_to be_nil
       expect(msg[:OBR]).not_to be_nil
@@ -32,7 +33,7 @@ describe HL7::Message do
       end
     end
 
-    it 'allows adding child segments' do
+    it "allows adding child segments" do
       msg = HL7::Message.new @base
       expect(msg).not_to be_nil
       expect(msg[:OBR]).not_to be_nil
@@ -63,4 +64,3 @@ describe HL7::Message do
     end
   end
 end
-

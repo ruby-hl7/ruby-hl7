@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 # via https://github.com/bbhoss/ruby-hl7/blob/master/lib/segments/in1.rb
 class HL7::Message::Segment::IN1 < HL7::Message::Segment
   add_field :set_id

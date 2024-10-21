@@ -1,32 +1,40 @@
-# Copied from bundler :)
+inherit_from: .rubocop_todo.yml
+
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://docs.rubocop.org/rubocop/configuration
+
+require:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 1.9
+  TargetRubyVersion: 3.3
+  NewCops: enable
   Exclude:
     - tmp/**/*
+    - vendor/bundle/**/*
   DisplayCopNames: true
 
 # They are idiomatic
 Lint/AssignmentInCondition:
   Enabled: false
 
-Lint/EndAlignment:
-  EnforcedStyleAlignWith: variable
-  AutoCorrect: true
-
 Lint/UnusedMethodArgument:
   Enabled: false
 
 # Style
 
-Style/AccessModifierIndentation:
-  EnforcedStyle: outdent
-
 Style/Alias:
   EnforcedStyle: prefer_alias_method
-
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
@@ -34,17 +42,11 @@ Style/FrozenStringLiteralComment:
 Style/MultilineBlockChain:
   Enabled: false
 
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
-
 Style/PerlBackrefs:
   Enabled: false
 
 Style/SingleLineBlockParams:
   Enabled: false
-
-Style/SpaceInsideBlockBraces:
-  SpaceBeforeBlockParameters: false
 
 Style/TrivialAccessors:
   Enabled: false
@@ -59,9 +61,10 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
-# Having these make it easier to *not* forget to add one when adding a new
-# value and you can simply copy the previous line.
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
 Style/TrailingUnderscoreVariable:
@@ -71,6 +74,27 @@ Style/TrailingUnderscoreVariable:
 Style/EmptyLiteral:
   Enabled: false
 
+# Layout
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+  AutoCorrect: true
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsideBlockBraces:
+  SpaceBeforeBlockParameters: false
+
 # 1.8.7 support
 
 Style/HashSyntax:
@@ -79,19 +103,10 @@ Style/HashSyntax:
 Style/Lambda:
   Enabled: false
 
-Style/DotPosition:
-  EnforcedStyle: trailing
-
 Style/EachWithObject:
   Enabled: false
 
 Style/SpecialGlobalVars:
-  Enabled: false
-
-Style/TrailingCommaInArguments:
-  Enabled: false
-
-Performance/FlatMap:
   Enabled: false
 
 # Metrics
