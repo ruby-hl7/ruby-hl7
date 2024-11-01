@@ -20,6 +20,7 @@ module HL7::MessageBatchParser
       yield "MSH#{_msg}"
     end
   end
+  #kisdif
 
   # parse a String or Enumerable object into an HL7::Message if possible
   # * returns a new HL7::Message if successful
