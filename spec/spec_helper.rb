@@ -13,3 +13,7 @@ end
 require File.expand_path("../lib/ruby-hl7", __dir__)
 require File.expand_path("../lib/test/hl7_messages", __dir__)
 require "pry"
+
+RSpec.configure do |config|
+  config.include TimeFormatterHelper, :type => :helper
+end
