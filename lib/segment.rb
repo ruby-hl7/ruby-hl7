@@ -21,6 +21,8 @@
 #
 class HL7::Message::Segment
   extend HL7::Message::SegmentListStorage
+  extend TimeFormatterHelper
+
   include HL7::Message::SegmentFields
 
   attr_accessor :segment_parent

@@ -21,6 +21,7 @@ require "rubygems"
 require "stringio"
 require "date"
 require "configuration"
+require "helpers/time_formatter_helper"
 
 module HL7 # :nodoc:
   VERSION = "1.3.3"
