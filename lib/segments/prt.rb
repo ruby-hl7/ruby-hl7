@@ -20,10 +20,4 @@ class HL7::Message::Segment::PRT < HL7::Message::Segment
   add_field :participation_qualitative_duration, :idx => 13
   add_field :participation_address, :idx => 14
   add_field :participation_telecommunication_address, :idx => 15
-
-  def self.convert_to_ts(value)
-    return value.to_hl7 if value.is_a?(Time) || value.is_a?(Date)
-
-    value
-  end
 end
