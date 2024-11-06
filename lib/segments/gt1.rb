@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HL7
   class Message::Segment::GT1 < HL7::Message::Segment
     add_field :set_id
@@ -9,10 +11,11 @@ module HL7
     add_field :guarantor_business_phone
     add_field :guarantor_date_of_birth
     add_field :guarantor_sex do |sex|
-      unless /^[FMOUANC]$/.match(sex) || sex == nil || sex == ""
-        raise HL7::InvalidDataError.new( "bad administrative sex value (not F|M|O|U|A|N|C)" )
+      unless /^[FMOUANC]$/.match(sex) || sex.nil? || sex == ""
+        raise HL7::InvalidDataError, "bad administrative sex value (not F|M|O|U|A|N|C)"
       end
-      sex = "" unless sex
+
+      sex ||= ""
       sex
     end
     add_field :guarantor_type
@@ -72,4 +75,4 @@ module HL7
     add_field :guarantor_birth_place
     add_field :vip_indicator
   end
-end   
+end

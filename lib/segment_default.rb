@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Provide a catch-all information preserving segment
 # * nb: aliases are not provided BUT you can use the numeric element accessor
 #
@@ -7,12 +9,12 @@
 #  seg.e2 = "KIN HERE"
 #
 class HL7::Message::Segment::Default < HL7::Message::Segment
-  def initialize(raw_segment="", delims=[])
-    segs = [] if (raw_segment == "")
+  def initialize(raw_segment = "", delims = [])
+    segs = [] if raw_segment == ""
     segs ||= raw_segment
-    super( segs, delims )
+    super(segs, delims)
   end
 end
 
 # load our segments
-Dir["#{File.dirname(__FILE__)}/segments/*.rb"].each { |ext| load ext }
+Dir["#{File.dirname(__FILE__)}/segments/*.rb"].each {|ext| load ext }

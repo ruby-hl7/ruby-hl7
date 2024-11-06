@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 # encoding: UTF-8
 # https://hl7-definition.caristix.com/v2/HL7v2.3.1/Segments/NK1
+
 class HL7::Message::Segment::NK1 < HL7::Message::Segment
   add_field :set_id
   add_field :name

@@ -1,7 +1,8 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 class HL7::Message::Segment::OBR < HL7::Message::Segment
   weight 89 # obx.weight-1
-  has_children [:NTE,:OBX,:SPM]
+  has_children %i[NTE OBX SPM]
   add_field :set_id
   add_field :placer_order_number
   add_field :filler_order_number
@@ -61,7 +62,7 @@ class HL7::Message::Segment::OBR < HL7::Message::Segment
   add_field :procedure_code_modifier
   add_field :placer_supplemental_service_info
   add_field :filler_supplemental_service_info
-  add_field :medically_necessary_dup_procedure_reason #longest method name ever. sry.
+  add_field :medically_necessary_dup_procedure_reason # longest method name ever. sry.
   add_field :result_handling
   add_field :parent_universal_service_identifier
 end

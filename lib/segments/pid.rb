@@ -1,7 +1,8 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 class HL7::Message::Segment::PID < HL7::Message::Segment
   weight 1
-  has_children [:NK1,:NTE,:PV1,:PV2]
+  has_children %i[NK1 NTE PV1 PV2]
   add_field :set_id
   add_field :patient_id
   add_field :patient_id_list
@@ -12,10 +13,11 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
     convert_to_ts(value)
   end
   add_field :admin_sex do |sex|
-    unless /^[FMOUANC]$/.match(sex) || sex == nil || sex == ""
-      raise HL7::InvalidDataError.new( "bad administrative sex value (not F|M|O|U|A|N|C)" )
+    unless /^[FMOUANC]$/.match(sex) || sex.nil? || sex == ""
+      raise HL7::InvalidDataError, "bad administrative sex value (not F|M|O|U|A|N|C)"
     end
-    sex = "" unless sex
+
+    sex ||= ""
     sex
   end
   add_field :patient_alias
@@ -43,7 +45,7 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
   end
   add_field :death_indicator
   add_field :id_unknown_indicator
-  add_field :id_readability_code
+  add_field :id_reliability_code
   add_field :last_update_date do |value|
     convert_to_ts(value)
   end
@@ -55,14 +57,26 @@ class HL7::Message::Segment::PID < HL7::Message::Segment
   add_field :tribal_citizenship
 
   def country_code
-    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; "+
+    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; " \
          "the 'country_code' alias is retained for backwards compatibility only."
     county_code
   end
 
   def country_code=(country_code)
-    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; "+
+    warn "DEPRECATION WARNING: PID-12 is defined as 'county_code'; " \
          "the 'country_code' alias is retained for backwards compatibility only."
     self.county_code = country_code
+  end
+
+  def id_readability_code
+    warn "DEPRECATION WARNING: PID-32 is defined as 'id_reliability_code'; " \
+         "the 'id_readability_code' alias is retained for backwards compatibility only."
+    id_reliability_code
+  end
+
+  def id_readability_code=(code)
+    warn "DEPRECATION WARNING: PID-32 is defined as 'id_reliability_code'; " \
+         "the 'id_readability_code' alias is retained for backwards compatibility only."
+    self.id_reliability_code = code
   end
 end

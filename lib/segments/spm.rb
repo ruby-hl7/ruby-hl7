@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::SPM < HL7::Message::Segment
   # Weight doesn't really matter, since this always occurs as a child
   # of an OBR segment.
