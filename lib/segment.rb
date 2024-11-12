@@ -21,6 +21,8 @@
 #
 class HL7::Message::Segment
   extend HL7::Message::SegmentListStorage
+  extend TimeFormatterHelper
+
   include HL7::Message::SegmentFields
 
   attr_accessor :segment_parent
@@ -191,6 +193,12 @@ private
   end
 
   def self.convert_to_ts(value) # :nodoc:
-    value.respond_to?(:to_hl7) ? value.to_hl7 : value
+    if value.is_a?(Time) || value.is_a?(DateTime)
+      hl7_formatted_timestamp(value)
+    elsif value.is_a?(Date)
+      hl7_formatted_date(value)
+    else
+      value
+    end
   end
 end
