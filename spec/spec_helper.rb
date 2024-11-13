@@ -16,4 +16,5 @@ require "pry"
 
 RSpec.configure do |config|
   config.include TimeFormatterHelper, :type => :helper
+  config.include StringFormatterHelper, :type => :helper
 end
