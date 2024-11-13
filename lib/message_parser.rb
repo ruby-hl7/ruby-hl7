@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module HL7::MessageBatchParser
+  include StringFormatterHelper
+
   def parse_batch(batch) # :yields: message
-    raise HL7::ParseError, "badly_formed_batch_message" unless
-      batch.hl7_batch?
+    raise HL7::ParseError, "badly_formed_batch_message" unless hl7_batch?(batch)
 
     batch = clean_batch_for_jruby batch
 
