@@ -36,7 +36,7 @@ class HL7::Message::Segment::PV2 < HL7::Message::Segment
   add_field :billing_media_code, :idx => 32
   add_field :expected_surgery_date, :idx => 33
   add_field :military_partnership_code, :idx => 34
-  add_field :military_non_availibility_code, :idx => 35
+  add_field :military_non_availability_code, :idx => 35
   add_field :newborn_baby_indicator, :idx => 36
   add_field :baby_detained_indicator, :idx => 37
   add_field :mode_of_arrival_code, :idx => 38
@@ -51,4 +51,18 @@ class HL7::Message::Segment::PV2 < HL7::Message::Segment
   add_field :expected_loa_return_date, :idx => 47
   add_field :expected_preadmission_testing_date, :idx => 48
   add_field :notify_clergy_code, :idx => 49
+
+  def military_non_availibility_code
+    warn "DEPRECATION WARNING: PV2-35 is defined as 'military_non_availability_code'; " \
+         "the 'military_non_availibility_code' alias is retained for backwards compatibility only."
+
+    military_non_availability_code
+  end
+
+  def military_non_availibility_code=(code)
+    warn "DEPRECATION WARNING: PV2-35 is defined as 'military_non_availability_code'; " \
+         "the 'military_non_availibility_code' alias is retained for backwards compatibility only."
+
+    self.military_non_availability_code = code
+  end
 end

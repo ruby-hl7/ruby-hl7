@@ -5,25 +5,25 @@ require "spec_helper"
 # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
 # reason: we need to assert every segment field to be exhaustive
 describe HL7::Message::Segment::PV2 do
+  let(:filled_pv2) { HL7::Message::Segment::PV2.new(segment_string) }
+
+  let(:segment_string) do
+    "PV2|prior_pending_location|accommodation_code|admit_reason|transfer_reason|patient_valuables" \
+      "|patient_valuables_location|visit_user_code|expected_admit_date|expected_discharge_date" \
+      "|estimated_length_of_inpatient_stay|actual_length_of_inpatient_stay|visit_description|referral_source_code" \
+      "|previous_service_date|employment_illness_related_indicator|purge_status_code|purge_status_date" \
+      "|special_program_code|retention_indicator|expected_number_of_insurance_plans|visit_publicity_code" \
+      "|visit_protection_indicator|clinic_organization_name|patient_status_code|visit_priority_code" \
+      "|previous_treatment_date|expected_discharge_disposition|signature_on_file" \
+      "|first_similar_illness_date|patient_charge_adjustment_code|recurring_service_code|billing_media_code" \
+      "|expected_surgery_date|military_partnership_code|military_non_availability_code|newborn_baby_indicator" \
+      "|baby_detained_indicator|mode_of_arrival_code|recreational_drug_use_code|admission_level_of_care_code" \
+      "|precaution_code|patient_condition_code|living_will_code|organ_donor_code|advance_directive_code" \
+      "|patient_status_effective_date|expected_loa_return_date|expected_preadmission_testing_date" \
+      "|notify_clergy_code"
+  end
+
   describe "segment parsing" do
-    let(:segment_string) do
-      "PV2|prior_pending_location|accommodation_code|admit_reason|transfer_reason|patient_valuables" \
-        "|patient_valuables_location|visit_user_code|expected_admit_date|expected_discharge_date" \
-        "|estimated_length_of_inpatient_stay|actual_length_of_inpatient_stay|visit_description|referral_source_code" \
-        "|previous_service_date|employment_illness_related_indicator|purge_status_code|purge_status_date" \
-        "|special_program_code|retention_indicator|expected_number_of_insurance_plans|visit_publicity_code" \
-        "|visit_protection_indicator|clinic_organization_name|patient_status_code|visit_priority_code" \
-        "|previous_treatment_date|expected_discharge_disposition|signature_on_file" \
-        "|first_similar_illness_date|patient_charge_adjustment_code|recurring_service_code|billing_media_code" \
-        "|expected_surgery_date|military_partnership_code|military_non_availibility_code|newborn_baby_indicator" \
-        "|baby_detained_indicator|mode_of_arrival_code|recreational_drug_use_code|admission_level_of_care_code" \
-        "|precaution_code|patient_condition_code|living_will_code|organ_donor_code|advance_directive_code" \
-        "|patient_status_effective_date|expected_loa_return_date|expected_preadmission_testing_date" \
-        "|notify_clergy_code"
-    end
-
-    let(:filled_pv2) { HL7::Message::Segment::PV2.new(segment_string) }
-
     it "allows access to a PV2 segment's attributes" do
       expect(filled_pv2.prior_pending_location).to eq("prior_pending_location")
       expect(filled_pv2.accommodation_code).to eq("accommodation_code")
@@ -59,7 +59,7 @@ describe HL7::Message::Segment::PV2 do
       expect(filled_pv2.billing_media_code).to eq("billing_media_code")
       expect(filled_pv2.expected_surgery_date).to eq("expected_surgery_date")
       expect(filled_pv2.military_partnership_code).to eq("military_partnership_code")
-      expect(filled_pv2.military_non_availibility_code).to eq("military_non_availibility_code")
+      expect(filled_pv2.military_non_availability_code).to eq("military_non_availability_code")
       expect(filled_pv2.newborn_baby_indicator).to eq("newborn_baby_indicator")
       expect(filled_pv2.baby_detained_indicator).to eq("baby_detained_indicator")
       expect(filled_pv2.mode_of_arrival_code).to eq("mode_of_arrival_code")
@@ -88,7 +88,7 @@ describe HL7::Message::Segment::PV2 do
         "|visit_protection_indicator|clinic_organization_name|patient_status_code|visit_priority_code" \
         "|previous_treatment_date|expected_discharge_disposition|signature_on_file" \
         "|first_similar_illness_date|patient_charge_adjustment_code|recurring_service_code|billing_media_code" \
-        "|expected_surgery_date|military_partnership_code|military_non_availibility_code|newborn_baby_indicator" \
+        "|expected_surgery_date|military_partnership_code|military_non_availability_code|newborn_baby_indicator" \
         "|baby_detained_indicator|mode_of_arrival_code|recreational_drug_use_code|admission_level_of_care_code" \
         "|precaution_code|patient_condition_code|living_will_code|organ_donor_code|advance_directive_code" \
         "|patient_status_effective_date|expected_loa_return_date|expected_preadmission_testing_date" \
@@ -130,7 +130,7 @@ describe HL7::Message::Segment::PV2 do
       pv2.billing_media_code = "billing_media_code"
       pv2.expected_surgery_date = "expected_surgery_date"
       pv2.military_partnership_code = "military_partnership_code"
-      pv2.military_non_availibility_code = "military_non_availibility_code"
+      pv2.military_non_availability_code = "military_non_availability_code"
       pv2.newborn_baby_indicator = "newborn_baby_indicator"
       pv2.baby_detained_indicator = "baby_detained_indicator"
       pv2.mode_of_arrival_code = "mode_of_arrival_code"
@@ -149,6 +149,14 @@ describe HL7::Message::Segment::PV2 do
 
     it "serializes a PV2 segment" do
       expect(pv2.to_s).to eq(expected_segment_string)
+    end
+  end
+
+  describe "military_non_availibility_code" do
+    it "aliases the military_non_availability_code field as military_non_availibility_code for backward compatibility" do
+      expect(filled_pv2.military_non_availibility_code).to eq "military_non_availability_code"
+      filled_pv2.military_non_availibility_code = "test"
+      expect(filled_pv2.military_non_availibility_code).to eq "test"
     end
   end
 end
