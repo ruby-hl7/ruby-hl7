@@ -20,12 +20,7 @@ class HL7::Message::Segment::NK1 < HL7::Message::Segment
   add_field :organization_name, :idx => 13
   add_field :marital_status, :idx => 14
   add_field :admin_sex, :idx => 15 do |sex|
-    unless /^[FMOUANC]$/.match(sex) || sex.nil? || sex == ""
-      raise HL7::InvalidDataError, "bad administrative sex value (not F|M|O|U|A|N|C)"
-    end
-
-    sex ||= ""
-    sex
+    sanitize_admin_sex!(sex)
   end
   add_field :date_of_birth, :idx => 16 do |value|
     convert_to_ts(value)
