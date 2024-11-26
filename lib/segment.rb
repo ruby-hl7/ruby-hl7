@@ -201,4 +201,11 @@ private
       value
     end
   end
+
+  def self.sanitize_admin_sex!(value)
+    raise HL7::InvalidDataError, "bad administrative sex value (not F|M|O|U|A|N|C)" unless /^[FMOUANC]$/.match(value) || value.nil? || value == ""
+
+    value ||= ""
+    value
+  end
 end
