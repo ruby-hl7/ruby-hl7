@@ -1,3 +1,29 @@
+# 1.4.0
+
+- Add support for `ROL` segment
+- Support previously unsupported fields in `NK1` segment
+- Completes and fixes `PV2` segment
+- Add helpers for date formatting
+- Add the ability to configure the gem thanks to the `HL7::Configuration` class
+
+https://github.com/ruby-hl7/ruby-hl7/pull/144
+https://github.com/ruby-hl7/ruby-hl7/pull/142
+https://github.com/ruby-hl7/ruby-hl7/pull/138
+https://github.com/ruby-hl7/ruby-hl7/pull/139
+https://github.com/ruby-hl7/ruby-hl7/pull/140
+https://github.com/ruby-hl7/ruby-hl7/pull/136
+https://github.com/ruby-hl7/ruby-hl7/pull/135
+https://github.com/ruby-hl7/ruby-hl7/pull/133
+https://github.com/ruby-hl7/ruby-hl7/pull/132
+https://github.com/ruby-hl7/ruby-hl7/pull/131
+https://github.com/ruby-hl7/ruby-hl7/pull/128
+https://github.com/ruby-hl7/ruby-hl7/pull/130
+https://github.com/ruby-hl7/ruby-hl7/pull/129
+https://github.com/ruby-hl7/ruby-hl7/pull/122
+
+Thanks to:
+@LucasMontorio and @mitch-lindsay
+
 # 1.3.3
 - Update RDoc
 - Added TXA segment
