@@ -15,8 +15,6 @@ The gem's version id can be found in the `HL7::VERSION` constant.
 
 ### Maintained by:
 
-* http://csinitiative.com
-* http://trisano.org
 * http://github.com/csinitiative/trisano
 * http://onemedical.com
 
