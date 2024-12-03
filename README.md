@@ -9,7 +9,7 @@ The gem's version id can be found in the `HL7::VERSION` constant.
 
 ###  Links
 * Git:          https://github.com/ruby-hl7/ruby-hl7.git
-* Docs:         https://rubydoc.info/gems/ruby-hl7/
+* Docs:         https://rubydoc.info/gems/ruby-hl7
 * Rubygems:     https://rubygems.org/gems/ruby-hl7
 * Google group: https://groups.google.com/group/ruby-hl7
 
@@ -17,6 +17,7 @@ The gem's version id can be found in the `HL7::VERSION` constant.
 
 * https://github.com/csinitiative/trisano
 * https://onemedical.com
+* https://github.com/LucasMontorio
 
 ## Download and Installation
 
