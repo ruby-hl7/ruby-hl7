@@ -8,17 +8,16 @@ Examples can be found in `HL7::Message`.
 The gem's version id can be found in the `HL7::VERSION` constant.
 
 ###  Links
-* Git:          http://github.com/ruby-hl7/ruby-hl7.git
-* Docs:         http://rubydoc.info/gems/ruby-hl7/1.0.3/frames
+* Git:          https://github.com/ruby-hl7/ruby-hl7.git
+* Docs:         https://rubydoc.info/gems/ruby-hl7
 * Rubygems:     https://rubygems.org/gems/ruby-hl7
-* Google group: http://groups.google.com/group/ruby-hl7
+* Google group: https://groups.google.com/group/ruby-hl7
 
 ### Maintained by:
 
-* http://csinitiative.com
-* http://trisano.org
-* http://github.com/csinitiative/trisano
-* http://onemedical.com
+* https://github.com/csinitiative/trisano
+* https://onemedical.com
+* https://github.com/LucasMontorio
 
 ## Download and Installation
 
@@ -41,5 +40,3 @@ gem 'ruby-hl7'
 See the `LICENSE` file.
 
 Copyright (C) 2006-2014 Mark Guzman
-
-
