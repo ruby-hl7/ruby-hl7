@@ -55,10 +55,6 @@ class DateTime
 end
 
 # TODO
-# parse an hl7 formatted date
-# def Date.from_hl7( hl7_date )
-# end
-
 # def Date.to_hl7_short( ruby_date )
 # end
 
