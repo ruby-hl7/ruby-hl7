@@ -162,6 +162,11 @@ class HL7::Message::Segment
     respond_to?(:children)
   end
 
+  def children_list
+    # NOTE: this method is meant to replace #children. In order to avoid a breaking change, we will keep both methods for now.
+    has_children? ? children(:mute_deprecation_warning => true) : []
+  end
+
 private
 
   def self.singleton # :nodoc:
