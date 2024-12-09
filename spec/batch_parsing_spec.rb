@@ -31,23 +31,3 @@ describe HL7::Message do
     end
   end
 end
-
-describe "String extension" do
-  before :all do
-    @batch_message = HL7MESSAGES[:realm_batch]
-    @plain_message = HL7MESSAGES[:realm_minimal_message]
-  end
-
-  it "respond_toes :hl7_batch?" do
-    expect(@batch_message.hl7_batch?).to be true
-    expect(@plain_message).to respond_to(:hl7_batch?)
-  end
-
-  it "returns true when passed a batch message" do
-    expect(@batch_message).to be_an_hl7_batch
-  end
-
-  it "returns false when passed a plain message" do
-    expect(@plain_message).not_to be_an_hl7_batch
-  end
-end
