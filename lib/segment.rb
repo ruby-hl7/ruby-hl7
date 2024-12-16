@@ -117,6 +117,13 @@ class HL7::Message::Segment
     end
   end
 
+  def respond_to_missing?(method_name, include_private = false)
+    base_str = method_name.to_s.delete("=")
+    base_sym = base_str.to_sym
+
+    self.class.fields.include?(base_sym) || (/e([0-9]+)/ =~ base_str).positive? || super
+  end
+
   # sort-compare two Segments, 0 indicates equality
   def <=>(other)
     return nil unless other.is_a?(HL7::Message::Segment)
