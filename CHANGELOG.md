@@ -1,3 +1,26 @@
+# 1.4.0
+
+Changes based on Github Automatic Release generation:
+
+* updating to version 1.3.2 by @gusIreland in https://github.com/ruby-hl7/ruby-hl7/pull/112
+* Updating to Version 1.3.3 by @mitch-lindsay in https://github.com/ruby-hl7/ruby-hl7/pull/119
+* Adding the ability to externally configure the gem by @mitch-lindsay in https://github.com/ruby-hl7/ruby-hl7/pull/122
+* Chore/alias pid id reliability code to fix typo by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/128
+* chore: remove 'C' value from PID segment validation spec by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/130
+* Chore: Add first Github Action for Rspec workflow by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/129
+* Chore: Add rubocop config by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/131
+* Feat: Define PRT segment by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/132
+* Chore: Add .ruby-version file by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/133
+* Chore: Add helpers for date-formatting by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/135
+* Chore: remove Travis CI config file by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/136
+* Chore: Various PV2 segment improvements by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/138
+* chore: add PR template to repository by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/140
+* chore: add CHANGELOG file, update README by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/139
+* Feat: Define missing fields to NK1 segment by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/142
+* Feat: Implement ROL segment by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/144
+* Chore: Move notes to CHANGELOG file by @LucasMontorio in https://github.com/ruby-hl7/ruby-hl7/pull/145
+* [skip-ci] Remove domains from maintainers list. Reason: domains not longer active by @esparta in https://github.com/ruby-hl7/ruby-hl7/pull/147
+
 # 1.3.3
 - Update RDoc
 - Added TXA segment
