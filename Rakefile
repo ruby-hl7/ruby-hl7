@@ -9,6 +9,7 @@ require "rbconfig"
 require "rspec"
 require "rspec/core/rake_task"
 require "simplecov"
+require_relative "lib/version"
 
 $: << "./lib"
 require "ruby-hl7"
@@ -28,6 +29,7 @@ desc "Default: Run all examples"
 task :default => :spec
 
 spec = Gem::Specification.new do |s|
+  s.version = RubyHl7::VERSION
   s.homepage = "https://github.com/ruby-hl7/ruby-hl7"
   s.platform = Gem::Platform::RUBY
   s.summary = "Ruby HL7 Library"
