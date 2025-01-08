@@ -9,6 +9,7 @@ require "rbconfig"
 require "rspec"
 require "rspec/core/rake_task"
 require "simplecov"
+require_relative "lib/version"
 
 $: << "./lib"
 require "ruby-hl7"
@@ -17,8 +18,6 @@ require "message"
 require "segment_list_storage"
 require "segment_generator"
 require "segment"
-
-full_name = "Ruby-HL7"
 RAKEVERSION = "12.3.3"
 
 # Many of these tasks were garnered from zenspider's Hoe
@@ -28,17 +27,18 @@ desc "Default: Run all examples"
 task :default => :spec
 
 spec = Gem::Specification.new do |s|
+  s.name = "ruby-hl7"
+  s.version = RubyHl7::VERSION
   s.homepage = "https://github.com/ruby-hl7/ruby-hl7"
   s.platform = Gem::Platform::RUBY
   s.summary = "Ruby HL7 Library"
   s.description = "A simple library to parse and generate HL7 2.x messages"
+  s.authors = ["Mark Guzman", "Enrique Carlos Mogollan", "Lucas Montorio"]
   s.files = FileList["{bin,lib,test_data}/**/*"].to_a
   s.require_path = "lib"
   s.test_files = FileList["{test}/**/test*.rb"].to_a
-  s.has_rdoc = true
   s.required_ruby_version = ">= 1.8.6"
-  s.extra_rdoc_files = %w[README.rdoc LICENSE]
-  s.add_dependency("rake", ">= #{RAKEVERSION}")
+  s.add_runtime_dependency("rake", ">= #{RAKEVERSION}")
 end
 
 desc "Run all examples"
@@ -51,13 +51,6 @@ desc "Run all examples with SimpleCov"
 RSpec::Core::RakeTask.new(:spec_with_simplecov) do |spec|
   ENV["COVERAGE"] = "true"
   spec.pattern = "spec/**/*.rb"
-end
-
-RDoc::Task.new do |rd|
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc", "LICENSE", "lib/**/*.rb")
-  rd.title = format("%s (%s) Documentation", full_name, spec.version)
-  rd.rdoc_dir = "doc"
 end
 
 Gem::PackageTask.new(spec) do |pkg|
