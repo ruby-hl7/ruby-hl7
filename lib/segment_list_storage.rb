@@ -43,8 +43,10 @@ private
 
   def define_method_children
     class_eval do
-      define_method(:children) do
+      define_method(:children) do |mute_deprecation_warning: false|
         unless defined?(@my_children)
+          warn "#children method is deprecated. Please use #children_list instead." unless mute_deprecation_warning
+
           p = self
           @my_children ||= []
           @my_children.instance_eval do
