@@ -22,6 +22,7 @@ require "stringio"
 require "date"
 require "configuration"
 require "helpers/time_formatter_helper"
+require "helpers/string_formatter_helper"
 
 module HL7 # :nodoc:
   # Gives access to the current Configuration.

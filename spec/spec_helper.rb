@@ -15,4 +15,5 @@ require File.expand_path("../lib/test/hl7_messages", __dir__)
 
 RSpec.configure do |config|
   config.include TimeFormatterHelper, :type => :helper
+  config.include StringFormatterHelper, :type => :helper
 end
