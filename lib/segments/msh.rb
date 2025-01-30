@@ -28,4 +28,14 @@ class HL7::Message::Segment::MSH < HL7::Message::Segment
   add_field :receiving_responsible_org
   add_field :sending_network_address
   add_field :receiving_network_address
+
+  # NOTE: MSH-1 has a special behaviour and is not included in the HL7 format, hence causing an offset to happen in the fields order
+  # This overriding of the following getter and setter ensure the order of the fields is respected
+  def [](index)
+    @elements[index - 1]
+  end
+
+  def []=(index, value)
+    @elements[index - 1] = value.to_s
+  end
 end
