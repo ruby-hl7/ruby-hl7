@@ -24,6 +24,18 @@ module TimeFormatterHelper
     value.strftime("%Y%m%d")
   end
 
+  def parsed_hl7_date(value)
+    raise ValueTypeNotSupportedError, "Value must be an instance of String" unless value.is_a?(String)
+
+    Date.parse(value)
+  end
+
+  def parsed_hl7_timestamp(value)
+    raise ValueTypeNotSupportedError, "Value must be an instance of String" unless value.is_a?(String)
+
+    Time.parse(value)
+  end
+
 private
 
   def hl7_formatted_fractions(value, fraction_digits = 0)

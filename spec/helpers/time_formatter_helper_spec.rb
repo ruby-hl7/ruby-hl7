@@ -74,4 +74,40 @@ RSpec.describe TimeFormatterHelper, :type => :helper do
       end
     end
   end
+
+  describe "#parsed_hl7_date" do
+    context "when value is not a String" do
+      let(:value) { Time.new }
+
+      it "raises a ValueTypeNotSupportedError" do
+        expect { parsed_hl7_date(value) }.to raise_error(TimeFormatterHelper::ValueTypeNotSupportedError)
+      end
+    end
+
+    context "when value is a String" do
+      let(:value) { Date.today }
+
+      it "returns the expected Date instance" do
+        expect(parsed_hl7_date(hl7_formatted_date(value))).to eq(value)
+      end
+    end
+  end
+
+  describe "#parsed_hl7_timestamp" do
+    context "when value is not a String" do
+      let(:value) { Time.new }
+
+      it "raises a ValueTypeNotSupportedError" do
+        expect { parsed_hl7_timestamp(value) }.to raise_error(TimeFormatterHelper::ValueTypeNotSupportedError)
+      end
+    end
+
+    context "when value is a String" do
+      let(:value) { Time.new(2023, 10, 5, 12, 30, 45) }
+
+      it "returns the expected Time instance" do
+        expect(parsed_hl7_timestamp(hl7_formatted_timestamp(value))).to eq(value)
+      end
+    end
+  end
 end
