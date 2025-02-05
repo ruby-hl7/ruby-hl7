@@ -7,19 +7,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
-    coderay (1.1.3)
     diff-lcs (1.5.1)
     docile (1.4.1)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
-    method_source (1.1.0)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
-    pry (0.14.2)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
     psych (5.1.2)
       stringio
     racc (1.8.1)
@@ -77,7 +72,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.5)
-  pry
   rake (>= 12.3.3)
   rake-contrib
   rdoc (~> 6.3)
