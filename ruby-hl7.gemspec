@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.license = "MIT"
 
   s.add_development_dependency "bundler", "~> 2.5"
-  s.add_development_dependency "pry"
   s.add_development_dependency "rake", ">= 12.3.3"
   s.add_development_dependency "rake-contrib"
   s.add_development_dependency "rdoc", "~> 6.3"
