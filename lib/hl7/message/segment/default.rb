@@ -17,4 +17,6 @@ class HL7::Message::Segment::Default < HL7::Message::Segment
 end
 
 # load our segments
-Dir["#{File.dirname(__FILE__)}/segments/*.rb"].each {|ext| load ext }
+Dir["lib/hl7/message/segment/*.rb"].
+  reject {|ext| ext == "lib/hl7/message/segment/default.rb" }.
+  each {|ext| load ext }
