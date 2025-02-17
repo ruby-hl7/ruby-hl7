@@ -140,3 +140,10 @@ Metrics/BlockLength:
 # rules for us.
 Metrics/PerceivedComplexity:
   Enabled: false
+
+# This is disabled for compatibility with Ruby 3.0
+Naming/BlockForwarding:
+  Enabled: false
+
+Style/ArgumentsForwarding:
+  Enabled: false

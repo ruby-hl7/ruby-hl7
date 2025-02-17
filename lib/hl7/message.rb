@@ -96,9 +96,7 @@ class HL7::Message
   #         responds to to_sym
   # value:: an HL7::Message::Segment object
   def []=(index, value)
-    unless value.is_a?(HL7::Message::Segment)
-      raise HL7::Exception, "attempting to assign something other than an HL7 Segment"
-    end
+    raise HL7::Exception, "attempting to assign something other than an HL7 Segment" unless value.is_a?(HL7::Message::Segment)
 
     if index.is_a?(Range) || index.is_a?(Integer)
       @segments[index] = value
@@ -136,9 +134,7 @@ class HL7::Message
   end
 
   def append(value)
-    unless value.is_a?(HL7::Message::Segment)
-      raise HL7::Exception, "attempting to append something other than an HL7 Segment"
-    end
+    raise HL7::Exception, "attempting to append something other than an HL7 Segment" unless value.is_a?(HL7::Message::Segment)
 
     value.segment_parent = self unless value.segment_parent
     (@segments ||= []) << value
@@ -148,10 +144,10 @@ class HL7::Message
   end
 
   # yield each segment in the message
-  def each # :yields: segment
+  def each(&block) # :yields: segment
     return unless @segments
 
-    @segments.each { |s| yield s }
+    @segments.each(&block)
   end
 
   # return the segment count

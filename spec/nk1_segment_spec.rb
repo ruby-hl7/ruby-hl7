@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-# rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
+# rubocop:disable RSpec/ExampleLength
 # reason: we need to assert every segment field to be exhaustive
 describe HL7::Message::Segment::NK1 do
   let(:segment_string) do
@@ -138,4 +138,4 @@ describe HL7::Message::Segment::NK1 do
     end
   end
 end
-# rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
+# rubocop:enable RSpec/ExampleLength

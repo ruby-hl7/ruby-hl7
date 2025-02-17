@@ -20,7 +20,7 @@
 require "rubygems"
 require "stringio"
 require "date"
-require "configuration"
+require "hl7/configuration"
 require "helpers/time_formatter_helper"
 
 module HL7 # :nodoc:
@@ -58,13 +58,14 @@ end
 class HL7::EmptySegmentNotAllowed < HL7::ParseError
 end
 
-require "message_parser"
-require "message"
-require "segment_list_storage"
-require "segment_generator"
-require "segment_fields"
-require "segment"
-require "segment_default"
+require "hl7/message_batch_parser"
+require "hl7/message"
+require "hl7/message/delimiter"
+require "hl7/message/segment_list_storage"
+require "hl7/message/segment_generator"
+require "hl7/message/segment_fields"
+require "hl7/message/segment"
+require "hl7/message/segment/default"
 
 require "core_ext/date_time"
 require "core_ext/string"

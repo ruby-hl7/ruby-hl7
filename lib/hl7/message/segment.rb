@@ -36,8 +36,7 @@ class HL7::Message::Segment
 
   # setup a new HL7::Message::Segment
   # raw_segment:: is an optional String or Array which will be used as the
-  #               segment's field data
-  # delims:: an optional array of delimiters, where
+  #               segment's field data  # delims:: an optional array of delimiters, where
   #               delims[0] = element delimiter
   #               delims[1] = item delimiter
   def initialize(raw_segment = "", delims = [], &blk)
@@ -146,10 +145,10 @@ class HL7::Message::Segment
   end
 
   # yield each element in the segment
-  def each # :yields: element
+  def each(&block) # :yields: element
     return unless @elements
 
-    @elements.each { |e| yield e }
+    @elements.each(&block)
   end
 
   # get the length of the segment (number of fields it contains)
