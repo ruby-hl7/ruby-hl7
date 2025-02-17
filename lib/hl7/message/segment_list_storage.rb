@@ -61,9 +61,7 @@ private
             end
 
             def append(value)
-              unless value.is_a?(HL7::Message::Segment)
-                raise HL7::Exception, "attempting to append non-segment to a segment list"
-              end
+              raise HL7::Exception, "attempting to append non-segment to a segment list" unless value.is_a?(HL7::Message::Segment)
 
               value.segment_parent = @parental
               k = @parental
