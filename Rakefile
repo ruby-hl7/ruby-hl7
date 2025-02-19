@@ -9,7 +9,7 @@ require "rbconfig"
 require "rspec"
 require "rspec/core/rake_task"
 require "simplecov"
-require_relative "lib/version"
+require_relative "lib/ruby_hl7/version"
 
 $: << "./lib"
 require "ruby_hl7"
