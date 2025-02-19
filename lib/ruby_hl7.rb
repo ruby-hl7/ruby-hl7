@@ -66,6 +66,3 @@ require "hl7/message/segment_generator"
 require "hl7/message/segment_fields"
 require "hl7/message/segment"
 require "hl7/message/segment/default"
-
-require "core_ext/date_time"
-require "core_ext/string"

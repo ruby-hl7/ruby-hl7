@@ -12,7 +12,7 @@ require "simplecov"
 require_relative "lib/version"
 
 $: << "./lib"
-require "ruby-hl7"
+require "ruby_hl7"
 require "hl7/message_batch_parser"
 require "hl7/message"
 require "hl7/message/delimiter"
