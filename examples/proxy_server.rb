@@ -3,7 +3,7 @@
 # $Id$
 # Ruby-HL7 Proxy Server Example
 require "rubygems"
-require "ruby-hl7"
+require "ruby_hl7"
 require "socket"
 
 PORT = 2402

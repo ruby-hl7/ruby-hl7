@@ -15,8 +15,3 @@ class HL7::Message::Segment::Default < HL7::Message::Segment
     super(segs, delims)
   end
 end
-
-# load our segments
-Dir["lib/hl7/message/segment/*.rb"].
-  reject {|ext| ext == "lib/hl7/message/segment/default.rb" }.
-  each {|ext| load ext }

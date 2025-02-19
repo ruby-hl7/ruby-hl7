@@ -22,6 +22,16 @@ require "stringio"
 require "date"
 require "hl7/configuration"
 require "helpers/time_formatter_helper"
+require "zeitwerk"
+
+require_relative "hl7_inflector"
+require_relative "core_ext/date"
+require_relative "core_ext/date_time"
+require_relative "core_ext/string"
+require_relative "core_ext/time"
+
+module RubyHl7
+end
 
 module HL7 # :nodoc:
   # Gives access to the current Configuration.
@@ -58,14 +68,16 @@ end
 class HL7::EmptySegmentNotAllowed < HL7::ParseError
 end
 
-require "hl7/message_batch_parser"
-require "hl7/message"
-require "hl7/message/delimiter"
-require "hl7/message/segment_list_storage"
-require "hl7/message/segment_generator"
-require "hl7/message/segment_fields"
-require "hl7/message/segment"
-require "hl7/message/segment/default"
+loader = Zeitwerk::Loader.for_gem(:warn_on_extra_files => false)
+loader.inflector = Hl7Inflector.new
+loader.inflector.inflect(
+  # NOTE: These constants are loaded through a custom inflector temporarily to avoid refactoring them all at once
+  "hl7_messages" => "HL7MESSAGES",
+  "version" => "VERSION"
+)
+loader.push_dir("#{__dir__}/../lib")
+loader.push_dir("#{__dir__}/../lib/helpers", :namespace => Object)
+loader.push_dir("#{__dir__}/../lib/core_ext", :namespace => Object)
 
-require "core_ext/date_time"
-require "core_ext/string"
+loader.setup
+loader.eager_load
