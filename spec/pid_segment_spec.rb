@@ -10,7 +10,7 @@ describe HL7::Message::Segment::PID do
     it 'validates the admin_sex element' do
       pid = HL7::Message::Segment::PID.new
       expect do
-        vals = %w[F M O U A N C X] + [ nil ]
+        vals = %w[F M O U A N C X D] + [ nil ]
         vals.each do |x|
           pid.admin_sex = x
         end
