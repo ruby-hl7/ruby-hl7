@@ -13,7 +13,7 @@ module Hl7Time
     strftime("%Y%m%d%H%M%S") + hl7_fractions(fraction_digits)
   end
 
-  private
+private
 
   def hl7_fractions(fraction_digits = 0)
     return "" unless fraction_digits.positive?
