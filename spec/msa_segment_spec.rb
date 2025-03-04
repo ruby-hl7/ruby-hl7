@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 $: << "../lib"
-require "ruby-hl7"
+require "ruby_hl7"
 
 describe HL7::Message::Segment::MSA do
   context "general" do
