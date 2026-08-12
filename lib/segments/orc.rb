@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 class HL7::Message::Segment::ORC < HL7::Message::Segment
   weight 88 # obr.weight-1
   has_children [:OBR]
@@ -32,18 +33,15 @@ class HL7::Message::Segment::ORC < HL7::Message::Segment
   add_field :ordering_provider_address
   add_field :order_status_modifier
   add_field :advanced_beneficiary_notice_override_reason
-  add_field :fillers_expected_availability_date_time 
+  add_field :fillers_expected_availability_date_time
   add_field :confidentiality_code
   add_field :order_type
   add_field :enterer_authorization_mode
   add_field :parent_universal_service_identifier
-  
-  private
-  def self.convert_to_ts(value) #:nodoc:
-    if value.is_a?(Time) or value.is_a?(Date)
-      return value.to_hl7
-    else
-      return value
-    end
+
+  def self.convert_to_ts(value) # :nodoc:
+    return value.to_hl7 if value.is_a?(Time) || value.is_a?(Date)
+
+    value
   end
 end

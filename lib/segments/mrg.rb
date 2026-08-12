@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HL7::Message::Segment::MRG < HL7::Message::Segment
   weight 4
   add_field :prior_patient_identifier_list
